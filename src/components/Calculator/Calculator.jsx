@@ -21,14 +21,14 @@ export const Calculator = ({ setAnimalsVisible, animal }) => {
     return (
         <section className="calculator">
             <div className="calculator__left">
-                <button className="calculator__character calculator__character--animal" onClick={onAnimalIconClick}>
+                <button className="calculator__character calculator__character-animal" onClick={onAnimalIconClick}>
                     <img src={animal.iconSrc} alt="Animal icon" className="calculator__character-img" />
                 </button>
                 <p className="calculator__age">{animalAge[0]}</p>
                 <p className="calculator__text">{animalAge[1]}</p>
             </div>
             <div className="calculator__right">
-                <div className="calculator__character calculator__character--human"></div>
+                <div className="calculator__character calculator__character-human"></div>
                 <p className="calculator__age">{humanAge}</p>
                 <p className="calculator__text">years</p>
             </div>

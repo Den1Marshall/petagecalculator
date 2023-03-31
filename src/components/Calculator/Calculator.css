@@ -21,12 +21,16 @@
     width: 100px;
     height: 100px;
     border: 0;
-    border-radius: 50%;
+    border-radius: 100%;
     background: #fff;
     margin-bottom: 50px;
 }
 
-.calculator__character--animal {
+.calculator__character-img {
+    border-radius: 100%;
+}
+
+.calculator__character-animal {
     transition: opacity .2s;
 }
 
@@ -34,7 +38,7 @@
     opacity: .4;
 }
 
-.calculator__character--human {
+.calculator__character-human {
     background-image: url('human.png');
     background-position: center center;
     background-repeat: no-repeat;
