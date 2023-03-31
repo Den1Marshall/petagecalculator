@@ -30,7 +30,7 @@
     transition: opacity .1s;
 }
 
-.animals__animal:hover {
+.animals__animal:hover, .animals__animal:focus {
     opacity: .8;
 }
 
@@ -77,3 +77,9 @@
 .animals__animal:nth-child(11) {
     background-image: url('../assets/pig.png');
 }
+
+@media (hover: none) {
+    .animals__animal:hover {
+      opacity: 1;
+    }
+  }
