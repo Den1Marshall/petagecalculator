@@ -26,9 +26,9 @@
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div class="loader">
+    <div id="loader">
       <style>
-        .loader {
+        #loader {
           z-index: 9999;
           position: fixed;
           top: 0;
@@ -39,7 +39,7 @@
           align-items: center;
           background: #000;
         }
-        .loader span {
+        #loader span {
           display: block;
           width: 70px;
           height: 70px;
@@ -56,10 +56,12 @@
         }
       </style>
       <script>
-        window.addEventListener("load", () => {
-          const loader = document.querySelector(".loader");
-          loader.onanimationend = () => loader.remove();
-          loader.style.animation = "fade .3s reverse";
+        window.addEventListener('load', function () {
+          var loader = document.getElementById('loader');
+          loader.onanimationend = function () {
+            loader.remove();
+          };
+          loader.style.animation = 'fade 0.3s reverse';
         });
       </script>
       <span></span>
