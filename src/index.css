@@ -1,13 +1,15 @@
 /* Fonts */
 @font-face {
-  font-family: "Pacifico";
-  src: local("Pacifico"),
-    url("fonts/Pacifico-Regular.ttf") format("truetype");
+  font-family: 'Pacifico';
+  src: local('Pacifico'),
+    url('assets/fonts/Pacifico-Regular.ttf') format('truetype');
   font-weight: 400;
 }
 
 /* Global Styles */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -19,9 +21,11 @@ html {
 }
 
 body {
-  font-family: 'Pacifico', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family: 'Pacifico', system-ui, -apple-system, BlinkMacSystemFont,
+    'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue',
+    sans-serif;
   color: #fff;
-  background: linear-gradient(90deg, #8360C3, #2EBF91);
+  background: linear-gradient(90deg, #8360c3, #2ebf91);
 }
 
 picture {
@@ -53,10 +57,10 @@ button {
 /* Animations */
 @keyframes fade {
   from {
-      opacity: 0;
+    opacity: 0;
   }
 
   to {
-      opacity: 1;
+    opacity: 1;
   }
 }

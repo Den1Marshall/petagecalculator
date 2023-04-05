@@ -1,41 +1,43 @@
-import { Home } from './pages/Home';
 import { useState } from 'react';
-import { Greeting } from './pages/Greeting';
-import { Footer } from './components/Footer/Footer';
-import { Animals } from './pages/Animals';
+import { Footer } from './layouts/Footer/Footer';
+import { Greeting } from './pages/Greeting/Greeting';
+import { Home } from './pages/Home/Home';
+import { Animals } from './pages/Animals/Animals';
 
-// 
-import { cat } from './features/cat';
+//
+import { cat } from './utils/cat';
 
 export const App = () => {
-    const [greetingVisible, setGreetingVisible] = useState(!Boolean(localStorage.getItem('greetingVisible')));
-    const [animalsVisible, setAnimalsVisible] = useState(false);
-    const [animal, setAnimal] = useState(cat);
+  const [greetingVisible, setGreetingVisible] = useState(
+    !Boolean(localStorage.getItem('greetingVisible'))
+  );
+  const [animalsVisible, setAnimalsVisible] = useState(false);
+  const [animal, setAnimal] = useState(cat);
 
-    if (greetingVisible) {
-        return (
-            <>
-            <Greeting setGreetingVisible={setGreetingVisible} />
-            <Footer setGreetingVisible={setGreetingVisible} />
-            </>
-        )
-    }
+  if (greetingVisible) {
+    return (
+      <>
+        <Greeting setGreetingVisible={setGreetingVisible} />
+        <Footer setGreetingVisible={setGreetingVisible} />
+      </>
+    );
+  }
 
-    if (!greetingVisible && !animalsVisible) {
-        return (
-            <>
-            <Home setAnimalsVisible={setAnimalsVisible} animal={animal}/>
-            <Footer setGreetingVisible={setGreetingVisible} />
-            </>
-        )
-    }
+  if (!greetingVisible && !animalsVisible) {
+    return (
+      <>
+        <Home setAnimalsVisible={setAnimalsVisible} animal={animal} />
+        <Footer setGreetingVisible={setGreetingVisible} />
+      </>
+    );
+  }
 
-    if (animalsVisible) {
-        return (
-            <>
-            <Animals setAnimalsVisible={setAnimalsVisible} setAnimal={setAnimal} />
-            <Footer setGreetingVisible={setGreetingVisible} />
-            </>
-        )
-    }
+  if (animalsVisible) {
+    return (
+      <>
+        <Animals setAnimalsVisible={setAnimalsVisible} setAnimal={setAnimal} />
+        <Footer setGreetingVisible={setGreetingVisible} />
+      </>
+    );
+  }
 };
