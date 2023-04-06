@@ -1,83 +1,84 @@
 .greeting {
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    flex-flow: column wrap;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    background-color: rgba(0, 0, 0, .5);
-    animation: fade .4s;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  background-color: rgba(0, 0, 0, 0.5);
+  animation: fade 0.4s;
 }
 
 .greeting__title {
-    margin-bottom: 30px;
-    font-size: 2rem;
+  margin-bottom: 30px;
+  font-size: 2rem;
 }
 
 .greeting__list {
-    display: flex;
-    flex-flow: column wrap;
-    gap: 30px;
-    margin-bottom: 30px;
-    list-style-type: none;
-    text-align: justify;
+  display: flex;
+  flex-flow: column wrap;
+  gap: 30px;
+  margin-bottom: 30px;
+  list-style-type: none;
+  text-align: justify;
 }
 
 .greeting__item {
-    list-style: '\1F431';
-    font-size: 1.3rem;
-    text-indent: 10px;
+  list-style: '\1F431';
+  font-size: 1.3rem;
+  text-indent: 10px;
 }
 
 .greeting__item:nth-child(2) {
-    list-style: '\1F436';
+  list-style: '\1F436';
 }
 
 .greeting__item:nth-child(3) {
-    list-style: '\1F439';
+  list-style: '\1F439';
 }
 
 .greeting__item:nth-child(4) {
-    list-style: '\1F430';
+  list-style: '\1F430';
 }
 
 .greeting__btn {
-    width: 200px;
-    height: 50px;
-    border-radius: 50px;
-    background-image: linear-gradient(60deg, #8360C3, #2EBF91);
-    background-size: 200% 100%;
-    background-position: 100% 0;
-    transition: background-position .2s;
-    font-size: 21px;
-    color: #000;
+  width: 200px;
+  height: 10%;
+  border-radius: 50px;
+  background-image: linear-gradient(60deg, #8360c3, #2ebf91);
+  background-size: 200% 100%;
+  background-position: 100% 0;
+  transition: background-position 0.2s;
+  font-size: 21px;
+  color: #000;
 }
 
 .greeting__btn:hover {
-    background-position: 0 0;
+  background-position: 0 0;
 }
 
 .greeting__btn-animation {
-    animation: greetingBtn .6s;
+  animation: greetingBtn 0.6s;
 }
 
 .greeting__icon {
-    display: none;
-    animation: fade 1s;
+  display: none;
+  animation: fade 1s;
 }
 
 @keyframes greetingBtn {
-    from {
-        transform: scaleX(1);
-    }
+  from {
+    transform: scaleX(1);
+  }
 
-    50% {
-        transform: scaleX(1.2);
-    }
+  50% {
+    transform: scaleX(1.2);
+  }
 
-    to {
-        transform: scaleX(0);
-    }
+  to {
+    transform: scaleX(0);
+  }
 }
