@@ -14,30 +14,18 @@ export const App = () => {
   const [animalsVisible, setAnimalsVisible] = useState(false);
   const [animal, setAnimal] = useState(cat);
 
-  if (greetingVisible) {
-    return (
-      <>
-        <Greeting setGreetingVisible={setGreetingVisible} />
-        <Footer setGreetingVisible={setGreetingVisible} />
-      </>
-    );
-  }
+  return (
+    <>
+      {greetingVisible && <Greeting setGreetingVisible={setGreetingVisible} />}
 
-  if (!greetingVisible && !animalsVisible) {
-    return (
-      <>
+      {!greetingVisible && !animalsVisible && (
         <Home setAnimalsVisible={setAnimalsVisible} animal={animal} />
-        <Footer setGreetingVisible={setGreetingVisible} />
-      </>
-    );
-  }
+      )}
 
-  if (animalsVisible) {
-    return (
-      <>
+      {animalsVisible && (
         <Animals setAnimalsVisible={setAnimalsVisible} setAnimal={setAnimal} />
-        <Footer setGreetingVisible={setGreetingVisible} />
-      </>
-    );
-  }
+      )}
+      <Footer setGreetingVisible={setGreetingVisible} />
+    </>
+  );
 };
