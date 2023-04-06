@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import './HomeCalculator.css';
+import { Link } from 'react-router-dom';
 
-export const Calculator = ({ setAnimalsVisible, animal }) => {
+export const HomeCalculator = ({ animal }) => {
   const [sliderValue, setSliderValue] = useState(0);
 
   const [animalAge, setAnimalAge] = useState(0);
@@ -16,21 +17,19 @@ export const Calculator = ({ setAnimalsVisible, animal }) => {
     setHumanAge(animal.humanAges.find((age, index) => index === +sliderValue));
   }, [sliderValue, animal.ages, animal.humanAges]);
 
-  const onAnimalIconClick = () => setAnimalsVisible(true);
-
   return (
     <section className="calculator">
       <div className="calculator__left">
-        <button
+        <Link
+          to={'/animals'}
           className="calculator__character calculator__character-animal"
-          onClick={onAnimalIconClick}
         >
           <img
             src={animal.iconSrc}
             alt="Animal icon"
             className="calculator__character-img"
           />
-        </button>
+        </Link>
         <p className="calculator__age">{animalAge[0]}</p>
         <p className="calculator__text">{animalAge[1]}</p>
       </div>

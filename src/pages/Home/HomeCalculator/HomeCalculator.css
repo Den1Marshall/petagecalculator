@@ -1,70 +1,72 @@
 .calculator {
-    position: relative;
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: space-between;
-    margin-bottom: 50px;
-    text-align: center;
+  position: relative;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  margin-bottom: 50px;
+  text-align: center;
 }
 
 .calculator::after {
-    content: " ";
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 1px;
-    height: 80%;
-    background: #fff;
+  content: ' ';
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1px;
+  height: 80%;
+  background: #fff;
 }
 
 .calculator__character {
-    width: 100px;
-    height: 100px;
-    border: 0;
-    border-radius: 100%;
-    background: #fff;
-    margin-bottom: 50px;
+  width: 100px;
+  height: 100px;
+  border: 0;
+  border-radius: 100%;
+  background: #fff;
+  margin-bottom: 50px;
 }
 
 .calculator__character-img {
-    border-radius: 100%;
+  border-radius: 100%;
 }
 
 .calculator__character-animal {
-    transition: opacity .2s;
+  display: block;
+  transition: opacity 0.2s;
 }
 
-.calculator__character-animal:hover, .calculator__character-animal:focus {
-    opacity: .4;
+.calculator__character-animal:hover,
+.calculator__character-animal:focus {
+  opacity: 0.4;
 }
 
 .calculator__character-human {
-    background-image: url('human.png');
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: cover;
+  background-image: url('human.png');
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .calculator__age {
-    font-size: 3rem;
+  font-size: 3rem;
 }
 
 .calculator__text {
-    font-size: 1.8rem;
+  font-size: 1.8rem;
 }
 
 .calculator__slider {
-    width: 100%;
-    margin-top: 50px;
+  width: 100%;
+  margin-top: 50px;
 }
 
 .calculator__slider::-webkit-slider-thumb {
-    width: 20px;
-    height: 20px;
+  width: 20px;
+  height: 20px;
 }
 
 @media (hover: none) {
-    .calculator__character-animal:hover {
-      opacity: 1;
-    }
+  .calculator__character-animal:hover {
+    opacity: 1;
   }
+}

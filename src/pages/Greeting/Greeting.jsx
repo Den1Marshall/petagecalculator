@@ -1,44 +1,41 @@
-import { useEffect } from 'react';
-
+import { useRef } from 'react';
 import './Greeting.css';
 import logo from './logo192.png';
+import { useNavigate } from 'react-router-dom';
 
-export const Greeting = ({ setGreetingVisible }) => {
-  useEffect(() => {
-    const btn = document.querySelector('.greeting__btn');
-    const greetingTitle = document.querySelector('.greeting__title');
-    const greetingList = document.querySelector('.greeting__list');
-    const greetingIcon = document.querySelector('.greeting__icon');
+export const Greeting = () => {
+  const greetingTitle = useRef(null);
+  const greetingList = useRef(null);
+  const greetingBtn = useRef(null);
+  const greetingIcon = useRef(null);
 
-    const onBtnClick = () => {
-      btn.classList.add('greeting__btn-animation');
-      btn.onanimationend = () => {
-        greetingTitle.style.display = 'none';
-        greetingList.style.display = 'none';
-        btn.style.display = 'none';
-        greetingIcon.style.display = 'initial';
-        setTimeout(() => {
-          localStorage.setItem('greetingVisible', 'true');
-          setGreetingVisible(!Boolean(localStorage.getItem('greetingVisible')));
-        }, 1000);
+  const navigate = useNavigate();
+
+  const onBtnClick = () => {
+    greetingBtn.current.classList.add('greeting__btn-animation');
+    greetingBtn.current.onanimationend = () => {
+      greetingTitle.current.style.display = 'none';
+      greetingList.current.style.display = 'none';
+      greetingBtn.current.style.display = 'none';
+
+      greetingIcon.current.style.display = 'block';
+      greetingIcon.current.onanimationend = () => {
+        localStorage.setItem('greetingVisible', 'false');
+        navigate('/');
       };
     };
-
-    btn.addEventListener('click', onBtnClick);
-
-    return () => btn.removeEventListener('click', onBtnClick);
-  });
+  };
 
   return (
     <>
       <section className="greeting">
         <div className="container">
-          <h2 className="greeting__title">
+          <h2 ref={greetingTitle} className="greeting__title">
             What is
             <br />
             Pet Age Calculator?
           </h2>
-          <ul className="greeting__list">
+          <ul ref={greetingList} className="greeting__list">
             <li className="greeting__item">
               Your pocket helper will help you to find out the age of your pet
               in human years.
@@ -55,8 +52,19 @@ export const Greeting = ({ setGreetingVisible }) => {
               animal icon) and drag slider to enter it's age.
             </li>
           </ul>
-          <button className="greeting__btn">Continue</button>
-          <img className="greeting__icon" src={logo} alt="PAC logo" />
+          <button
+            ref={greetingBtn}
+            className="greeting__btn"
+            onClick={onBtnClick}
+          >
+            Continue
+          </button>
+          <img
+            ref={greetingIcon}
+            className="greeting__icon"
+            src={logo}
+            alt="PAC logo"
+          />
         </div>
       </section>
     </>
