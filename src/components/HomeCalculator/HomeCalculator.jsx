@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
-import './HomeCalculator.css';
 import { Link } from 'react-router-dom';
 import { Slider } from '@mui/material';
+
+import './HomeCalculator.css';
 
 export const HomeCalculator = ({ animal }) => {
   const [sliderValue, setSliderValue] = useState(0);
@@ -17,8 +18,6 @@ export const HomeCalculator = ({ animal }) => {
     setAnimalAge(animal.ages.find((age, index) => index === +sliderValue));
     setHumanAge(animal.humanAges.find((age, index) => index === +sliderValue));
   }, [sliderValue, animal.ages, animal.humanAges]);
-
-  console.log('calculator render');
 
   return (
     <section className="calculator">

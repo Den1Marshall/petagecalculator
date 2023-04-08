@@ -1,13 +1,14 @@
+import { memo } from 'react';
+import { Link, Outlet } from 'react-router-dom';
+
 import './Footer.css';
+
 import instagramIcon from './instagram.svg';
 import telegramIcon from './telegram.svg';
 import mailIcon from './mail.svg';
 import githubIcon from './github.svg';
-import { Link, Outlet } from 'react-router-dom';
-import { memo } from 'react';
 
 export const Footer = memo(() => {
-  console.log('footer render');
   return (
     <>
       <Outlet />

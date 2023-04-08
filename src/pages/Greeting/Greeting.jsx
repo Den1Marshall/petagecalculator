@@ -1,7 +1,8 @@
 import { useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import './Greeting.css';
 import logo from './logo192.png';
-import { useNavigate } from 'react-router-dom';
 
 export const Greeting = () => {
   const greetingTitle = useRef(null);

@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
+import { Route, Routes, useNavigate } from 'react-router-dom';
+
 import { Footer } from './layouts/Footer/Footer';
 import { Greeting } from './pages/Greeting/Greeting';
 import { Home } from './pages/Home/Home';
 import { Animals } from './pages/Animals/Animals';
 
-//
 import { cat } from './utils/cat';
-import { Route, Routes, useNavigate } from 'react-router-dom';
 
 export const App = () => {
   const [animal, setAnimal] = useState(cat);
@@ -17,8 +17,6 @@ export const App = () => {
       navigate('/greeting');
     }
   }, []);
-
-  console.log('app render');
 
   return (
     <Routes>
