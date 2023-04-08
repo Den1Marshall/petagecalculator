@@ -18,6 +18,8 @@ export const HomeCalculator = ({ animal }) => {
     setHumanAge(animal.humanAges.find((age, index) => index === +sliderValue));
   }, [sliderValue, animal.ages, animal.humanAges]);
 
+  console.log('calculator render');
+
   return (
     <section className="calculator">
       <div className="calculator__left">

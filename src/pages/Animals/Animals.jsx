@@ -16,6 +16,8 @@ import { Link } from 'react-router-dom';
 export const Animals = ({ setAnimal }) => {
   const selectAnimal = (animal) => setAnimal(animal);
 
+  console.log('animals render');
+
   return (
     <section className="animals">
       <h2 className="animals__title">Choose your animal</h2>

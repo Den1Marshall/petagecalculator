@@ -18,6 +18,8 @@ export const App = () => {
     }
   }, []);
 
+  console.log('app render');
+
   return (
     <Routes>
       <Route path="/" element={<Footer />}>
