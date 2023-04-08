@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import './HomeCalculator.css';
 import { Link } from 'react-router-dom';
+import { Slider } from '@mui/material';
 
 export const HomeCalculator = ({ animal }) => {
   const [sliderValue, setSliderValue] = useState(0);
@@ -38,13 +39,15 @@ export const HomeCalculator = ({ animal }) => {
         <p className="calculator__age">{humanAge}</p>
         <p className="calculator__text">years</p>
       </div>
-      <input
-        className="calculator__slider"
-        type="range"
+      <Slider
         min={animal.minSliderValue}
         max={animal.maxSliderValue}
         value={sliderValue}
         onChange={onSliderChange}
+        sx={{
+          marginTop: '50px',
+          color: '#fff',
+        }}
       />
     </section>
   );

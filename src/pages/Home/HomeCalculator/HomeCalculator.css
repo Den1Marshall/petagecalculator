@@ -55,11 +55,6 @@
   font-size: 1.8rem;
 }
 
-.calculator__slider {
-  width: 100%;
-  margin-top: 50px;
-}
-
 .calculator__slider::-webkit-slider-thumb {
   width: 20px;
   height: 20px;
