@@ -1,7 +1,7 @@
 import './Home.css';
 
-import { HomeTitle } from './HomeTitle/HomeTitle';
-import { HomeCalculator } from './HomeCalculator/HomeCalculator';
+import { HomeTitle } from '../../components/HomeTitle/HomeTitle';
+import { HomeCalculator } from '../../components/HomeCalculator/HomeCalculator';
 
 export const Home = ({ animal }) => {
   return (
