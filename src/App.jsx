@@ -7,6 +7,8 @@ import { Home } from './pages/Home/Home';
 import { Animals } from './pages/Animals/Animals';
 
 import { cat } from './utils/cat';
+import { ThemeProvider } from '@emotion/react';
+import { Theme } from './utils/Theme';
 
 export const App = () => {
   const [animal, setAnimal] = useState(cat);
@@ -19,12 +21,14 @@ export const App = () => {
   }, [navigate]);
 
   return (
-    <Routes>
-      <Route path="/" element={<Footer />}>
-        <Route index element={<Home animal={animal} />} />
-        <Route path="/animals" element={<Animals setAnimal={setAnimal} />} />
-        <Route path="/greeting" element={<Greeting />} />
-      </Route>
-    </Routes>
+    <ThemeProvider theme={Theme}>
+      <Routes>
+        <Route path="/" element={<Footer />}>
+          <Route index element={<Home animal={animal} />} />
+          <Route path="/animals" element={<Animals setAnimal={setAnimal} />} />
+          <Route path="/greeting" element={<Greeting />} />
+        </Route>
+      </Routes>
+    </ThemeProvider>
   );
 };

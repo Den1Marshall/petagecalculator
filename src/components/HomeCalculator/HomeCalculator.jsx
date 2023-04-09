@@ -45,9 +45,9 @@ export const HomeCalculator = ({ animal }) => {
         max={animal.maxSliderValue}
         value={sliderValue}
         onChange={onSliderChange}
+        color="primary"
         sx={{
           marginTop: '50px',
-          color: '#fff',
         }}
       />
     </section>
