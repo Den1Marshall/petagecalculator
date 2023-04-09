@@ -16,7 +16,7 @@ export const App = () => {
     if (localStorage.getItem('greetingVisible') === null) {
       navigate('/greeting');
     }
-  }, []);
+  }, [navigate]);
 
   return (
     <Routes>
