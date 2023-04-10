@@ -20,32 +20,32 @@ export const HomeCalculator = ({ animal }) => {
   }, [sliderValue, animal.ages, animal.humanAges]);
 
   return (
-    <section className="calculator">
-      <div className="calculator__left">
+    <section className='calculator'>
+      <div className='calculator__left'>
         <Link
           to={'/animals'}
-          className="calculator__character calculator__character-animal"
+          className='calculator__character calculator__character-animal'
         >
           <img
             src={animal.iconSrc}
-            alt="Animal icon"
-            className="calculator__character-img"
+            alt='Animal icon'
+            className='calculator__character-img'
           />
         </Link>
-        <p className="calculator__age">{animalAge[0]}</p>
-        <p className="calculator__text">{animalAge[1]}</p>
+        <p className='calculator__age'>{animalAge[0]}</p>
+        <p className='calculator__text'>{animalAge[1]}</p>
       </div>
-      <div className="calculator__right">
-        <div className="calculator__character calculator__character-human"></div>
-        <p className="calculator__age">{humanAge}</p>
-        <p className="calculator__text">years</p>
+      <div className='calculator__right'>
+        <div className='calculator__character calculator__character-human'></div>
+        <p className='calculator__age'>{humanAge}</p>
+        <p className='calculator__text'>years</p>
       </div>
       <Slider
         min={animal.minSliderValue}
         max={animal.maxSliderValue}
         value={sliderValue}
         onChange={onSliderChange}
-        color="primary"
+        color='primary'
         sx={{
           marginTop: '50px',
         }}
