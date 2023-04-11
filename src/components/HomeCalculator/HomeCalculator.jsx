@@ -1,10 +1,14 @@
-import { useEffect, useState } from 'react';
+import './HomeCalculator.css';
+
+import { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Slider } from '@mui/material';
 
-import './HomeCalculator.css';
+import { AnimalContext } from '../../context/AnimalContext';
 
 export const HomeCalculator = () => {
+  const { animal } = useContext(AnimalContext);
+
   const [sliderValue, setSliderValue] = useState(0);
 
   const [animalAge, setAnimalAge] = useState(0);
@@ -18,6 +22,8 @@ export const HomeCalculator = () => {
     setAnimalAge(animal.ages.find((age, index) => index === +sliderValue));
     setHumanAge(animal.humanAges.find((age, index) => index === +sliderValue));
   }, [sliderValue, animal.ages, animal.humanAges]);
+
+  console.log('calculator render');
 
   return (
     <section className='calculator'>
