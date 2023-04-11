@@ -4,7 +4,7 @@ import { Slider } from '@mui/material';
 
 import './HomeCalculator.css';
 
-export const HomeCalculator = ({ animal }) => {
+export const HomeCalculator = () => {
   const [sliderValue, setSliderValue] = useState(0);
 
   const [animalAge, setAnimalAge] = useState(0);

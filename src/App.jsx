@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 
 import { Footer } from './layouts/Footer/Footer';
@@ -6,12 +6,10 @@ import { Greeting } from './pages/Greeting/Greeting';
 import { Home } from './pages/Home/Home';
 import { Animals } from './pages/Animals/Animals';
 
-import { cat } from './utils/cat';
 import { ThemeProvider } from '@emotion/react';
 import { Theme } from './utils/Theme';
 
 export const App = () => {
-  const [animal, setAnimal] = useState(cat);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -23,10 +21,10 @@ export const App = () => {
   return (
     <ThemeProvider theme={Theme}>
       <Routes>
-        <Route path="/" element={<Footer />}>
-          <Route index element={<Home animal={animal} />} />
-          <Route path="/animals" element={<Animals setAnimal={setAnimal} />} />
-          <Route path="/greeting" element={<Greeting />} />
+        <Route path='/' element={<Footer />}>
+          <Route index element={<Home />} />
+          <Route path='/animals' element={<Animals />} />
+          <Route path='/greeting' element={<Greeting />} />
         </Route>
       </Routes>
     </ThemeProvider>

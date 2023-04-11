@@ -13,66 +13,66 @@ import { cow } from '../../utils/cow';
 import { pig } from '../../utils/pig';
 import { Link } from 'react-router-dom';
 
-export const Animals = ({ setAnimal }) => {
-  const selectAnimal = (animal) => setAnimal(animal);
+export const Animals = () => {
+  const selectAnimal = () => {};
 
   return (
-    <section className="animals">
-      <h2 className="animals__title">Choose your animal</h2>
-      <div className="container animals__container">
+    <section className='animals'>
+      <h2 className='animals__title'>Choose your animal</h2>
+      <div className='container animals__container'>
         <Link
           to={'/'}
-          className="animals__animal"
+          className='animals__animal'
           onClick={() => selectAnimal(cat)}
         ></Link>
         <Link
           to={'/'}
-          className="animals__animal"
+          className='animals__animal'
           onClick={() => selectAnimal(dog)}
         ></Link>
         <Link
           to={'/'}
-          className="animals__animal"
+          className='animals__animal'
           onClick={() => selectAnimal(hamster)}
         ></Link>
         <Link
           to={'/'}
-          className="animals__animal"
+          className='animals__animal'
           onClick={() => selectAnimal(mouse)}
         ></Link>
         <Link
           to={'/'}
-          className="animals__animal"
+          className='animals__animal'
           onClick={() => selectAnimal(rabbit)}
         ></Link>
         <Link
           to={'/'}
-          className="animals__animal"
+          className='animals__animal'
           onClick={() => selectAnimal(fox)}
         ></Link>
         <Link
           to={'/'}
-          className="animals__animal"
+          className='animals__animal'
           onClick={() => selectAnimal(chick)}
         ></Link>
         <Link
           to={'/'}
-          className="animals__animal"
+          className='animals__animal'
           onClick={() => selectAnimal(goat)}
         ></Link>
         <Link
           to={'/'}
-          className="animals__animal"
+          className='animals__animal'
           onClick={() => selectAnimal(horse)}
         ></Link>
         <Link
           to={'/'}
-          className="animals__animal"
+          className='animals__animal'
           onClick={() => selectAnimal(cow)}
         ></Link>
         <Link
           to={'/'}
-          className="animals__animal"
+          className='animals__animal'
           onClick={() => selectAnimal(pig)}
         ></Link>
       </div>
