@@ -1,20 +1,14 @@
 import './Animals.css';
 
-import { cat } from '../../utils/cat';
-import { dog } from '../../utils/dog';
-import { hamster } from '../../utils/hamster';
-import { mouse } from '../../utils/mouse';
-import { rabbit } from '../../utils/rabbit';
-import { fox } from '../../utils/fox';
-import { chick } from '../../utils/chick';
-import { goat } from '../../utils/goat';
-import { horse } from '../../utils/horse';
-import { cow } from '../../utils/cow';
-import { pig } from '../../utils/pig';
+import { useContext } from 'react';
+
 import { Link } from 'react-router-dom';
+import { AnimalContext } from '../../context/AnimalContext';
 
 export const Animals = () => {
-  const selectAnimal = () => {};
+  const { selectAnimal } = useContext(AnimalContext);
+
+  console.log('animals render');
 
   return (
     <section className='animals'>
@@ -23,57 +17,57 @@ export const Animals = () => {
         <Link
           to={'/'}
           className='animals__animal'
-          onClick={() => selectAnimal(cat)}
+          onClick={() => selectAnimal({ type: 'cat' })}
         ></Link>
         <Link
           to={'/'}
           className='animals__animal'
-          onClick={() => selectAnimal(dog)}
+          onClick={() => selectAnimal({ type: 'dog' })}
         ></Link>
         <Link
           to={'/'}
           className='animals__animal'
-          onClick={() => selectAnimal(hamster)}
+          onClick={() => selectAnimal({ type: 'hamster' })}
         ></Link>
         <Link
           to={'/'}
           className='animals__animal'
-          onClick={() => selectAnimal(mouse)}
+          onClick={() => selectAnimal({ type: 'mouse' })}
         ></Link>
         <Link
           to={'/'}
           className='animals__animal'
-          onClick={() => selectAnimal(rabbit)}
+          onClick={() => selectAnimal({ type: 'rabbit' })}
         ></Link>
         <Link
           to={'/'}
           className='animals__animal'
-          onClick={() => selectAnimal(fox)}
+          onClick={() => selectAnimal({ type: 'fox' })}
         ></Link>
         <Link
           to={'/'}
           className='animals__animal'
-          onClick={() => selectAnimal(chick)}
+          onClick={() => selectAnimal({ type: 'chick' })}
         ></Link>
         <Link
           to={'/'}
           className='animals__animal'
-          onClick={() => selectAnimal(goat)}
+          onClick={() => selectAnimal({ type: 'goat' })}
         ></Link>
         <Link
           to={'/'}
           className='animals__animal'
-          onClick={() => selectAnimal(horse)}
+          onClick={() => selectAnimal({ type: 'horse' })}
         ></Link>
         <Link
           to={'/'}
           className='animals__animal'
-          onClick={() => selectAnimal(cow)}
+          onClick={() => selectAnimal({ type: 'cow' })}
         ></Link>
         <Link
           to={'/'}
           className='animals__animal'
-          onClick={() => selectAnimal(pig)}
+          onClick={() => selectAnimal({ type: 'pig' })}
         ></Link>
       </div>
     </section>
