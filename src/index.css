@@ -4,6 +4,7 @@
   src: local('Pacifico'),
     url('assets/fonts/Pacifico-Regular.ttf') format('truetype');
   font-weight: 400;
+  font-display: swap;
 }
 
 /* Global Styles */
