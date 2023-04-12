@@ -1,0 +1,17 @@
+.animal {
+  object-fit: cover;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  transition: opacity 0.1s;
+}
+
+.animal:hover,
+.animal:focus {
+  opacity: 0.8;
+}
+
+@media (hover: none) {
+  .animals__animal:hover {
+    opacity: 1;
+  }
+}

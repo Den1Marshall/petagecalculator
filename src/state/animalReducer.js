@@ -14,37 +14,37 @@ export const initialState = cat;
 
 const animalReducer = (state, action) => {
   switch (action.type) {
-    case 'cat':
+    case 'Cat':
       return cat;
 
-    case 'dog':
+    case 'Dog':
       return dog;
 
-    case 'hamster':
+    case 'Hamster':
       return hamster;
 
-    case 'mouse':
+    case 'Mouse':
       return mouse;
 
-    case 'rabbit':
+    case 'Rabbit':
       return rabbit;
 
-    case 'fox':
+    case 'Fox':
       return fox;
 
-    case 'chick':
+    case 'Chick':
       return chick;
 
-    case 'goat':
+    case 'Goat':
       return goat;
 
-    case 'horse':
+    case 'Horse':
       return horse;
 
-    case 'cow':
+    case 'Cow':
       return cow;
 
-    case 'pig':
+    case 'Pig':
       return pig;
 
     default:
