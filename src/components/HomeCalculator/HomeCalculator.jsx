@@ -1,6 +1,6 @@
 import './HomeCalculator.css';
 
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Slider } from '@mui/material';
 
@@ -9,19 +9,19 @@ import { AnimalContext } from '../../context/AnimalContext';
 export const HomeCalculator = () => {
   const { animal } = useContext(AnimalContext);
 
-  const [sliderValue, setSliderValue] = useState(0);
-
-  const [animalAge, setAnimalAge] = useState(0);
-  const [humanAge, setHumanAge] = useState(0);
+  const [slider, setSlider] = useState({
+    sliderValue: 0,
+    animalAge: animal.ages[0],
+    humanAge: 0,
+  });
 
   const onSliderChange = (e) => {
-    setSliderValue(e.target.value);
+    setSlider({
+      sliderValue: e.target.value,
+      animalAge: animal.ages.find((age, index) => index === e.target.value),
+      humanAge: animal.humanAges.find((age, index) => index === e.target.value),
+    });
   };
-
-  useEffect(() => {
-    setAnimalAge(animal.ages.find((age, index) => index === +sliderValue));
-    setHumanAge(animal.humanAges.find((age, index) => index === +sliderValue));
-  }, [sliderValue, animal.ages, animal.humanAges]);
 
   console.log('calculator render');
 
@@ -38,18 +38,18 @@ export const HomeCalculator = () => {
             className='calculator__character-img'
           />
         </Link>
-        <p className='calculator__age'>{animalAge[0]}</p>
-        <p className='calculator__text'>{animalAge[1]}</p>
+        <p className='calculator__age'>{slider.animalAge[0]}</p>
+        <p className='calculator__text'>{slider.animalAge[1]}</p>
       </div>
       <div className='calculator__right'>
         <div className='calculator__character calculator__character-human'></div>
-        <p className='calculator__age'>{humanAge}</p>
+        <p className='calculator__age'>{slider.humanAge}</p>
         <p className='calculator__text'>years</p>
       </div>
       <Slider
+        value={slider.sliderValue}
         min={animal.minSliderValue}
         max={animal.maxSliderValue}
-        value={sliderValue}
         onChange={onSliderChange}
         color='primary'
         sx={{
