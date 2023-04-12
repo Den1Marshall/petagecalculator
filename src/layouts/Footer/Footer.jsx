@@ -8,7 +8,6 @@ import mailIcon from './mail.svg';
 import githubIcon from './github.svg';
 
 export const Footer = () => {
-  console.log('footer render');
   return (
     <>
       <Outlet />

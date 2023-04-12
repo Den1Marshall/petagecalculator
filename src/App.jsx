@@ -11,8 +11,6 @@ import { Home } from './pages/Home/Home';
 import { Animals } from './pages/Animals/Animals';
 
 export const App = () => {
-  console.log('app render');
-
   return (
     <ThemeProvider theme={Theme}>
       <AnimalProvider>

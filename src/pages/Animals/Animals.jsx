@@ -9,8 +9,6 @@ import AnimalsAnimal from '../../components/AnimalsAnimal/AnimalsAnimal';
 export const Animals = () => {
   const { selectAnimal } = useContext(AnimalContext);
 
-  console.log('animals render');
-
   return (
     <section className='animals'>
       <h2 className='animals__title'>Choose your animal</h2>

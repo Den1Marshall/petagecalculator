@@ -23,8 +23,6 @@ export const HomeCalculator = () => {
     });
   };
 
-  console.log('calculator render');
-
   return (
     <section className='calculator'>
       <div className='calculator__left'>

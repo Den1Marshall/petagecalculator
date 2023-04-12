@@ -14,8 +14,6 @@ export const Home = () => {
     }
   }, [navigate]);
 
-  console.log('home render');
-
   return (
     <main className='home'>
       <div className='container'>
