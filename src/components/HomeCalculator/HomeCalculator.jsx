@@ -36,6 +36,8 @@ export const HomeCalculator = () => {
             src={animal.iconSrc}
             alt='Animal icon'
             className='calculator__character-img'
+            width={100}
+            height={100}
           />
         </Link>
         <p className='calculator__age'>{slider.animalAge[0]}</p>
