@@ -11,7 +11,7 @@
 }
 
 @media (hover: none) {
-  .animals__animal:hover {
+  .animal:hover {
     opacity: 1;
   }
 }
