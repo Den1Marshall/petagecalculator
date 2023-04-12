@@ -23,7 +23,13 @@ export const Footer = () => {
             target='_blank'
             rel='noopener noreferrer'
           >
-            <img className='footer__link-icon' src={githubIcon} alt='Github' />
+            <img
+              className='footer__link-icon'
+              src={githubIcon}
+              alt='Github'
+              width={20}
+              height={20}
+            />
           </a>
           <a
             href='https://www.instagram.com/d.e.n_marshall/'
@@ -34,6 +40,8 @@ export const Footer = () => {
               className='footer__link-icon'
               src={instagramIcon}
               alt='Instagram'
+              width={20}
+              height={20}
             />
           </a>
           <a
@@ -45,6 +53,8 @@ export const Footer = () => {
               className='footer__link-icon'
               src={telegramIcon}
               alt='Telegram'
+              width={20}
+              height={20}
             />
           </a>
           <a
@@ -52,7 +62,13 @@ export const Footer = () => {
             target='_blank'
             rel='noopener noreferrer'
           >
-            <img className='footer__link-icon' src={mailIcon} alt='Mail' />
+            <img
+              className='footer__link-icon'
+              src={mailIcon}
+              alt='Mail'
+              width={20}
+              height={20}
+            />
           </a>
         </p>
         <p className='footer__copyright'>
