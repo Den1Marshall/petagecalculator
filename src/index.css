@@ -28,6 +28,7 @@ body {
     sans-serif;
   color: #fff;
   background: linear-gradient(90deg, #8360c3, #2ebf91);
+  overflow-x: hidden;
 }
 
 picture {
