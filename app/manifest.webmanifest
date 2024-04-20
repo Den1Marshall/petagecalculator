@@ -1,0 +1,16 @@
+{
+  "name": "CHANGETHIS",
+  "short_name": "CHANGETHIS",
+  "icons": [
+    { "src": "/icon-192.png", "type": "image/png", "sizes": "192x192" },
+    { "src": "/icon-512.png", "type": "image/png", "sizes": "512x512" }
+  ],
+  "start_url": "/",
+  "background_color": "#000",
+  "display": "standalone",
+  "scope": "/",
+  "theme_color": "#000",
+  "shortcuts": [],
+  "description": "CHANGETHIS",
+  "screenshots": []
+}
