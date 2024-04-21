@@ -24,6 +24,7 @@ body {
   padding-left: max(16px, env(safe-area-inset-left));
   overscroll-behavior: none;
   touch-action: pan-x pan-y;
+  background: linear-gradient(90deg, #8360c3, #2ebf91);
 }
 
 @media (prefers-reduced-motion: no-preference) {
