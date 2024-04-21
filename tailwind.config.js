@@ -9,7 +9,11 @@ module.exports = {
     './src/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        pacifico: ['var(--font-pacifico)'],
+      },
+    },
   },
   plugins: [],
 };

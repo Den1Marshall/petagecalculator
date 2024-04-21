@@ -4,6 +4,7 @@ import '@/app/index.css';
 import { RSReducedMotion } from '@/shared/ui/RSReducedMotion';
 import { FMReducedMotion } from '@/shared/ui/FMReducedMotion';
 import { startupImage } from './startupImage';
+import { Pacifico } from 'next/font/google';
 
 export const metadata: Metadata = {
   title: 'CHANGETHIS',
@@ -42,13 +43,23 @@ export const viewport: Viewport = {
   ],
 };
 
+const pacifico = Pacifico({
+  weight: '400',
+  subsets: ['latin'],
+  variable: '--font-pacifico',
+});
+
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <html lang='en' suppressHydrationWarning={true}>
+    <html
+      lang='en'
+      suppressHydrationWarning={true}
+      className={`${pacifico.variable} font-sans`}
+    >
       <body>
         <StateProvider>
           <FMReducedMotion>{children}</FMReducedMotion>
