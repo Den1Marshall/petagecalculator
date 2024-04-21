@@ -1,6 +1,4 @@
 import type { Metadata, Viewport } from 'next';
-import { AppRouterCacheProvider } from '@mui/material-nextjs/v14-appRouter';
-import { MUIThemeProvider } from '@/app/theme';
 import { StateProvider } from '@/app/state';
 import '@/app/index.css';
 import { RSReducedMotion } from '@/shared/ui/RSReducedMotion';
@@ -53,11 +51,7 @@ export default function RootLayout({
     <html lang='en' suppressHydrationWarning={true}>
       <body>
         <StateProvider>
-          <AppRouterCacheProvider>
-            <MUIThemeProvider>
-              <FMReducedMotion>{children}</FMReducedMotion>
-            </MUIThemeProvider>
-          </AppRouterCacheProvider>
+          <FMReducedMotion>{children}</FMReducedMotion>
         </StateProvider>
         <RSReducedMotion />
       </body>
