@@ -58,7 +58,7 @@ export default function RootLayout({
     <html
       lang='en'
       suppressHydrationWarning={true}
-      className={`${pacifico.variable} font-sans`}
+      className={`${pacifico.variable} font-sans text-white`}
     >
       <body>
         <StateProvider>
