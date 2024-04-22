@@ -15,5 +15,8 @@ module.exports = {
       },
     },
   },
-  plugins: [require('tailwindcss-react-aria-components')],
+  plugins: [
+    require('tailwindcss-react-aria-components'),
+    require('tailwindcss-safe-area'),
+  ],
 };
