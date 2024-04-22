@@ -5,9 +5,10 @@ import { RSReducedMotion } from '@/shared/ui/RSReducedMotion';
 import { FMReducedMotion } from '@/shared/ui/FMReducedMotion';
 import { startupImage } from './startupImage';
 import { Pacifico } from 'next/font/google';
+import { title } from './title';
 
 export const metadata: Metadata = {
-  title: 'CHANGETHIS',
+  title,
   description: 'CHANGETHIS',
   robots: 'all',
   metadataBase: new URL('http://localhost:3000'),
@@ -18,13 +19,13 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     url: '/',
-    title: 'CHANGETHIS',
+    title,
     description: 'CHANGETHIS',
   },
 
   twitter: {
     card: 'summary_large_image',
-    title: 'CHANGETHIS',
+    title,
     description: 'CHANGETHIS',
   },
 

@@ -1,6 +1,6 @@
 {
-  "name": "CHANGETHIS",
-  "short_name": "CHANGETHIS",
+  "name": "Pet Age Calculator",
+  "short_name": "Pet Age Calculator",
   "icons": [
     { "src": "/icon-192.png", "type": "image/png", "sizes": "192x192" },
     { "src": "/icon-512.png", "type": "image/png", "sizes": "512x512" }
