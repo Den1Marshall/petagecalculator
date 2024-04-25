@@ -27,6 +27,10 @@ body {
   background: linear-gradient(90deg, #8360c3, #2ebf91);
 }
 
+img {
+  pointer-events: none;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   html {
     scroll-behavior: smooth;
