@@ -33,7 +33,11 @@ export const AnimalButton: FC<AnimalButtonProps> = ({
         duration: isHuman ? 0.5 : 0.3,
         bounce: isHuman ? 0.9 : 0,
       }}
-      className={`bg-white rounded-full max-w-[200px] h-auto focus:outline-none focus-visible:outline-[revert] ${className}`}
+      className={({ isFocusVisible }) =>
+        `bg-white rounded-full max-w-[200px] h-auto ${
+          !isFocusVisible && 'outline-none'
+        } ${className}`
+      }
     >
       <Image quality={100} priority src={src} alt={`${name} icon`} />
     </MotionButton>
