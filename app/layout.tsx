@@ -1,5 +1,4 @@
 import type { Metadata, Viewport } from 'next';
-import { StateProvider } from '@/app/state';
 import '@/app/index.css';
 import { RSReducedMotion } from '@/shared/ui/RSReducedMotion';
 import { FMReducedMotion } from '@/shared/ui/FMReducedMotion';
@@ -63,9 +62,7 @@ export default function RootLayout({
       className={`${pacifico.variable} font-sans text-white`}
     >
       <body>
-        <StateProvider>
-          <FMReducedMotion>{children}</FMReducedMotion>
-        </StateProvider>
+        <FMReducedMotion>{children}</FMReducedMotion>
         <RSReducedMotion />
       </body>
     </html>
