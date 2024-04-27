@@ -6,10 +6,11 @@ import { FMReducedMotion } from '@/shared/ui/FMReducedMotion';
 import { startupImage } from './startupImage';
 import { Pacifico } from 'next/font/google';
 import { title } from './title';
+import { description } from './description';
 
 export const metadata: Metadata = {
   title,
-  description: 'CHANGETHIS',
+  description,
   robots: 'all',
   metadataBase: new URL('http://localhost:3000'),
   alternates: {
@@ -20,13 +21,13 @@ export const metadata: Metadata = {
     type: 'website',
     url: '/',
     title,
-    description: 'CHANGETHIS',
+    description,
   },
 
   twitter: {
     card: 'summary_large_image',
     title,
-    description: 'CHANGETHIS',
+    description,
   },
 
   appleWebApp: {
