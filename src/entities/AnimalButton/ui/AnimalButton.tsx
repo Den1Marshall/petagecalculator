@@ -34,7 +34,7 @@ export const AnimalButton: FC<AnimalButtonProps> = ({
         bounce: isHuman ? 0.9 : 0,
       }}
       className={({ isFocusVisible }) =>
-        `bg-white rounded-full max-w-[200px] h-auto ${
+        `bg-white rounded-full max-w-[180px] h-auto ${
           !isFocusVisible && 'outline-none'
         } ${className}`
       }
