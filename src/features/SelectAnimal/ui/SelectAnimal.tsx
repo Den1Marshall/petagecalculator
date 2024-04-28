@@ -82,6 +82,7 @@ export const SelectAnimal: FC<SelectAnimalProps> = ({
                   }
                 >
                   <Image
+                    priority
                     quality={100}
                     src={animal.src}
                     alt={`${animal.name} icon`}
