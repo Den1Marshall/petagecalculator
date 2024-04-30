@@ -6,6 +6,7 @@ import { startupImage } from './startupImage';
 import { Pacifico } from 'next/font/google';
 import { title } from './title';
 import { description } from './description';
+import { Analytics } from '@vercel/analytics/react';
 
 export const metadata: Metadata = {
   title,
@@ -62,7 +63,10 @@ export default function RootLayout({
       className={`${pacifico.variable} font-sans text-white`}
     >
       <body>
-        <FMReducedMotion>{children}</FMReducedMotion>
+        <FMReducedMotion>
+          {children}
+          <Analytics />
+        </FMReducedMotion>
         <RSReducedMotion />
       </body>
     </html>
