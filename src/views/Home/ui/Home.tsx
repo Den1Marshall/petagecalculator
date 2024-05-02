@@ -1,3 +1,4 @@
+import { Credits } from '@/entities/Credits';
 import { Calculator } from '@/widgets/Calculator';
 
 export default function Home() {
@@ -8,6 +9,7 @@ export default function Home() {
         <span className='text-5xl'>calculator</span>
       </h1>
       <Calculator />
+      <Credits />
     </main>
   );
 }
