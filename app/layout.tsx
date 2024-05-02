@@ -12,7 +12,6 @@ export const metadata: Metadata = {
   title,
   description,
   robots: 'all',
-  metadataBase: new URL('http://localhost:3000'),
   alternates: {
     canonical: '/',
   },
