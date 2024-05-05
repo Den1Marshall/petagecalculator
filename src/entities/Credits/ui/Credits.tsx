@@ -25,7 +25,7 @@ export const Credits: FC = () => {
         aria-label='Open info menu'
         onPress={() => setOpen(!isOpen)}
         className={({ isFocusVisible }) =>
-          `absolute top-safe-or-3 right-safe-or-4 lg:z-10 ${
+          `absolute top-safe-or-3 right-safe-or-4 lg:z-20 ${
             !isFocusVisible && 'outline-none'
           }`
         }
@@ -70,9 +70,9 @@ export const Credits: FC = () => {
                 setOpen(false);
               }
             }}
-            className='fixed top-0 right-0 w-full h-screen p-safe-or-5 bg-white/35 dark:bg-black/35 backdrop-blur-3xl'
+            className='z-10 fixed bottom-0 right-0 size-full p-safe-or-5 bg-white/35 dark:bg-black/35 backdrop-blur-3xl'
           >
-            <Dialog className='w-full h-full flex flex-col items-center gap-10 outline-none'>
+            <Dialog className='size-full flex flex-col items-center gap-10 outline-none'>
               <div className='relative w-full flex items-center justify-center'>
                 <Button
                   onPress={() => setOpen(false)}
