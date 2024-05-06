@@ -21,7 +21,7 @@ export const SelectAnimal: FC<SelectAnimalProps> = ({
   setIsOpen,
   selectNewAnimal,
 }) => {
-  const lg = useMediaQuery('(min-width: 768px)');
+  const lg = useMediaQuery('(min-width: 1024px)');
 
   return (
     <AnimatePresence>
@@ -29,6 +29,7 @@ export const SelectAnimal: FC<SelectAnimalProps> = ({
         <MotionModal
           isOpen
           onOpenChange={setIsOpen}
+          layout
           initial={{ x: lg ? '-100%' : '0%', y: lg ? '0%' : '100%' }}
           animate={{ x: '0%', y: '0%' }}
           exit={{ x: lg ? '-100%' : '0%', y: lg ? '0%' : '100%' }}
@@ -57,14 +58,14 @@ export const SelectAnimal: FC<SelectAnimalProps> = ({
           }}
           className='fixed z-10 left-0 top-safe w-full h-full bg-white/[.3] dark:bg-black/[.3] backdrop-blur-xl rounded-t-2xl lg:w-3/12 lg:rounded-none lg:overflow-y-auto lg:overscroll-contain'
         >
-          <Dialog className='flex flex-col gap-10 p-5 outline-none lg:p-7'>
+          <Dialog className='flex flex-col gap-10 p-5 outline-none max-lg:landscape:p-safe-or-5 lg:p-7'>
             <Heading
               slot='title'
               className='text-5xl text-center font-pacifico'
             >
               Select animal
             </Heading>
-            <section className='grid grid-cols-3 gap-3 lg:grid-cols-2'>
+            <section className='grid grid-cols-3 gap-3 max-lg:landscape:grid-cols-4 lg:grid-cols-2'>
               {animals.map((animal) => (
                 <MotionButton
                   key={animal.name}

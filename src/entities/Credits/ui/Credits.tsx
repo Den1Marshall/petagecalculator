@@ -17,7 +17,7 @@ const MotionModal = motion(Modal);
 export const Credits: FC = () => {
   const [isOpen, setOpen] = useState(false);
 
-  const lg = useMediaQuery('(min-width: 768px)');
+  const lg = useMediaQuery('(min-width: 1024px)');
 
   return (
     <DialogTrigger>
@@ -25,7 +25,7 @@ export const Credits: FC = () => {
         aria-label='Open info menu'
         onPress={() => setOpen(!isOpen)}
         className={({ isFocusVisible }) =>
-          `absolute top-safe-or-3 right-safe-or-4 lg:z-20 ${
+          `absolute top-safe-or-3 right-safe-or-5 lg:z-20 ${
             !isFocusVisible && 'outline-none'
           }`
         }
