@@ -24,6 +24,7 @@ export const AnimalButton: FC<AnimalButtonProps> = ({
 
   return (
     <MotionButton
+      aria-label={`Current animal is ${name}. Click to change it.`}
       onPress={openModal}
       onPressStart={() => controls.start({ x: isHuman ? [10, -10, 0] : 0 })}
       animate={controls}
