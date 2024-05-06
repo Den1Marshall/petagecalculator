@@ -59,9 +59,9 @@ export default function RootLayout({
     <html
       lang='en'
       suppressHydrationWarning={true}
-      className={`${pacifico.variable} font-sans text-white`}
+      className={`${pacifico.variable} h-[max(calc(100%_+_env(safe-area-inset-top)),_100%)] font-sans text-white overscroll-none touch-pan-x touch-pan-y motion-safe:scroll-smooth`}
     >
-      <body>
+      <body className='h-full py-safe px-safe-or-5 bg-gradient-to-r from-[#8360c3] to-[#2ebf91]'>
         <FMReducedMotion>
           {children}
           <Analytics />

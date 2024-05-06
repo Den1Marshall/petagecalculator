@@ -9,30 +9,6 @@
   -webkit-user-select: none;
 }
 
-html {
-  width: 100%;
-  height: max(calc(100% + env(safe-area-inset-top)), 100%);
-  overscroll-behavior: none;
-}
-
-body {
-  width: 100%;
-  height: 100%;
-  padding-top: env(safe-area-inset-top);
-  padding-right: max(16px, env(safe-area-inset-right));
-  padding-bottom: env(safe-area-inset-bottom);
-  padding-left: max(16px, env(safe-area-inset-left));
-  overscroll-behavior: none;
-  touch-action: pan-x pan-y;
-  background: linear-gradient(90deg, #8360c3, #2ebf91);
-}
-
 img {
   pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  html {
-    scroll-behavior: smooth;
-  }
 }
