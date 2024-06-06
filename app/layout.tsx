@@ -11,6 +11,7 @@ import { Analytics } from '@vercel/analytics/react';
 export const metadata: Metadata = {
   title,
   description,
+  metadataBase: new URL('https://petagecalculator.vercel.app/'),
   robots: 'all',
   alternates: {
     canonical: '/',
