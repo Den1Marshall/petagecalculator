@@ -12,3 +12,7 @@
 img {
   pointer-events: none;
 }
+
+a {
+  -webkit-touch-callout: none;
+}
