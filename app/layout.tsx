@@ -62,10 +62,10 @@ export default function RootLayout({
     <html
       lang='en'
       suppressHydrationWarning={true}
-      className={`${pacifico.variable} h-[max(calc(100%_+_env(safe-area-inset-top)),_100%)] font-sans text-white overscroll-none touch-pan-x touch-pan-y motion-safe:scroll-smooth bg-gradient-to-r from-[#8360c3] to-[#2ebf91]`}
+      className={`${pacifico.variable} h-[max(calc(100%_+_env(safe-area-inset-top)),_100%)] font-sans overscroll-none touch-pan-x touch-pan-y motion-safe:scroll-smooth bg-gradient-to-r from-[#8360c3] to-[#2ebf91]`}
     >
-      <body className='dark h-full py-safe px-safe-or-5 overscroll-none'>
-        <NextUIProvider className='w-full h-full'>
+      <body className='h-full py-safe px-safe-or-5 overscroll-none'>
+        <NextUIProvider>
           <AriaRouterProvider>
             <FMReducedMotion>
               {children}
