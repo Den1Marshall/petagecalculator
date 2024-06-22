@@ -70,7 +70,7 @@ export const Credits: FC = () => {
                 setOpen(false);
               }
             }}
-            className='z-10 fixed bottom-0 right-0 size-full p-safe-or-5 bg-white/35 dark:bg-black/35 backdrop-blur-3xl'
+            className='z-50 fixed bottom-0 right-0 size-full p-safe-or-5 bg-white/35 dark:bg-black/35 backdrop-blur-3xl'
           >
             <Dialog className='size-full flex flex-col items-center gap-10 outline-none'>
               <div className='relative w-full flex items-center justify-center'>

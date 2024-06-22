@@ -9,6 +9,7 @@ import { description } from './description';
 import { Analytics } from '@vercel/analytics/react';
 import { AriaRouterProvider } from '@/app/AriaRouterProvider';
 import { NextUIProvider } from '@/app/NextUIProvider';
+import { BottomNav } from '@/widgets/BottomNav';
 
 export const metadata: Metadata = {
   title,
@@ -69,6 +70,7 @@ export default function RootLayout({
           <AriaRouterProvider>
             <FMReducedMotion>
               {children}
+              <BottomNav />
               <Analytics />
             </FMReducedMotion>
             <RSReducedMotion />
