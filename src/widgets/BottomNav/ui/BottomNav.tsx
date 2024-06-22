@@ -4,6 +4,7 @@ import { BottomNavLink } from './BottomNavLink';
 import { usePathname } from 'next/navigation';
 import { Navbar, NavbarContent, NavbarItem } from '@nextui-org/react';
 import { HomeIcon } from '@/shared/ui/HomeIcon';
+import { SettingsIcon } from '@/shared/ui/SettingsIcon';
 
 export const BottomNav: FC = () => {
   const pathname = usePathname();
@@ -15,6 +16,12 @@ export const BottomNav: FC = () => {
           <BottomNavLink href='/' pathname={pathname}>
             <HomeIcon />
             Home
+          </BottomNavLink>
+        </NavbarItem>
+        <NavbarItem className='w-full'>
+          <BottomNavLink href='/settings' pathname={pathname}>
+            <SettingsIcon />
+            Settings
           </BottomNavLink>
         </NavbarItem>
       </NavbarContent>
