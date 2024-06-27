@@ -21,7 +21,7 @@ export const SelectTheme: FC = () => {
       <h2>Select theme</h2>
       <Dropdown>
         <DropdownTrigger>
-          <Button disableRipple>{theme}</Button>
+          <Button color='primary'>{theme}</Button>
         </DropdownTrigger>
         <DropdownMenu
           disallowEmptySelection

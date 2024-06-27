@@ -13,7 +13,11 @@ export const NextUIProvider: FC<NextUIProviderProps> = ({ children }) => {
 
   return (
     <NextThemesProvider attribute='class'>
-      <Provider navigate={router.push} className={'w-full h-full'}>
+      <Provider
+        disableRipple
+        navigate={router.push}
+        className={'w-full h-full'}
+      >
         {children}
       </Provider>
     </NextThemesProvider>
