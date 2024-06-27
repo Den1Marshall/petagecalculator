@@ -30,9 +30,15 @@ export const SelectTheme: FC = () => {
           onSelectionChange={(keys) => setSelectedKeys(keys)}
           onAction={(key) => setTheme(key as string)}
         >
-          <DropdownItem key='light'>Light</DropdownItem>
-          <DropdownItem key='dark'>Dark</DropdownItem>
-          <DropdownItem key='system'>System</DropdownItem>
+          <DropdownItem color='primary' key='light'>
+            Light
+          </DropdownItem>
+          <DropdownItem color='primary' key='dark'>
+            Dark
+          </DropdownItem>
+          <DropdownItem color='primary' key='system'>
+            System
+          </DropdownItem>
         </DropdownMenu>
       </Dropdown>
     </article>
