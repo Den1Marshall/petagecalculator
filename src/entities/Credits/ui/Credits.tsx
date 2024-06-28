@@ -1,6 +1,7 @@
 'use client';
 import { CloseIcon } from '@/shared/ui/CloseIcon';
 import { InfoIcon } from '@/shared/ui/InfoIcon';
+import { Link } from '@nextui-org/react';
 import { AnimatePresence, Variants, motion } from 'framer-motion';
 import { FC, useState } from 'react';
 import {
@@ -84,49 +85,45 @@ export const Credits: FC = () => {
                   Credits
                 </Heading>
               </div>
-              <a
+              <Link
+                isExternal
                 href='https://streamlinehq.com/'
-                rel='noopener noreferrer'
-                target='_blank'
-                className='inline-block my-auto text-blue-400 hover:underline'
+                color='primary'
+                className='my-auto'
               >
                 Free icons from StreamLine
-              </a>
+              </Link>
               <footer className='mt-auto w-full flex flex-col justify-center items-center gap-5'>
                 <hr className='bg-white w-screen' />
                 <div className='flex items-center gap-5'>
-                  <a
-                    rel='noopener noreferrer'
-                    target='_blank'
+                  <Link
+                    isExternal
                     href='https://github.com/Den1Marshall'
-                    className='text-blue-400 hover:underline'
+                    color='primary'
                   >
                     GitHub
-                  </a>
-                  <a
-                    rel='noopener noreferrer'
-                    target='_blank'
+                  </Link>
+                  <Link
+                    isExternal
                     href='mailto:denyshrychulevych@gmail.com'
-                    className='text-blue-400 hover:underline'
+                    color='primary'
                   >
                     Email
-                  </a>
-                  <a
-                    rel='noopener noreferrer'
-                    target='_blank'
-                    href='https://www.instagram.com/d.e.n_marshall/'
-                    className='text-blue-400 hover:underline'
+                  </Link>
+                  <Link
+                    isExternal
+                    href='https://www.instagram.com/d.e.n_marshall'
+                    color='primary'
                   >
                     Instagram
-                  </a>
-                  <a
-                    rel='noopener noreferrer'
-                    target='_blank'
+                  </Link>
+                  <Link
+                    isExternal
                     href='https://t.me/den_marshall'
-                    className='text-blue-400 hover:underline'
+                    color='primary'
                   >
                     Telegram
-                  </a>
+                  </Link>
                 </div>
                 <p className='text-center'>
                   Copyright © {new Date().getFullYear()} Denys Hrychulevych. All
