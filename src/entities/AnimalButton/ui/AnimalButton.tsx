@@ -26,13 +26,19 @@ export const AnimalButton: FC<AnimalButtonProps> = ({
     <MotionButton
       aria-label={`Current animal is ${name}. Click to change it.`}
       onPress={openModal}
-      onPressStart={() => controls.start({ x: isHuman ? [10, -10, 0] : 0 })}
+      onPressStart={() =>
+        controls.start({
+          transform: isHuman
+            ? ['translateX(10px)', 'translateX(0px)']
+            : 'translateX(0px)',
+        })
+      }
       animate={controls}
       whileTap={{ scale: isHuman ? 1 : 0.85 }}
       transition={{
         type: 'spring',
         duration: isHuman ? 0.5 : 0.3,
-        bounce: isHuman ? 0.9 : 0,
+        bounce: isHuman ? 0.95 : 0,
       }}
       className={({ isFocusVisible }) =>
         `bg-white rounded-full max-w-[180px] h-auto ${
