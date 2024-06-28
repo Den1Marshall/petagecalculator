@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation';
 import { Navbar, NavbarContent, NavbarItem } from '@nextui-org/react';
 import { HomeIcon } from '@/shared/ui/HomeIcon';
 import { SettingsIcon } from '@/shared/ui/SettingsIcon';
+import { UserIcon } from '@/shared/ui/UserIcon';
 
 export const BottomNav: FC = () => {
   const pathname = usePathname();
@@ -16,6 +17,12 @@ export const BottomNav: FC = () => {
           <BottomNavLink href='/' pathname={pathname}>
             <HomeIcon />
             Home
+          </BottomNavLink>
+        </NavbarItem>
+        <NavbarItem className='w-full'>
+          <BottomNavLink href='/my-pets' pathname={pathname}>
+            <UserIcon />
+            My Pets
           </BottomNavLink>
         </NavbarItem>
         <NavbarItem className='w-full'>
