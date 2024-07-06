@@ -20,6 +20,7 @@ export const SelectTheme: FC = () => {
     <article className='flex items-center justify-between'>
       <h2>Select theme</h2>
       <Dropdown
+        closeOnSelect={false}
         motionProps={{
           variants: {
             enter: {
