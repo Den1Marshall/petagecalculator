@@ -19,7 +19,22 @@ export const SelectTheme: FC = () => {
   return (
     <article className='flex items-center justify-between'>
       <h2>Select theme</h2>
-      <Dropdown>
+      <Dropdown
+        motionProps={{
+          variants: {
+            enter: {
+              opacity: 1,
+              transform: 'scale(1)',
+              transition: { type: 'spring', duration: 0.5 },
+            },
+            exit: {
+              opacity: 0,
+              transform: 'scale(0)',
+              transition: { type: 'spring', duration: 0.5, bounce: 0 },
+            },
+          },
+        }}
+      >
         <DropdownTrigger>
           <Button color='primary' className='capitalize'>
             {theme}
