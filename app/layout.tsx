@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from 'next';
 import '@/app/index.css';
-import { RSReducedMotion } from '@/shared/ui/RSReducedMotion';
 import { FMReducedMotion } from '@/shared/ui/FMReducedMotion';
 import { startupImage } from './startupImage';
 import { Pacifico } from 'next/font/google';
@@ -75,7 +74,6 @@ export default function RootLayout({
                 <BottomNav />
                 <Analytics />
               </FMReducedMotion>
-              <RSReducedMotion />
             </AriaRouterProvider>
           </NextUIProvider>
         </UserProvider>
