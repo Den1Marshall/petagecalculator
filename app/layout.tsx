@@ -10,6 +10,7 @@ import { Analytics } from '@vercel/analytics/react';
 import { AriaRouterProvider } from '@/app/AriaRouterProvider';
 import { NextUIProvider } from '@/app/NextUIProvider';
 import { BottomNav } from '@/widgets/BottomNav';
+import { UserProvider } from '@/app/UserProvider';
 
 export const metadata: Metadata = {
   title,
@@ -66,16 +67,18 @@ export default function RootLayout({
       className={`${pacifico.variable} h-[max(calc(100%_+_env(safe-area-inset-top)),_100%)] font-sans overscroll-none touch-pan-x touch-pan-y motion-safe:scroll-smooth bg-gradient-to-r from-[#8360c3] to-[#2ebf91]`}
     >
       <body className='h-full py-safe px-safe-or-5 overscroll-none'>
-        <NextUIProvider>
-          <AriaRouterProvider>
-            <FMReducedMotion>
-              {children}
-              <BottomNav />
-              <Analytics />
-            </FMReducedMotion>
-            <RSReducedMotion />
-          </AriaRouterProvider>
-        </NextUIProvider>
+        <UserProvider>
+          <NextUIProvider>
+            <AriaRouterProvider>
+              <FMReducedMotion>
+                {children}
+                <BottomNav />
+                <Analytics />
+              </FMReducedMotion>
+              <RSReducedMotion />
+            </AriaRouterProvider>
+          </NextUIProvider>
+        </UserProvider>
       </body>
     </html>
   );
