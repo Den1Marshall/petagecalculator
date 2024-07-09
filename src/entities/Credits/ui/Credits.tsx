@@ -54,12 +54,6 @@ export const Credits: FC = () => {
             initial={'exit'}
             animate={'enter'}
             exit={'exit'}
-            transition={{
-              type: 'spring',
-              duration: 0.5,
-              bounce: 0,
-              restDelta: 0.0001,
-            }}
             // drag={!lg && 'x'}
             // dragSnapToOrigin
             // dragConstraints={{ left: 0 }}

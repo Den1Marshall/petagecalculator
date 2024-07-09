@@ -31,7 +31,6 @@ export const SelectTheme: FC = () => {
             exit: {
               opacity: 0,
               transform: 'scale(0)',
-              transition: { type: 'spring', duration: 0.5, bounce: 0 },
             },
           },
         }}

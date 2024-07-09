@@ -43,12 +43,6 @@ export const SelectAnimal: FC<SelectAnimalProps> = ({
           initial={'exit'}
           animate={'enter'}
           exit={'exit'}
-          transition={{
-            type: 'spring',
-            duration: 0.5,
-            bounce: 0,
-            restDelta: 0.0001,
-          }}
           // drag={!lg && 'y'}
           // dragConstraints={{ top: -0 }}
           // dragElastic={0.05}
