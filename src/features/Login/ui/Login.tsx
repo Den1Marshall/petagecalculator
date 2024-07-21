@@ -92,9 +92,9 @@ export const Login: FC<LoginProps> = ({ isOpen, onClose }) => {
 
   return (
     <Modal
-      shouldBlockScroll={false}
       isOpen={isOpen}
       onClose={onClose}
+      hideCloseButton
       backdrop='blur'
       placement='center'
       motionProps={{
