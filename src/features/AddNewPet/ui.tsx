@@ -1,15 +1,13 @@
 'use client';
 import { AddIcon } from '@/shared/ui/AddIcon';
+import { Button, DatePicker, Input } from '@nextui-org/react';
 import {
-  Button,
-  DatePicker,
-  Input,
   Modal,
   ModalBody,
   ModalContent,
   ModalFooter,
   ModalHeader,
-} from '@nextui-org/react';
+} from '@nextui-org/modal';
 import { FC, useContext } from 'react';
 import {
   CalendarDate,
@@ -106,7 +104,6 @@ export const AddNewPet: FC<AddNewPetProps> = ({
         Add new pet
       </Button>
       <Modal
-        shouldBlockScroll={false}
         hideCloseButton
         backdrop='transparent'
         isDismissable
