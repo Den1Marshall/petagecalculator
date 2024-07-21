@@ -20,6 +20,7 @@ import { auth } from '@/shared/config/firebase';
 import { FirebaseError } from 'firebase/app';
 import { LoginForgotPassword } from './LoginForgotPassword';
 import { AnimatePresence, Variants, motion } from 'framer-motion';
+import { addNewUserToDatabase } from '../api';
 
 interface LoginProps {
   isOpen: boolean;
@@ -40,11 +41,23 @@ export const Login: FC<LoginProps> = ({ isOpen, onClose }) => {
     setIsLoading(true);
 
     try {
-      type === 'signIn'
-        ? await signInWithEmailAndPassword(auth, email, password)
-        : await createUserWithEmailAndPassword(auth, email, password);
+      if (type === 'signIn') {
+        const userCredential = await signInWithEmailAndPassword(
+          auth,
+          email,
+          password
+        );
 
-      setErr('');
+        await addNewUserToDatabase(userCredential.user.uid);
+      } else {
+        const userCredential = await createUserWithEmailAndPassword(
+          auth,
+          email,
+          password
+        );
+
+        await addNewUserToDatabase(userCredential.user.uid);
+      }
     } catch (error) {
       const firebaseError = error as FirebaseError;
 
@@ -55,18 +68,16 @@ export const Login: FC<LoginProps> = ({ isOpen, onClose }) => {
   };
 
   const handleSignInWithPopup = async () => {
-    setIsLoading(true);
-
     try {
       const provider = new GoogleAuthProvider();
 
-      await signInWithPopup(auth, provider);
+      const userCredential = await signInWithPopup(auth, provider);
+
+      await addNewUserToDatabase(userCredential.user.uid);
     } catch (error) {
       const firebaseError = error as FirebaseError;
 
       setErr(firebaseError.code);
-    } finally {
-      setIsLoading(false);
     }
   };
 
@@ -81,6 +92,7 @@ export const Login: FC<LoginProps> = ({ isOpen, onClose }) => {
 
   return (
     <Modal
+      shouldBlockScroll={false}
       isOpen={isOpen}
       onClose={onClose}
       backdrop='blur'

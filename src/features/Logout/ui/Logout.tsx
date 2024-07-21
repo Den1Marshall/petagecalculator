@@ -1,5 +1,5 @@
 'use client';
-import { UserContext } from '@/app/UserProvider';
+import { UserContext } from '@/app/ui';
 import { auth } from '@/shared/config/firebase';
 import { Button } from '@nextui-org/react';
 import { FirebaseError } from 'firebase/app';
@@ -13,7 +13,7 @@ export const Logout: FC = () => {
     setIsLoading(true);
 
     try {
-      auth.signOut();
+      await auth.signOut();
     } catch (error) {
       const firebaseError = error as FirebaseError;
 

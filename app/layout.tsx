@@ -9,7 +9,7 @@ import { Analytics } from '@vercel/analytics/react';
 import { AriaRouterProvider } from '@/app/AriaRouterProvider';
 import { NextUIProvider } from '@/app/NextUIProvider';
 import { BottomNav } from '@/widgets/BottomNav';
-import { UserProvider } from '@/app/UserProvider';
+import { UserProvider } from '@/app/ui';
 
 export const metadata: Metadata = {
   title,
