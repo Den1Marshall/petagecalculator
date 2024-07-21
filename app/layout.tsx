@@ -6,7 +6,6 @@ import { Pacifico } from 'next/font/google';
 import { title } from './title';
 import { description } from './description';
 import { Analytics } from '@vercel/analytics/react';
-import { AriaRouterProvider } from '@/app/AriaRouterProvider';
 import { NextUIProvider } from '@/app/NextUIProvider';
 import { BottomNav } from '@/widgets/BottomNav';
 import { UserProvider } from '@/app/ui';
@@ -69,13 +68,11 @@ export default function RootLayout({
       <body className='h-full py-safe px-safe-or-5 overscroll-none'>
         <UserProvider>
           <NextUIProvider>
-            <AriaRouterProvider>
-              <FMReducedMotion>
-                {children}
-                <BottomNav />
-                <Analytics />
-              </FMReducedMotion>
-            </AriaRouterProvider>
+            <FMReducedMotion>
+              {children}
+              <BottomNav />
+              <Analytics />
+            </FMReducedMotion>
           </NextUIProvider>
         </UserProvider>
       </body>
