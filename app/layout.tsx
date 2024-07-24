@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from 'next';
 import '@/app/index.css';
-import { FMReducedMotion } from '@/shared/ui/FMReducedMotion';
 import { startupImage } from './startupImage';
 import { Pacifico } from 'next/font/google';
 import { title } from './title';
@@ -8,7 +7,7 @@ import { description } from './description';
 import { Analytics } from '@vercel/analytics/react';
 import { NextUIProvider } from '@/app/NextUIProvider';
 import { BottomNav } from '@/widgets/BottomNav';
-import { UserProvider } from '@/app/ui';
+import { FramerMotionConfig, UserProvider } from '@/app/ui';
 
 export const metadata: Metadata = {
   title,
@@ -68,11 +67,11 @@ export default function RootLayout({
       <body className='h-full py-safe px-safe-or-5 overscroll-none'>
         <UserProvider>
           <NextUIProvider>
-            <FMReducedMotion>
+            <FramerMotionConfig>
               {children}
               <BottomNav />
               <Analytics />
-            </FMReducedMotion>
+            </FramerMotionConfig>
           </NextUIProvider>
         </UserProvider>
       </body>

@@ -2,7 +2,13 @@
 import { FC, ReactNode } from 'react';
 import { MotionConfig } from 'framer-motion';
 
-export const FMReducedMotion: FC<{ children: ReactNode }> = ({ children }) => {
+interface FramerMotionConfigProps {
+  children: ReactNode;
+}
+
+export const FramerMotionConfig: FC<FramerMotionConfigProps> = ({
+  children,
+}) => {
   return (
     <MotionConfig
       reducedMotion='user'
