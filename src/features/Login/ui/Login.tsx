@@ -1,14 +1,12 @@
 'use client';
+import { Button, ButtonGroup, Input } from '@nextui-org/react';
 import {
-  Button,
-  ButtonGroup,
-  Input,
   Modal,
   ModalBody,
   ModalContent,
   ModalFooter,
   ModalHeader,
-} from '@nextui-org/react';
+} from '@nextui-org/modal';
 import { FC, useState } from 'react';
 import {
   createUserWithEmailAndPassword,
@@ -21,25 +19,44 @@ import { FirebaseError } from 'firebase/app';
 import { LoginForgotPassword } from './LoginForgotPassword';
 import { AnimatePresence, Variants, motion } from 'framer-motion';
 import { addNewUserToDatabase } from '../api';
+import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+import { EyeIcon, EyeSlashIcon, GoogleIcon } from '@/shared/ui';
 
 interface LoginProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
+interface Inputs {
+  email: string;
+  password: string;
+}
+
 export const Login: FC<LoginProps> = ({ isOpen, onClose }) => {
   const [type, setType] = useState<'signIn' | 'signUp'>('signIn');
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [err, setErr] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
+  const { control, formState, handleSubmit, clearErrors, setValue, setError } =
+    useForm<Inputs>();
+  const { isSubmitting, errors } = formState;
 
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [forgotPassword, setForgotPassword] = useState(false);
 
-  const handleLogin = async () => {
-    setIsLoading(true);
+  const handleSignInWithPopup = async () => {
+    try {
+      const provider = new GoogleAuthProvider();
 
+      const userCredential = await signInWithPopup(auth, provider);
+
+      await addNewUserToDatabase(userCredential.user.uid);
+    } catch (error) {
+      const firebaseError = error as FirebaseError;
+
+      setError('email', { type: 'custom', message: firebaseError.code });
+    }
+  };
+
+  const onSubmit: SubmitHandler<Inputs> = async ({ email, password }) => {
     try {
       if (type === 'signIn') {
         const userCredential = await signInWithEmailAndPassword(
@@ -61,23 +78,7 @@ export const Login: FC<LoginProps> = ({ isOpen, onClose }) => {
     } catch (error) {
       const firebaseError = error as FirebaseError;
 
-      setErr(firebaseError.code);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const handleSignInWithPopup = async () => {
-    try {
-      const provider = new GoogleAuthProvider();
-
-      const userCredential = await signInWithPopup(auth, provider);
-
-      await addNewUserToDatabase(userCredential.user.uid);
-    } catch (error) {
-      const firebaseError = error as FirebaseError;
-
-      setErr(firebaseError.code);
+      setError('email', { type: 'custom', message: firebaseError.code });
     }
   };
 
@@ -111,7 +112,11 @@ export const Login: FC<LoginProps> = ({ isOpen, onClose }) => {
       }}
       className='origin-bottom'
     >
-      <ModalContent className='relative min-h-[428px]'>
+      <ModalContent
+        as={'form'}
+        onSubmit={handleSubmit(onSubmit)}
+        className='relative min-h-[428px]'
+      >
         <AnimatePresence initial={false}>
           {forgotPassword ? (
             <LoginForgotPassword
@@ -133,7 +138,7 @@ export const Login: FC<LoginProps> = ({ isOpen, onClose }) => {
                     color={type === 'signIn' ? 'primary' : 'default'}
                     onPress={() => {
                       setType('signIn');
-                      setErr('');
+                      clearErrors();
                     }}
                   >
                     Sign In
@@ -142,39 +147,69 @@ export const Login: FC<LoginProps> = ({ isOpen, onClose }) => {
                     color={type !== 'signIn' ? 'primary' : 'default'}
                     onPress={() => {
                       setType('signUp');
-                      setErr('');
+                      clearErrors();
                     }}
                   >
                     Sign Up
                   </Button>
                 </ButtonGroup>
                 <Button onPress={handleSignInWithPopup}>
-                  Continue With Google
+                  Continue With Google <GoogleIcon />
                 </Button>
                 <p className='text-center'>OR</p>
-                <Input
-                  isRequired
-                  type='email'
-                  value={email}
-                  onValueChange={setEmail}
-                  placeholder='Email'
-                  errorMessage={err}
-                  isInvalid={Boolean(err)}
+                <Controller
+                  name='email'
+                  rules={{ required: 'This field is required' }}
+                  control={control}
+                  render={({ field }) => (
+                    <Input
+                      isRequired
+                      type='email'
+                      placeholder='Email'
+                      isClearable
+                      onClear={() => setValue('email', '')}
+                      errorMessage={errors.email?.message}
+                      isInvalid={Boolean(errors.email?.message)}
+                      {...field}
+                    />
+                  )}
                 />
-                <Input
-                  isRequired
-                  type='password'
-                  value={password}
-                  onValueChange={setPassword}
-                  placeholder='Password'
+                <Controller
+                  name='password'
+                  rules={{ required: 'This field is required' }}
+                  control={control}
+                  render={({ field }) => (
+                    <Input
+                      isRequired
+                      type={isPasswordVisible ? 'text' : 'password'}
+                      placeholder='Password'
+                      endContent={
+                        <button
+                          className='focus:outline-none'
+                          type='button'
+                          onClick={() =>
+                            setIsPasswordVisible(!isPasswordVisible)
+                          }
+                          aria-label='toggle password visibility'
+                        >
+                          {isPasswordVisible ? (
+                            <EyeIcon className='text-2xl text-default-400 pointer-events-none' />
+                          ) : (
+                            <EyeSlashIcon className='text-2xl text-default-400 pointer-events-none' />
+                          )}
+                        </button>
+                      }
+                      {...field}
+                    />
+                  )}
                 />
               </ModalBody>
               <ModalFooter className='flex flex-col'>
                 <Button
-                  isLoading={isLoading}
+                  type='submit'
+                  isLoading={isSubmitting}
                   fullWidth
                   color='primary'
-                  onPress={handleLogin}
                 >
                   {type === 'signIn' ? 'Sign In' : 'Sign Up'}
                 </Button>
