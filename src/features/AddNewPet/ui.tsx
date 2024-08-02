@@ -40,7 +40,7 @@ export const AddNewPet: FC<AddNewPetProps> = ({
 }) => {
   const { user, userPets } = useContext(UserContext);
 
-  const { control, formState, handleSubmit, reset, setError } =
+  const { control, formState, handleSubmit, reset, setError, setValue } =
     useForm<Inputs>();
 
   const { isSubmitting, errors } = formState;
@@ -138,6 +138,7 @@ export const AddNewPet: FC<AddNewPetProps> = ({
                 <Input
                   isRequired
                   isClearable
+                  onClear={() => setValue('name', '')}
                   variant='bordered'
                   label={'Name'}
                   isInvalid={Boolean(errors.name?.message)}
