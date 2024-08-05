@@ -8,6 +8,7 @@ import { Analytics } from '@vercel/analytics/react';
 import { NextUIProvider } from '@/app/NextUIProvider';
 import { BottomNav } from '@/widgets/BottomNav';
 import { FramerMotionConfig, UserProvider } from '@/app/ui';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 export const metadata: Metadata = {
   title,
@@ -74,6 +75,7 @@ export default function RootLayout({
             </FramerMotionConfig>
           </NextUIProvider>
         </UserProvider>
+        <SpeedInsights />
       </body>
     </html>
   );
