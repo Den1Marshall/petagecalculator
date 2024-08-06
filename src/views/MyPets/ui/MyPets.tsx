@@ -33,7 +33,7 @@ export default function MyPets() {
                 />
               ))
             ) : (
-              <h2 className='h-[50dvh] text-2xl text-center font-pacifico'>
+              <h2 className='w-full h-[50dvh] text-2xl text-center font-pacifico'>
                 No pets added yet...
               </h2>
             )}
