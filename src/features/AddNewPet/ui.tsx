@@ -19,6 +19,8 @@ import { IPet } from '@/entities/Pet';
 import { doc, setDoc } from 'firebase/firestore';
 import { db } from '@/shared/config/firebase';
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
+import { Variants } from 'framer-motion';
+import { useMediaQuery } from 'usehooks-ts';
 
 interface AddNewPetProps {
   isOpen: boolean;
@@ -92,6 +94,19 @@ export const AddNewPet: FC<AddNewPetProps> = ({
 
   const today = dateToday(getLocalTimeZone());
 
+  const lg = useMediaQuery('(min-width: 1024px)');
+
+  const variants: Variants = {
+    enter: {
+      y: lg ? undefined : '0%',
+      x: lg ? '0%' : undefined,
+    },
+    exit: {
+      y: lg ? undefined : '100%',
+      x: lg ? '-100%' : undefined,
+    },
+  };
+
   return (
     <>
       <Button
@@ -112,16 +127,23 @@ export const AddNewPet: FC<AddNewPetProps> = ({
         onOpenChange={onOpenChange}
         onClose={reset}
         motionProps={{
-          variants: {
-            enter: {
-              transform: 'translateY(0%)',
-            },
-            exit: {
-              transform: 'translateY(100%)',
-            },
+          variants,
+          drag: !lg && 'y',
+          dragConstraints: { top: -0 },
+          dragElastic: 0.05,
+          dragSnapToOrigin: true,
+          dragTransition: { bounceStiffness: 500, bounceDamping: 50 },
+          onDragEnd: (_e, info) => {
+            if (
+              info.offset.y >= window.innerHeight / 2 ||
+              info.velocity.y >= 250
+            ) {
+              onClose();
+            }
           },
         }}
-        className='max-h-[50%] backdrop-blur-2xl saturate-150 bg-overlay/30'
+        className='max-h-[50%] backdrop-blur-2xl saturate-150 bg-overlay/30 lg:max-h-full'
+        classNames={{ wrapper: 'lg:max-w-[25%]' }}
       >
         <ModalContent as={'form'} onSubmit={handleSubmit(onSubmit)}>
           <ModalHeader>Tell us more about your pet</ModalHeader>
