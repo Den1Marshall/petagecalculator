@@ -22,12 +22,12 @@ export const Credits: FC = () => {
 
   const variants: Variants = {
     enter: {
-      transform: lg ? undefined : 'translateX(0%)',
+      x: lg ? undefined : '0%',
       opacity: lg ? 1 : undefined,
     },
 
     exit: {
-      transform: lg ? undefined : 'translateX(100%)',
+      x: lg ? undefined : '100%',
       opacity: lg ? 0 : undefined,
     },
   };
@@ -54,23 +54,22 @@ export const Credits: FC = () => {
             initial={'exit'}
             animate={'enter'}
             exit={'exit'}
-            // drag={!lg && 'x'}
-            // dragSnapToOrigin
-            // dragConstraints={{ left: 0 }}
-            // dragElastic={0}
-            // dragTransition={{
-            //   bounceStiffness: 500,
-            //   bounceDamping: 50,
-            //   restDelta: 0.0001,
-            // }}
-            // onDragEnd={(_e, info) => {
-            //   if (
-            //     info.offset.x >= window.innerWidth / 2 ||
-            //     info.velocity.x >= 450
-            //   ) {
-            //     setOpen(false);
-            //   }
-            // }}
+            drag={!lg && 'x'}
+            dragSnapToOrigin
+            dragConstraints={{ left: 0 }}
+            dragElastic={0}
+            dragTransition={{
+              bounceStiffness: 500,
+              bounceDamping: 50,
+            }}
+            onDragEnd={(_e, info) => {
+              if (
+                info.offset.x >= window.innerWidth / 2 ||
+                info.velocity.x >= 250
+              ) {
+                setOpen(false);
+              }
+            }}
             className='z-50 fixed bottom-0 right-0 size-full p-safe-or-5 bg-white/35 dark:bg-black/35 backdrop-blur-3xl'
           >
             <Dialog className='size-full flex flex-col items-center gap-10 outline-none'>

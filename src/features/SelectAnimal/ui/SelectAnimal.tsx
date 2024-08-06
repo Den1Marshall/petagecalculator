@@ -25,10 +25,12 @@ export const SelectAnimal: FC<SelectAnimalProps> = ({
 
   const variants: Variants = {
     enter: {
-      transform: lg ? 'translateX(0%)' : 'translateY(0%)',
+      y: lg ? undefined : '0%',
+      x: lg ? '0%' : undefined,
     },
     exit: {
-      transform: lg ? 'translateX(-100%)' : 'translateY(100%)',
+      y: lg ? undefined : '100%',
+      x: lg ? '-100%' : undefined,
     },
   };
 
@@ -38,29 +40,27 @@ export const SelectAnimal: FC<SelectAnimalProps> = ({
         <MotionModal
           isOpen
           onOpenChange={setIsOpen}
-          layout
           variants={variants}
           initial={'exit'}
           animate={'enter'}
           exit={'exit'}
-          // drag={!lg && 'y'}
-          // dragConstraints={{ top: -0 }}
-          // dragElastic={0.05}
-          // dragSnapToOrigin
-          // dragTransition={{
-          //   bounceStiffness: 500,
-          //   bounceDamping: 50,
-          //   restDelta: 0.0001,
-          // }}
-          // onDragEnd={(_e, info) => {
-          //   if (
-          //     info.offset.y >= window.innerHeight / 2 ||
-          //     info.velocity.y >= 450
-          //   ) {
-          //     setIsOpen(false);
-          //   }
-          // }}
-          className='fixed z-10 left-0 top-safe w-full h-full bg-white/[.3] dark:bg-black/[.3] backdrop-blur-xl rounded-t-2xl lg:w-3/12 lg:rounded-none lg:overflow-y-auto lg:overscroll-contain'
+          drag={!lg && 'y'}
+          dragConstraints={{ top: -0 }}
+          dragElastic={0.05}
+          dragSnapToOrigin
+          dragTransition={{
+            bounceStiffness: 500,
+            bounceDamping: 50,
+          }}
+          onDragEnd={(_e, info) => {
+            if (
+              info.offset.y >= window.innerHeight / 2 ||
+              info.velocity.y >= 250
+            ) {
+              setIsOpen(false);
+            }
+          }}
+          className='fixed z-10 left-0 top-safe w-full h-full bg-white/[.3] dark:bg-black/[.3] backdrop-blur-xl rounded-t-2xl lg:w-1/4 lg:rounded-none lg:overflow-y-auto lg:overscroll-contain'
         >
           <Dialog className='flex flex-col gap-10 p-5 outline-none max-lg:landscape:p-safe-or-5 lg:p-7'>
             <Heading
