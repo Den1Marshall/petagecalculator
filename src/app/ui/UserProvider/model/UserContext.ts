@@ -8,10 +8,12 @@ interface UserContextProps {
   isLoading: boolean;
   user: User | null;
   userPets: IPet[];
+  setUserPets: (pets: IPet[]) => void;
 }
 
 export const UserContext = createContext<UserContextProps>({
   isLoading: true,
   user: null,
   userPets: petsPlaceholder,
+  setUserPets: () => {},
 });

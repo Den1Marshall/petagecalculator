@@ -6,18 +6,12 @@ import { IPet } from './model';
 import cat from '@/../public/images/animals/cat.png';
 import { getLocalTimeZone, now } from '@internationalized/date';
 import { UserContext } from '@/app/ui';
-import { doc, setDoc } from 'firebase/firestore';
-import { db } from '@/shared/config/firebase';
-import { CloseIcon } from '@/shared/ui/CloseIcon';
 import { deletePet } from './api';
+import { CloseIcon } from '@/shared/ui/CloseIcon';
 
-interface PetProps extends IPet {
-  i: number;
-}
-
-export const Pet: FC<PetProps> = ({ image, name, birthDate, i }) => {
+export const Pet: FC<IPet> = ({ image, name, birthDate }) => {
   const timeNow = now(getLocalTimeZone());
-  const { user, userPets } = useContext(UserContext);
+  const { user, userPets, setUserPets } = useContext(UserContext);
 
   const [isDeleting, setIsDeleting] = useState(false);
 
@@ -32,29 +26,28 @@ export const Pet: FC<PetProps> = ({ image, name, birthDate, i }) => {
       setIsDeleting(true);
       await deletePet(user.uid, name, userPets);
       setIsDeleting(false);
+    } else {
+      setUserPets(userPets.filter((pet) => pet.name !== name));
     }
   };
 
   return (
     <Card
       isBlurred
-      shadow='none'
+      shadow='sm'
       as={'article'}
-      className='relative min-h-full flex flex-col items-center justify-center font-pacifico lg:basis-[calc(50%_-_20px)]'
+      className='size-full flex flex-col items-center justify-center font-pacifico'
     >
-      {user && (
-        <Button
-          isLoading={isDeleting}
-          variant='light'
-          isIconOnly
-          onPress={handleDeletePet}
-          className='absolute top-0 right-0'
-        >
-          <CloseIcon />
-        </Button>
-      )}
+      <Button
+        isLoading={isDeleting}
+        variant='light'
+        isIconOnly
+        onPress={handleDeletePet}
+        className='absolute top-0 right-0'
+      >
+        <CloseIcon />
+      </Button>
       <Image
-        priority={i === 0}
         quality={100}
         src={image || cat}
         alt={`Picture of ${name}`}

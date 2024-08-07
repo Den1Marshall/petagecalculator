@@ -27,6 +27,7 @@ interface AddNewPetProps {
   onOpen: () => void;
   onClose: () => void;
   onOpenChange: () => void;
+  className?: string;
 }
 
 interface Inputs {
@@ -39,6 +40,7 @@ export const AddNewPet: FC<AddNewPetProps> = ({
   onOpen,
   onClose,
   onOpenChange,
+  className,
 }) => {
   const { user, userPets } = useContext(UserContext);
 
@@ -110,13 +112,13 @@ export const AddNewPet: FC<AddNewPetProps> = ({
   return (
     <>
       <Button
+        isIconOnly
         variant='shadow'
         color='primary'
         onPress={onOpen}
         className='m-auto'
       >
         <AddIcon />
-        Add new pet
       </Button>
       <Modal
         hideCloseButton
@@ -142,7 +144,7 @@ export const AddNewPet: FC<AddNewPetProps> = ({
             }
           },
         }}
-        className='max-h-[50%] backdrop-blur-2xl saturate-150 bg-overlay/30 lg:max-h-full'
+        className={`max-h-[50%] backdrop-blur-2xl saturate-150 bg-overlay/30 lg:max-h-full ${className}`}
         classNames={{ wrapper: 'lg:max-w-[25%]' }}
       >
         <ModalContent as={'form'} onSubmit={handleSubmit(onSubmit)}>

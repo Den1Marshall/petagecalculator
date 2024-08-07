@@ -44,7 +44,7 @@ export const UserProvider: FC<UserProviderProps> = ({ children }) => {
   }, []);
 
   return (
-    <UserContext.Provider value={{ isLoading, user, userPets }}>
+    <UserContext.Provider value={{ isLoading, user, userPets, setUserPets }}>
       {children}
     </UserContext.Provider>
   );
