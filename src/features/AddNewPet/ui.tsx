@@ -4,8 +4,8 @@ import {
   Button,
   DatePicker,
   Input,
-  Radio,
-  RadioGroup,
+  Select,
+  SelectItem,
 } from '@nextui-org/react';
 import {
   Modal,
@@ -14,7 +14,7 @@ import {
   ModalFooter,
   ModalHeader,
 } from '@nextui-org/modal';
-import { FC, useContext } from 'react';
+import { FC, useContext, useRef } from 'react';
 import {
   CalendarDate,
   getLocalTimeZone,
@@ -39,6 +39,7 @@ import horse from '@/../public/images/animals/horse.png';
 import cow from '@/../public/images/animals/cow.png';
 import pig from '@/../public/images/animals/pig.png';
 import Image from 'next/image';
+import { uploadUserPetImage } from './api';
 
 interface AddNewPetProps {
   isOpen: boolean;
@@ -69,13 +70,7 @@ export const AddNewPet: FC<AddNewPetProps> = ({
   const { isSubmitting, errors } = formState;
 
   const onSubmit: SubmitHandler<Inputs> = async ({ date, name, image }) => {
-    const pet: IPet = {
-      name,
-      birthDate: date,
-      image: image,
-    };
-
-    const sameNamedPet = userPets.find((uPet) => uPet.name === pet.name);
+    const sameNamedPet = userPets.find((uPet) => uPet.name === name);
 
     if (date.compare(today) > 0) {
       setError(
@@ -96,7 +91,21 @@ export const AddNewPet: FC<AddNewPetProps> = ({
     }
 
     if (user && !sameNamedPet) {
+      const userImage = inputRef.current?.files?.item(0) ?? null;
+
       try {
+        const uploadedUserImage = await uploadUserPetImage(
+          user.uid,
+          name,
+          userImage
+        );
+
+        const pet: IPet = {
+          name,
+          birthDate: date,
+          image: uploadedUserImage ?? image,
+        };
+
         const docRef = doc(db, 'users', user.uid);
 
         await setDoc(
@@ -127,6 +136,8 @@ export const AddNewPet: FC<AddNewPetProps> = ({
       x: lg ? '-100%' : undefined,
     },
   };
+
+  const inputRef = useRef<HTMLInputElement>(null);
 
   return (
     <>
@@ -211,55 +222,119 @@ export const AddNewPet: FC<AddNewPetProps> = ({
               name='image'
               control={control}
               render={({ field }) => (
-                <RadioGroup
-                  orientation='horizontal'
-                  label={'Select image'}
+                <Select
+                  defaultSelectedKeys={[cat.src]}
+                  disallowEmptySelection
+                  variant='bordered'
+                  label='Select or upload image'
+                  popoverProps={{
+                    backdrop: 'blur',
+                    motionProps: {
+                      variants: {
+                        enter: {
+                          opacity: 1,
+                          transform: 'scale(1)',
+                          transition: {
+                            type: 'spring',
+                            duration: 0.5,
+                            bounce: 0.15,
+                          },
+                        },
+                        exit: {
+                          opacity: 0,
+                          transform: 'scale(0)',
+                          transition: {
+                            type: 'spring',
+                            duration: 0.5,
+                            bounce: 0,
+                          },
+                        },
+                      },
+                    },
+                  }}
                   {...field}
                 >
-                  <Radio value={cat.src}>
-                    <Image src={cat} alt='cat image' className='size-20' />
-                  </Radio>
-                  <Radio value={dog.src}>
-                    <Image src={dog} alt='dog image' className='size-20' />
-                  </Radio>
-                  <Radio value={hamster.src}>
+                  <SelectItem key={cat.src} textValue='Cat'>
+                    <Image
+                      src={cat}
+                      alt='cat image'
+                      className='max-w-[50%] mx-auto'
+                    />
+                  </SelectItem>
+                  <SelectItem key={dog.src} textValue='Dog'>
+                    <Image
+                      src={dog}
+                      alt='dog image'
+                      className='max-w-[50%] mx-auto'
+                    />
+                  </SelectItem>
+                  <SelectItem key={hamster.src} textValue='Hamster'>
                     <Image
                       src={hamster}
                       alt='hamster image'
-                      className='size-20'
+                      className='max-w-[50%] mx-auto'
                     />
-                  </Radio>
-                  <Radio value={mouse.src}>
-                    <Image src={mouse} alt='mouse image' className='size-20' />
-                  </Radio>
-                  <Radio value={rabbit.src}>
+                  </SelectItem>
+                  <SelectItem key={mouse.src} textValue='Mouse'>
+                    <Image
+                      src={mouse}
+                      alt='mouse image'
+                      className='max-w-[50%] mx-auto'
+                    />
+                  </SelectItem>
+                  <SelectItem key={rabbit.src} textValue='Rabbit'>
                     <Image
                       src={rabbit}
                       alt='rabbit image'
-                      className='size-20'
+                      className='max-w-[50%] mx-auto'
                     />
-                  </Radio>
-                  <Radio value={fox.src}>
-                    <Image src={fox} alt='fox image' className='size-20' />
-                  </Radio>
-                  <Radio value={chick.src}>
-                    <Image src={chick} alt='chick image' className='size-20' />
-                  </Radio>
-                  <Radio value={goat.src}>
-                    <Image src={goat} alt='goat image' className='size-20' />
-                  </Radio>
-                  <Radio value={horse.src}>
-                    <Image src={horse} alt='horse image' className='size-20' />
-                  </Radio>
-                  <Radio value={cow.src}>
-                    <Image src={cow} alt='cow image' className='size-20' />
-                  </Radio>
-                  <Radio value={pig.src}>
-                    <Image src={pig} alt='pig image' className='size-20' />
-                  </Radio>
-                </RadioGroup>
+                  </SelectItem>
+                  <SelectItem key={fox.src} textValue='Fox'>
+                    <Image
+                      src={fox}
+                      alt='fox image'
+                      className='max-w-[50%] mx-auto'
+                    />
+                  </SelectItem>
+                  <SelectItem key={chick.src} textValue='Chick'>
+                    <Image
+                      src={chick}
+                      alt='chick image'
+                      className='max-w-[50%] mx-auto'
+                    />
+                  </SelectItem>
+                  <SelectItem key={goat.src} textValue='Goat'>
+                    <Image
+                      src={goat}
+                      alt='goat image'
+                      className='max-w-[50%] mx-auto'
+                    />
+                  </SelectItem>
+                  <SelectItem key={horse.src} textValue='Horse'>
+                    <Image
+                      src={horse}
+                      alt='horse image'
+                      className='max-w-[50%] mx-auto'
+                    />
+                  </SelectItem>
+                  <SelectItem key={cow.src} textValue='Cow'>
+                    <Image
+                      src={cow}
+                      alt='cow image'
+                      className='max-w-[50%] mx-auto'
+                    />
+                  </SelectItem>
+                  <SelectItem key={pig.src} textValue='Pig'>
+                    <Image
+                      src={pig}
+                      alt='pig image'
+                      className='max-w-[50%] mx-auto'
+                    />
+                  </SelectItem>
+                </Select>
               )}
             />
+            <input ref={inputRef} type='file' accept='image/*' />
           </ModalBody>
           <ModalFooter className='mb-safe'>
             <Button

@@ -1,6 +1,7 @@
 import { doc, setDoc } from 'firebase/firestore';
 import { IPet } from './model';
-import { db } from '@/shared/config/firebase';
+import { db, storage } from '@/shared/config/firebase';
+import { deleteObject, ref } from 'firebase/storage';
 
 export const deletePet = async (
   userUid: string,
@@ -11,6 +12,10 @@ export const deletePet = async (
 
   try {
     const docRef = doc(db, 'users', userUid);
+
+    await deleteObject(
+      ref(storage, `/users/${userUid}/pets/${petToDeleteName}`)
+    );
 
     await setDoc(
       docRef,

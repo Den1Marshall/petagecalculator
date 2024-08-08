@@ -1,5 +1,9 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
+const nextConfig = {
+  images: {
+    domains: ['firebasestorage.googleapis.com'],
+  },
+};
 
 const withPWA = require('@ducanh2912/next-pwa').default({
   dest: 'public',

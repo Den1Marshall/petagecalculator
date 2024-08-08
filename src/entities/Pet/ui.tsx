@@ -3,7 +3,6 @@ import { Button, Card, CardBody, CardFooter } from '@nextui-org/react';
 import Image from 'next/image';
 import { FC, useContext, useState } from 'react';
 import { IPet } from './model';
-import cat from '@/../public/images/animals/cat.png';
 import { getLocalTimeZone, now } from '@internationalized/date';
 import { UserContext } from '@/app/ui';
 import { deletePet } from './api';
@@ -22,12 +21,16 @@ export const Pet: FC<IPet> = ({ image, name, birthDate }) => {
   const day = Math.abs(nowDay - birthDate.day);
 
   const handleDeletePet = async () => {
-    if (user) {
-      setIsDeleting(true);
-      await deletePet(user.uid, name, userPets);
-      setIsDeleting(false);
-    } else {
-      setUserPets(userPets.filter((pet) => pet.name !== name));
+    try {
+      if (user) {
+        setIsDeleting(true);
+        await deletePet(user.uid, name, userPets);
+        setIsDeleting(false);
+      } else {
+        setUserPets(userPets.filter((pet) => pet.name !== name));
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -45,16 +48,17 @@ export const Pet: FC<IPet> = ({ image, name, birthDate }) => {
           aria-label='Delete current pet'
           isIconOnly
           onPress={handleDeletePet}
-          className='absolute top-0 right-0'
+          className='absolute z-10 top-0 right-0'
         >
           <CloseIcon />
         </Button>
         <Image
           quality={100}
-          src={image || cat}
+          src={image}
           fill
+          sizes='100%'
           alt={`Picture of ${name}`}
-          className='rounded-t-lg object-contain'
+          className='rounded-t-lg object-cover'
         />
       </CardBody>
       <CardFooter className='flex-col justify-center'>
