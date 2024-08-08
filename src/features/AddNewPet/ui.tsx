@@ -132,6 +132,7 @@ export const AddNewPet: FC<AddNewPetProps> = ({
     <>
       <Button
         isIconOnly
+        aria-label='Add new pet'
         variant='shadow'
         color='primary'
         onPress={onOpen}

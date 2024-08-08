@@ -42,6 +42,7 @@ export const Pet: FC<IPet> = ({ image, name, birthDate }) => {
         <Button
           isLoading={isDeleting}
           variant='light'
+          aria-label='Delete current pet'
           isIconOnly
           onPress={handleDeletePet}
           className='absolute top-0 right-0'

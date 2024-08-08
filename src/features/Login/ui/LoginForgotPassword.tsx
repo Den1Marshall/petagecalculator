@@ -62,7 +62,12 @@ export const LoginForgotPassword: FC<LoginForgotPasswordProps> = ({
       className='absolute top-0 left-0 w-full h-full'
     >
       <ModalHeader className='flex items-center gap-1'>
-        <Button isIconOnly variant='light' onPress={() => setIsOpen(false)}>
+        <Button
+          isIconOnly
+          aria-label='go back to login'
+          variant='light'
+          onPress={() => setIsOpen(false)}
+        >
           <ArrowReturnIcon />
         </Button>
         Reset Password
