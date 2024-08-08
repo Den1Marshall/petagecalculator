@@ -6,12 +6,12 @@ import dog from '@/../public/images/animals/dog.png';
 export const petsPlaceholder: IPet[] = [
   {
     name: 'My Cat',
-    image: cat,
+    image: cat.src,
     birthDate: new CalendarDate(2018, 7, 14),
   },
   {
     name: 'My Dog',
-    image: dog,
+    image: dog.src,
     birthDate: new CalendarDate(2013, 5, 12),
   },
 ];
