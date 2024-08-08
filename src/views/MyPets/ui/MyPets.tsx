@@ -87,7 +87,7 @@ export default function MyPets() {
               onOpen={onOpen}
               onClose={onClose}
               onOpenChange={onOpenChange}
-              className='min-h-10'
+              className='min-h-10 lg:mx-auto'
             />
           </Reorder.Group>
           {userPets.length < 1 && (
