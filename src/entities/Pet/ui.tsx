@@ -1,5 +1,5 @@
 'use client';
-import { Button, Card, CardFooter } from '@nextui-org/react';
+import { Button, Card, CardBody, CardFooter } from '@nextui-org/react';
 import Image from 'next/image';
 import { FC, useContext, useState } from 'react';
 import { IPet } from './model';
@@ -36,23 +36,26 @@ export const Pet: FC<IPet> = ({ image, name, birthDate }) => {
       isBlurred
       shadow='sm'
       as={'article'}
-      className='size-full flex flex-col items-center justify-center font-pacifico'
+      className='w-full h-full font-pacifico'
     >
-      <Button
-        isLoading={isDeleting}
-        variant='light'
-        isIconOnly
-        onPress={handleDeletePet}
-        className='absolute top-0 right-0'
-      >
-        <CloseIcon />
-      </Button>
-      <Image
-        quality={100}
-        src={image || cat}
-        alt={`Picture of ${name}`}
-        className='max-w-full h-auto rounded-t-lg'
-      />
+      <CardBody>
+        <Button
+          isLoading={isDeleting}
+          variant='light'
+          isIconOnly
+          onPress={handleDeletePet}
+          className='absolute top-0 right-0'
+        >
+          <CloseIcon />
+        </Button>
+        <Image
+          quality={100}
+          src={image || cat}
+          fill
+          alt={`Picture of ${name}`}
+          className='rounded-t-lg object-contain'
+        />
+      </CardBody>
       <CardFooter className='flex-col justify-center'>
         <h2 className='text-2xl'>{name}</h2>
         <p className='text-lg'>

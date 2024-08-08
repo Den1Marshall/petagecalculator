@@ -7,7 +7,7 @@ export class Animal {
     public name: string,
     public ages: [string, string][],
     public humanAges: number[],
-    public src: string | StaticImport,
+    public src: StaticImport,
     public human?: boolean
   ) {
     this.maxSliderValue = ages.length - 1;

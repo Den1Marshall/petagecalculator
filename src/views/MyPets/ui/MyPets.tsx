@@ -40,7 +40,9 @@ export default function MyPets() {
 
   return (
     <main className='h-[calc(100%_-_64px)] flex flex-col'>
-      <h1 className='text-center text-6xl font-pacifico mb-10'>My Pets</h1>
+      <h1 className='max-lg:mb-10 text-center text-6xl font-pacifico'>
+        My Pets
+      </h1>
       {isLoading ? (
         <Spinner size='lg' />
       ) : (
@@ -50,7 +52,7 @@ export default function MyPets() {
             values={userPets}
             onReorder={handleReorder}
             layoutScroll
-            className={`h-screen flex flex-col items-center gap-10 ${overflow} lg:flex-row`}
+            className={`max-lg:pb-10 flex flex-col items-center gap-10 ${overflow} lg:my-auto lg:flex-row`}
           >
             <AnimatePresence initial={false} mode='popLayout'>
               {userPets.map((pet) => (
@@ -61,13 +63,16 @@ export default function MyPets() {
                   initial={{ scale: 0 }}
                   animate={{ scale: 1 }}
                   exit={{ scale: 0 }}
-                  onDragStart={() => {
-                    setOverflow('overflow-hidden');
+                  onDragStart={(e) => {
+                    if (overflow === 'overflow-scroll') {
+                      e.preventDefault();
+                      setOverflow('overflow-hidden');
+                    }
                   }}
                   onDragEnd={() => {
                     setOverflow('overflow-scroll');
                   }}
-                  className='lg:min-w-[25%] cursor-grab'
+                  className='min-w-[80%] aspect-square cursor-grab lg:min-w-[33.333333%]'
                 >
                   <Pet
                     name={pet.name}
@@ -82,6 +87,7 @@ export default function MyPets() {
               onOpen={onOpen}
               onClose={onClose}
               onOpenChange={onOpenChange}
+              className='min-h-10'
             />
           </Reorder.Group>
           {userPets.length < 1 && (

@@ -1,6 +1,12 @@
 'use client';
 import { AddIcon } from '@/shared/ui/AddIcon';
-import { Button, DatePicker, Input } from '@nextui-org/react';
+import {
+  Button,
+  DatePicker,
+  Input,
+  Radio,
+  RadioGroup,
+} from '@nextui-org/react';
 import {
   Modal,
   ModalBody,
@@ -21,6 +27,18 @@ import { db } from '@/shared/config/firebase';
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import { Variants } from 'framer-motion';
 import { useMediaQuery } from 'usehooks-ts';
+import cat from '@/../public/images/animals/cat.png';
+import dog from '@/../public/images/animals/dog.png';
+import hamster from '@/../public/images/animals/hamster.png';
+import mouse from '@/../public/images/animals/mouse.png';
+import rabbit from '@/../public/images/animals/rabbit.png';
+import fox from '@/../public/images/animals/fox.png';
+import chick from '@/../public/images/animals/chick.png';
+import goat from '@/../public/images/animals/goat.png';
+import horse from '@/../public/images/animals/horse.png';
+import cow from '@/../public/images/animals/cow.png';
+import pig from '@/../public/images/animals/pig.png';
+import Image from 'next/image';
 
 interface AddNewPetProps {
   isOpen: boolean;
@@ -33,6 +51,7 @@ interface AddNewPetProps {
 interface Inputs {
   name: string;
   date: CalendarDate;
+  image: string;
 }
 
 export const AddNewPet: FC<AddNewPetProps> = ({
@@ -49,11 +68,11 @@ export const AddNewPet: FC<AddNewPetProps> = ({
 
   const { isSubmitting, errors } = formState;
 
-  const onSubmit: SubmitHandler<Inputs> = async ({ date, name }) => {
+  const onSubmit: SubmitHandler<Inputs> = async ({ date, name, image }) => {
     const pet: IPet = {
       name,
       birthDate: date,
-      image: '',
+      image: image,
     };
 
     const sameNamedPet = userPets.find((uPet) => uPet.name === pet.name);
@@ -116,7 +135,7 @@ export const AddNewPet: FC<AddNewPetProps> = ({
         variant='shadow'
         color='primary'
         onPress={onOpen}
-        className='m-auto'
+        className={className}
       >
         <AddIcon />
       </Button>
@@ -144,7 +163,7 @@ export const AddNewPet: FC<AddNewPetProps> = ({
             }
           },
         }}
-        className={`max-h-[50%] backdrop-blur-2xl saturate-150 bg-overlay/30 lg:max-h-full ${className}`}
+        className='max-h-[50%] backdrop-blur-2xl saturate-150 bg-overlay/30 overflow-y-scroll lg:max-h-full'
         classNames={{ wrapper: 'lg:max-w-[25%]' }}
       >
         <ModalContent as={'form'} onSubmit={handleSubmit(onSubmit)}>
@@ -185,6 +204,59 @@ export const AddNewPet: FC<AddNewPetProps> = ({
                   errorMessage={errors.date?.message}
                   {...field}
                 />
+              )}
+            />
+            <Controller
+              name='image'
+              control={control}
+              render={({ field }) => (
+                <RadioGroup
+                  orientation='horizontal'
+                  label={'Select image'}
+                  {...field}
+                >
+                  <Radio value={cat.src}>
+                    <Image src={cat} alt='cat image' className='size-20' />
+                  </Radio>
+                  <Radio value={dog.src}>
+                    <Image src={dog} alt='dog image' className='size-20' />
+                  </Radio>
+                  <Radio value={hamster.src}>
+                    <Image
+                      src={hamster}
+                      alt='hamster image'
+                      className='size-20'
+                    />
+                  </Radio>
+                  <Radio value={mouse.src}>
+                    <Image src={mouse} alt='mouse image' className='size-20' />
+                  </Radio>
+                  <Radio value={rabbit.src}>
+                    <Image
+                      src={rabbit}
+                      alt='rabbit image'
+                      className='size-20'
+                    />
+                  </Radio>
+                  <Radio value={fox.src}>
+                    <Image src={fox} alt='fox image' className='size-20' />
+                  </Radio>
+                  <Radio value={chick.src}>
+                    <Image src={chick} alt='chick image' className='size-20' />
+                  </Radio>
+                  <Radio value={goat.src}>
+                    <Image src={goat} alt='goat image' className='size-20' />
+                  </Radio>
+                  <Radio value={horse.src}>
+                    <Image src={horse} alt='horse image' className='size-20' />
+                  </Radio>
+                  <Radio value={cow.src}>
+                    <Image src={cow} alt='cow image' className='size-20' />
+                  </Radio>
+                  <Radio value={pig.src}>
+                    <Image src={pig} alt='pig image' className='size-20' />
+                  </Radio>
+                </RadioGroup>
               )}
             />
           </ModalBody>
