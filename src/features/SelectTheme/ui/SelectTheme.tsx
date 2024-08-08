@@ -26,7 +26,7 @@ export const SelectTheme: FC = () => {
             enter: {
               opacity: 1,
               transform: 'scale(1)',
-              transition: { type: 'spring', duration: 0.5 },
+              transition: { type: 'spring', duration: 0.5, bounce: 0.2 },
             },
             exit: {
               opacity: 0,
