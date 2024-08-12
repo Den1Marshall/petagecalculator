@@ -4,7 +4,7 @@ import { db, storage } from '@/shared/config/firebase';
 import { deleteObject, ref } from 'firebase/storage';
 import { FirebaseError } from 'firebase/app';
 
-const deleteUserPetImage = async (userUid: string, petToDeleteName: string) => {
+const deletePetImage = async (userUid: string, petToDeleteName: string) => {
   try {
     await deleteObject(
       ref(storage, `/users/${userUid}/pets/${petToDeleteName}`)
@@ -18,7 +18,7 @@ const deleteUserPetImage = async (userUid: string, petToDeleteName: string) => {
   }
 };
 
-export const deleteUserPet = async (
+export const deletePet = async (
   userUid: string,
   petToDeleteName: string,
   userPets: IPet[]
@@ -28,7 +28,7 @@ export const deleteUserPet = async (
   try {
     const docRef = doc(db, 'users', userUid);
 
-    await deleteUserPetImage(userUid, petToDeleteName);
+    await deletePetImage(userUid, petToDeleteName);
 
     await setDoc(
       docRef,
