@@ -65,7 +65,7 @@ export const AddNewPet: FC<AddNewPetProps> = ({
   const { user, userPets } = useContext(UserContext);
 
   const { control, formState, handleSubmit, reset, setError, setValue } =
-    useForm<Inputs>();
+    useForm<Inputs>({ defaultValues: { image: cat.src } });
 
   const { isSubmitting, errors } = formState;
 
