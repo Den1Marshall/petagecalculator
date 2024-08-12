@@ -38,6 +38,8 @@ export default function MyPets() {
 
   const lg = useMediaQuery('(min-width: 1024px)');
 
+  const drag = userPets.length > 1 ? (lg ? 'x' : 'y') : false;
+
   return (
     <main className='h-[calc(100%_-_64px)] flex flex-col'>
       <h1 className='max-lg:mb-10 text-center text-6xl font-pacifico'>
@@ -48,7 +50,7 @@ export default function MyPets() {
       ) : (
         <>
           <Reorder.Group
-            axis={lg ? 'x' : 'y'}
+            axis={drag || undefined}
             values={userPets}
             onReorder={handleReorder}
             layoutScroll
@@ -57,6 +59,7 @@ export default function MyPets() {
             <AnimatePresence initial={false} mode='popLayout'>
               {userPets.map((pet) => (
                 <Reorder.Item
+                  drag={drag}
                   dragTransition={{ bounceDamping: 50, bounceStiffness: 500 }}
                   key={pet.name}
                   value={pet}
@@ -72,7 +75,9 @@ export default function MyPets() {
                   onDragEnd={() => {
                     setOverflow('overflow-scroll');
                   }}
-                  className='min-w-[80%] aspect-square cursor-grab lg:min-w-[33.333333%]'
+                  className={`min-w-[80%] aspect-square ${
+                    drag && 'cursor-grab'
+                  } lg:min-w-[33.333333%]`}
                 >
                   <Pet
                     name={pet.name}
