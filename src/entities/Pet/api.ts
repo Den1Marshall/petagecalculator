@@ -2,8 +2,23 @@ import { doc, setDoc } from 'firebase/firestore';
 import { IPet } from './model';
 import { db, storage } from '@/shared/config/firebase';
 import { deleteObject, ref } from 'firebase/storage';
+import { FirebaseError } from 'firebase/app';
 
-export const deletePet = async (
+const deleteUserPetImage = async (userUid: string, petToDeleteName: string) => {
+  try {
+    await deleteObject(
+      ref(storage, `/users/${userUid}/pets/${petToDeleteName}`)
+    );
+  } catch (error) {
+    const firebaseError = error as FirebaseError;
+
+    if (firebaseError.code !== 'storage/object-not-found') {
+      throw firebaseError;
+    }
+  }
+};
+
+export const deleteUserPet = async (
   userUid: string,
   petToDeleteName: string,
   userPets: IPet[]
@@ -13,9 +28,7 @@ export const deletePet = async (
   try {
     const docRef = doc(db, 'users', userUid);
 
-    await deleteObject(
-      ref(storage, `/users/${userUid}/pets/${petToDeleteName}`)
-    );
+    await deleteUserPetImage(userUid, petToDeleteName);
 
     await setDoc(
       docRef,
