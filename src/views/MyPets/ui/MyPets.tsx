@@ -80,6 +80,7 @@ export default function MyPets() {
                   } lg:min-w-[33.333333%]`}
                 >
                   <Pet
+                    openAddNewPet={onOpen}
                     name={pet.name}
                     image={pet.image}
                     birthDate={pet.birthDate}

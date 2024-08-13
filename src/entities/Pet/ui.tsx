@@ -1,17 +1,43 @@
 'use client';
-import { Button, Card, CardBody, CardFooter } from '@nextui-org/react';
+import {
+  Button,
+  Card,
+  CardBody,
+  CardFooter,
+  Dropdown,
+  DropdownItem,
+  DropdownMenu,
+  DropdownTrigger,
+  Spinner,
+  useDisclosure,
+} from '@nextui-org/react';
 import Image from 'next/image';
 import { FC, useContext, useState } from 'react';
 import { IPet } from './model';
 import { getLocalTimeZone, now } from '@internationalized/date';
 import { UserContext } from '@/app/ui';
 import { deletePet } from './api';
-import { CloseIcon } from '@/shared/ui/CloseIcon';
+import { EllipsisHorizontalIcon, TrashIcon } from '@/shared/ui';
+import { AddIcon } from '@/shared/ui/AddIcon';
 
-export const Pet: FC<IPet> = ({ image, name, birthDate }) => {
+interface PetProps extends IPet {
+  openAddNewPet: () => void;
+}
+
+export const Pet: FC<PetProps> = ({
+  openAddNewPet,
+  image,
+  name,
+  birthDate,
+}) => {
   const timeNow = now(getLocalTimeZone());
   const { user, userPets, setUserPets } = useContext(UserContext);
 
+  const {
+    isOpen: isMenuOpen,
+    onOpenChange: onMenuOpenChange,
+    onOpen,
+  } = useDisclosure();
   const [isDeleting, setIsDeleting] = useState(false);
 
   const { year: nowYear, month: nowMonth, day: nowDay } = timeNow;
@@ -39,19 +65,50 @@ export const Pet: FC<IPet> = ({ image, name, birthDate }) => {
       isBlurred
       shadow='sm'
       as={'article'}
+      onContextMenu={(e) => {
+        e.preventDefault();
+        onOpen();
+      }}
       className='w-full h-full font-pacifico'
     >
       <CardBody>
-        <Button
-          isLoading={isDeleting}
-          variant='light'
-          aria-label='Delete current pet'
-          isIconOnly
-          onPress={handleDeletePet}
-          className='absolute z-10 top-0 right-0'
-        >
-          <CloseIcon />
-        </Button>
+        <Dropdown isOpen={isMenuOpen} onOpenChange={onMenuOpenChange}>
+          <DropdownTrigger>
+            <Button
+              variant='light'
+              isIconOnly
+              className='absolute z-10 top-0 right-0'
+            >
+              <EllipsisHorizontalIcon />
+            </Button>
+          </DropdownTrigger>
+          <DropdownMenu
+            color='primary'
+            onAction={(key) => {
+              switch (key) {
+                case 'add':
+                  openAddNewPet();
+                  break;
+                case 'delete':
+                  handleDeletePet();
+                  break;
+              }
+            }}
+          >
+            <DropdownItem key={'add'} showDivider startContent={<AddIcon />}>
+              Add new pet
+            </DropdownItem>
+            <DropdownItem
+              key={'delete'}
+              color='danger'
+              startContent={<TrashIcon />}
+              endContent={isDeleting && <Spinner />}
+              className='text-danger'
+            >
+              Delete pet
+            </DropdownItem>
+          </DropdownMenu>
+        </Dropdown>
         <Image
           quality={100}
           src={image}
