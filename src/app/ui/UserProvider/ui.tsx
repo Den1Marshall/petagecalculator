@@ -34,12 +34,13 @@ export const UserProvider: FC<UserProviderProps> = ({ children }) => {
       } else {
         setUserPets(petsPlaceholder);
         setIsLoading(false);
+        snapshotUnsub && snapshotUnsub();
       }
     });
 
     return () => {
       unsubscribe();
-      if (snapshotUnsub) snapshotUnsub();
+      snapshotUnsub && snapshotUnsub();
     };
   }, []);
 

@@ -1,6 +1,7 @@
 import { SelectTheme } from '@/features/SelectTheme';
 import { SettingsDivider } from './SettingsDivider';
 import { Logout } from '@/features/Logout';
+import { DeleteAccount } from '@/features/DeleteAccount';
 
 export default function Settings() {
   return (
@@ -10,6 +11,8 @@ export default function Settings() {
         <SelectTheme />
         <SettingsDivider />
         <Logout />
+        <SettingsDivider />
+        <DeleteAccount />
       </div>
     </main>
   );
