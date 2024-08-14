@@ -75,9 +75,10 @@ export const Pet: FC<PetProps> = ({
         <Dropdown isOpen={isMenuOpen} onOpenChange={onMenuOpenChange}>
           <DropdownTrigger>
             <Button
-              variant='light'
+              aria-label='open menu'
+              size='sm'
               isIconOnly
-              className='absolute z-10 top-0 right-0'
+              className='absolute z-10 top-1 right-1 bg-overlay/30 saturate-150 backdrop-blur-sm'
             >
               <EllipsisHorizontalIcon />
             </Button>
