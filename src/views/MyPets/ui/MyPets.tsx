@@ -41,12 +41,12 @@ export default function MyPets() {
   const drag = userPets.length > 1 ? (lg ? 'x' : 'y') : false;
 
   return (
-    <main className='h-[calc(100%_-_64px)] flex flex-col'>
-      <h1 className='max-lg:mb-10 text-center text-6xl font-pacifico'>
-        My Pets
-      </h1>
+    <main className='relative h-[calc(100%_-_64px)] flex flex-col'>
       {isLoading ? (
-        <Spinner size='lg' />
+        <Spinner
+          size='lg'
+          className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2'
+        />
       ) : (
         <>
           <Reorder.Group
