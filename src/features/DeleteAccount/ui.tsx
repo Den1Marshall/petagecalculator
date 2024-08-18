@@ -2,16 +2,11 @@
 import { UserContext } from '@/app/ui';
 import { db, storage } from '@/shared/config/firebase';
 import { Button } from '@nextui-org/react';
-import {
-  deleteUser,
-  EmailAuthProvider,
-  GoogleAuthProvider,
-  reauthenticateWithCredential,
-  reauthenticateWithPopup,
-} from 'firebase/auth';
+import { deleteUser } from 'firebase/auth';
 import { deleteDoc, doc } from 'firebase/firestore';
 import { deleteObject, listAll, ref } from 'firebase/storage';
 import { FC, useContext, useState } from 'react';
+import { reauthenticateUser } from '@/shared/api';
 import { FirebaseError } from 'firebase/app';
 
 export const DeleteAccount: FC = () => {
@@ -24,27 +19,7 @@ export const DeleteAccount: FC = () => {
       try {
         setIsLoading(true);
 
-        switch (user.providerData[0].providerId) {
-          case 'google.com':
-            await reauthenticateWithPopup(user, new GoogleAuthProvider());
-            break;
-
-          case 'password':
-            let email = prompt('Enter your email');
-            if (email === null) return;
-
-            let password = prompt('Enter your password');
-            if (password === null) return;
-
-            await reauthenticateWithCredential(
-              user,
-              EmailAuthProvider.credential(email, password)
-            );
-            break;
-
-          default:
-            return;
-        }
+        await reauthenticateUser(user);
 
         // delete user firebase storage (pets images)
         const petsStorageRef = ref(storage, `users/${user.uid}/pets`);
@@ -60,8 +35,9 @@ export const DeleteAccount: FC = () => {
         await deleteUser(user);
       } catch (error) {
         const firebaseError = error as FirebaseError;
+        const defaultError = error as Error;
 
-        alert(firebaseError.code);
+        alert(firebaseError.message ?? defaultError.message);
       } finally {
         setIsLoading(false);
       }
@@ -70,6 +46,7 @@ export const DeleteAccount: FC = () => {
 
   return (
     <Button
+      fullWidth
       color='danger'
       onPress={handlePress}
       isDisabled={!user}

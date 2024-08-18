@@ -50,7 +50,7 @@ export default function MyPets() {
       ) : (
         <>
           <h1 className='max-lg:mb-10 text-center text-6xl font-pacifico'>
-            My Pets
+            {user?.displayName ? user.displayName + "'s" : 'My'} Pets
           </h1>
           <Reorder.Group
             axis={drag || undefined}
