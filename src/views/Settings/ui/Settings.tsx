@@ -2,7 +2,7 @@
 import { SelectTheme } from '@/features/SelectTheme';
 import { Logout } from '@/features/Logout';
 import { DeleteAccount } from '@/features/DeleteAccount';
-import { UpdateProfile } from '@/features/UpdateProfile';
+import { UpdateProfile } from '@/widgets/UpdateProfile';
 import { ButtonGroup, Divider, Spinner } from '@nextui-org/react';
 import { useContext } from 'react';
 import { UserContext } from '@/app/ui';
