@@ -73,14 +73,17 @@ export const UpdateProfile: FC = () => {
         reset({ name, email, password: '', newPassword: '' });
       } catch (error) {
         const firebaseError = error as FirebaseError;
-        const defaultError = error as Error;
 
         reset();
 
-        setError('root', {
-          type: 'custom',
-          message: firebaseError.message ?? defaultError.message,
-        });
+        if (firebaseError.code) {
+          setError('root', {
+            type: 'custom',
+            message: firebaseError.message,
+          });
+        } else {
+          console.log(error);
+        }
       }
     }
   };
