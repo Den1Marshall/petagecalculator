@@ -20,7 +20,7 @@ import { LoginForgotPassword } from './LoginForgotPassword';
 import { AnimatePresence, Variants, motion } from 'framer-motion';
 import { addNewUserToDatabase } from '../api';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
-import { EyeIcon, EyeSlashIcon, GoogleIcon } from '@/shared/ui';
+import { GoogleIcon, ToggleVisibilityButton } from '@/shared/ui';
 
 interface LoginProps {
   isOpen: boolean;
@@ -184,20 +184,10 @@ export const Login: FC<LoginProps> = ({ isOpen, onClose }) => {
                       type={isPasswordVisible ? 'text' : 'password'}
                       placeholder='Password'
                       endContent={
-                        <button
-                          className='focus:outline-none'
-                          type='button'
-                          onClick={() =>
-                            setIsPasswordVisible(!isPasswordVisible)
-                          }
-                          aria-label='toggle password visibility'
-                        >
-                          {isPasswordVisible ? (
-                            <EyeIcon className='text-2xl text-default-400 pointer-events-none' />
-                          ) : (
-                            <EyeSlashIcon className='text-2xl text-default-400 pointer-events-none' />
-                          )}
-                        </button>
+                        <ToggleVisibilityButton
+                          isVisible={isPasswordVisible}
+                          setIsVisible={setIsPasswordVisible}
+                        />
                       }
                       {...field}
                     />
