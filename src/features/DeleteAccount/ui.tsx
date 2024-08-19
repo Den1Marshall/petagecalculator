@@ -35,9 +35,12 @@ export const DeleteAccount: FC = () => {
         await deleteUser(user);
       } catch (error) {
         const firebaseError = error as FirebaseError;
-        const defaultError = error as Error;
 
-        alert(firebaseError.message ?? defaultError.message);
+        if (firebaseError.code) {
+          alert(firebaseError.code);
+        } else {
+          console.log(error);
+        }
       } finally {
         setIsLoading(false);
       }
