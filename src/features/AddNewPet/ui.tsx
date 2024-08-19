@@ -39,7 +39,7 @@ import horse from '@/../public/images/animals/horse.png';
 import cow from '@/../public/images/animals/cow.png';
 import pig from '@/../public/images/animals/pig.png';
 import Image from 'next/image';
-import { uploadUserPetImage } from './api';
+import { uploadUserPetImage } from '@/shared/api';
 
 interface AddNewPetProps {
   isOpen: boolean;
@@ -91,20 +91,18 @@ export const AddNewPet: FC<AddNewPetProps> = ({
     }
 
     if (user && !sameNamedPet) {
-      const userImage = inputRef.current?.files?.item(0) ?? null;
-
       try {
-        const uploadedUserImage = await uploadUserPetImage(
-          user.uid,
-          name,
-          userImage
-        );
-
         const pet: IPet = {
           name,
           birthDate: date,
-          image: uploadedUserImage ?? image,
+          image,
         };
+
+        const userImage = inputRef.current?.files?.item(0) ?? null;
+
+        if (userImage) {
+          pet.image = await uploadUserPetImage(user.uid, name, userImage);
+        }
 
         const docRef = doc(db, 'users', user.uid);
 

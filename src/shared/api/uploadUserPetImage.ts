@@ -5,9 +5,9 @@ export const uploadUserPetImage = async (
   userUid: string,
   petName: string,
   image: File | null
-): Promise<string | null> => {
+): Promise<string> => {
   try {
-    if (image === null) return null;
+    if (image === null) throw new Error('Image is null');
 
     const storageRef = ref(storage, `/users/${userUid}/pets/${petName}`);
 
@@ -16,7 +16,6 @@ export const uploadUserPetImage = async (
 
     return url;
   } catch (error) {
-    console.log(error);
-    return null;
+    throw error;
   }
 };
