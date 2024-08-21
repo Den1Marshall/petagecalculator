@@ -1,1 +1,1 @@
-export { DeleteAccount } from './ui';
+export { DeleteAccount } from './ui/DeleteAccount';
