@@ -1,0 +1,1 @@
+export { isImageLocal } from './isImageLocal';

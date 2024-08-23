@@ -16,19 +16,26 @@ import { FC, useContext, useState } from 'react';
 import { IPet } from './model';
 import { getLocalTimeZone, now } from '@internationalized/date';
 import { UserContext } from '@/app/ui';
-import { deletePet } from './api';
-import { EllipsisHorizontalIcon, TrashIcon } from '@/shared/ui';
+import { EditIcon, EllipsisHorizontalIcon, TrashIcon } from '@/shared/ui';
 import { AddIcon } from '@/shared/ui/AddIcon';
+import { doc, setDoc } from 'firebase/firestore';
+import { db } from '@/shared/config/firebase';
+import { deleteUserPetImage } from '@/shared/api';
+import { FirebaseError } from 'firebase/app';
+import { isImageLocal } from '@/shared/lib';
 
 interface PetProps extends IPet {
   openAddNewPet: () => void;
+  openEditPet: (pet: IPet) => void;
 }
 
 export const Pet: FC<PetProps> = ({
+  openEditPet,
   openAddNewPet,
-  image,
+  uuid,
   name,
   birthDate,
+  image,
 }) => {
   const timeNow = now(getLocalTimeZone());
   const { user, userPets, setUserPets } = useContext(UserContext);
@@ -38,6 +45,7 @@ export const Pet: FC<PetProps> = ({
     onOpenChange: onMenuOpenChange,
     onOpen,
   } = useDisclosure();
+
   const [isDeleting, setIsDeleting] = useState(false);
 
   const { year: nowYear, month: nowMonth, day: nowDay } = timeNow;
@@ -50,13 +58,33 @@ export const Pet: FC<PetProps> = ({
     try {
       if (user) {
         setIsDeleting(true);
-        await deletePet(user.uid, name, userPets);
-        setIsDeleting(false);
+
+        if (!isImageLocal(image)) {
+          await deleteUserPetImage(user.uid, uuid);
+        }
+
+        const filteredArr = userPets.filter((uPet) => uPet.uuid !== uuid);
+
+        const docRef = doc(db, 'users', user.uid);
+
+        await setDoc(
+          docRef,
+          { pets: JSON.stringify(filteredArr) },
+          { merge: true }
+        );
       } else {
-        setUserPets(userPets.filter((pet) => pet.name !== name));
+        setUserPets(userPets.filter((pet) => pet.uuid !== uuid));
       }
     } catch (error) {
-      console.log(error);
+      const firebaseError = error as FirebaseError;
+
+      if (firebaseError.code) {
+        alert(firebaseError.code);
+      } else {
+        console.log(error);
+      }
+    } finally {
+      setIsDeleting(false);
     }
   };
 
@@ -90,6 +118,9 @@ export const Pet: FC<PetProps> = ({
                 case 'add':
                   openAddNewPet();
                   break;
+                case 'edit':
+                  openEditPet({ uuid, name, birthDate, image });
+                  break;
                 case 'delete':
                   handleDeletePet();
                   break;
@@ -98,6 +129,9 @@ export const Pet: FC<PetProps> = ({
           >
             <DropdownItem key={'add'} showDivider startContent={<AddIcon />}>
               Add new pet
+            </DropdownItem>
+            <DropdownItem key={'edit'} showDivider startContent={<EditIcon />}>
+              Edit pet
             </DropdownItem>
             <DropdownItem
               key={'delete'}

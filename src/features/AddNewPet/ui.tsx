@@ -40,6 +40,8 @@ import cow from '@/../public/images/animals/cow.png';
 import pig from '@/../public/images/animals/pig.png';
 import Image from 'next/image';
 import { uploadUserPetImage } from '@/shared/api';
+import { v4 as uuidv4 } from 'uuid';
+import { FirebaseError } from 'firebase/app';
 
 interface AddNewPetProps {
   isOpen: boolean;
@@ -47,12 +49,6 @@ interface AddNewPetProps {
   onClose: () => void;
   onOpenChange: () => void;
   className?: string;
-}
-
-interface Inputs {
-  name: string;
-  date: CalendarDate;
-  image: string;
 }
 
 export const AddNewPet: FC<AddNewPetProps> = ({
@@ -65,43 +61,34 @@ export const AddNewPet: FC<AddNewPetProps> = ({
   const { user, userPets } = useContext(UserContext);
 
   const { control, formState, handleSubmit, reset, setError, setValue } =
-    useForm<Inputs>({ defaultValues: { image: cat.src } });
+    useForm<IPet>({ defaultValues: { image: cat.src } });
 
   const { isSubmitting, errors } = formState;
 
-  const onSubmit: SubmitHandler<Inputs> = async ({ date, name, image }) => {
-    const sameNamedPet = userPets.find((uPet) => uPet.name === name);
-
-    if (date.compare(today) > 0) {
+  const onSubmit: SubmitHandler<IPet> = async ({ birthDate, name, image }) => {
+    if (birthDate.compare(today) > 0) {
       setError(
-        'date',
+        'birthDate',
         { type: 'custom', message: 'Your pet can not be younger than today' },
         { shouldFocus: true }
       );
+
       return;
     }
 
-    if (sameNamedPet) {
-      setError(
-        'name',
-        { type: 'custom', message: 'This pet already exists' },
-        { shouldFocus: true }
-      );
-      return;
-    }
-
-    if (user && !sameNamedPet) {
+    if (user) {
       try {
         const pet: IPet = {
+          uuid: uuidv4(),
           name,
-          birthDate: date,
+          birthDate,
           image,
         };
 
         const userImage = inputRef.current?.files?.item(0) ?? null;
 
         if (userImage) {
-          pet.image = await uploadUserPetImage(user.uid, name, userImage);
+          pet.image = await uploadUserPetImage(user.uid, pet.uuid, userImage);
         }
 
         const docRef = doc(db, 'users', user.uid);
@@ -115,7 +102,13 @@ export const AddNewPet: FC<AddNewPetProps> = ({
         reset();
         onClose();
       } catch (error) {
-        console.log(error);
+        const firebaseError = error as FirebaseError;
+
+        if (firebaseError.code) {
+          setError('root', { type: 'custom', message: firebaseError.code });
+        } else {
+          console.log(error);
+        }
       }
     }
   };
@@ -201,7 +194,7 @@ export const AddNewPet: FC<AddNewPetProps> = ({
               )}
             />
             <Controller
-              name='date'
+              name='birthDate'
               rules={{ required: 'This field is required' }}
               control={control}
               render={({ field }) => (
@@ -210,8 +203,8 @@ export const AddNewPet: FC<AddNewPetProps> = ({
                   variant='bordered'
                   label={'Birth date'}
                   maxValue={today}
-                  isInvalid={Boolean(errors.date?.message)}
-                  errorMessage={errors.date?.message}
+                  isInvalid={Boolean(errors.birthDate?.message)}
+                  errorMessage={errors.birthDate?.message}
                   {...field}
                 />
               )}
@@ -333,6 +326,11 @@ export const AddNewPet: FC<AddNewPetProps> = ({
               )}
             />
             <input ref={inputRef} type='file' accept='image/*' />
+            {errors.root && (
+              <p role='alert' className='text-danger'>
+                {errors.root?.message}
+              </p>
+            )}
           </ModalBody>
           <ModalFooter className='mb-safe'>
             <Button

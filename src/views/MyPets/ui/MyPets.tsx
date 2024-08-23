@@ -9,10 +9,24 @@ import { AnimatePresence, Reorder } from 'framer-motion';
 import { doc, setDoc } from 'firebase/firestore';
 import { db } from '@/shared/config/firebase';
 import { useMediaQuery } from 'usehooks-ts';
+import { EditPet } from '@/features/EditPet';
 
 export default function MyPets() {
   const { isLoading, user, userPets, setUserPets } = useContext(UserContext);
-  const { isOpen, onOpen, onClose, onOpenChange } = useDisclosure();
+  const { isOpen, onOpen, onClose, onOpenChange } = useDisclosure({
+    onClose: () => setEditPet(undefined),
+  });
+
+  const [editPet, setEditPet] = useState<IPet | undefined>(undefined);
+
+  const { isOpen: isEditPetOpen, onClose: onEditPetClose } = useDisclosure({
+    isOpen: editPet !== undefined,
+    onClose: () => setEditPet(undefined),
+  });
+
+  const openEditPet = (pet: IPet) => {
+    setEditPet(pet);
+  };
 
   const handleReorder = async (newOrder: IPet[]) => {
     try {
@@ -64,7 +78,7 @@ export default function MyPets() {
                 <Reorder.Item
                   drag={drag}
                   dragTransition={{ bounceDamping: 50, bounceStiffness: 500 }}
-                  key={pet.name}
+                  key={pet.uuid}
                   value={pet}
                   initial={{ scale: 0 }}
                   animate={{ scale: 1 }}
@@ -83,7 +97,9 @@ export default function MyPets() {
                   } lg:min-w-[33.333333%]`}
                 >
                   <Pet
+                    openEditPet={openEditPet}
                     openAddNewPet={onOpen}
+                    uuid={pet.uuid}
                     name={pet.name}
                     image={pet.image}
                     birthDate={pet.birthDate}
@@ -98,13 +114,23 @@ export default function MyPets() {
               onOpenChange={onOpenChange}
               className='min-h-10 lg:mx-auto'
             />
+            <EditPet
+              pet={editPet}
+              isOpen={user !== null && isEditPetOpen}
+              onClose={onEditPetClose}
+            />
           </Reorder.Group>
           {userPets.length < 1 && (
             <h2 className='w-full h-[50dvh] text-2xl text-center font-pacifico'>
               No pets added yet...
             </h2>
           )}
-          <Login isOpen={user === null && isOpen} onClose={onClose} />
+          <Login
+            isOpen={
+              (user === null && isOpen) || (user === null && isEditPetOpen)
+            }
+            onClose={onClose}
+          />
         </>
       )}
     </main>
