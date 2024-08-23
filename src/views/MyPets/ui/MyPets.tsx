@@ -120,11 +120,6 @@ export default function MyPets() {
               onClose={onEditPetClose}
             />
           </Reorder.Group>
-          {userPets.length < 1 && (
-            <h2 className='w-full h-[50dvh] text-2xl text-center font-pacifico'>
-              No pets added yet...
-            </h2>
-          )}
           <Login
             isOpen={
               (user === null && isOpen) || (user === null && isEditPetOpen)
