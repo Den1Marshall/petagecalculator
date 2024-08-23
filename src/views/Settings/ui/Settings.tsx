@@ -2,17 +2,13 @@
 import { SelectTheme } from '@/features/SelectTheme';
 import { Logout } from '@/features/Logout';
 import { DeleteAccount } from '@/features/DeleteAccount';
-import {
-  Listbox,
-  ListboxItem,
-  ListboxSection,
-  Spinner,
-} from '@nextui-org/react';
+import { Listbox, ListboxItem, ListboxSection } from '@nextui-org/react';
 import { useContext, useState } from 'react';
 import { UserContext } from '@/app/ui';
 import { ChangeEmail } from '@/features/ChangeEmail';
 import { ChangePassword } from '@/features/ChangePassword';
 import { Login } from '@/features/Login';
+import { Loading } from '@/shared/ui';
 
 export default function Settings() {
   const { isLoading, user } = useContext(UserContext);
@@ -29,10 +25,7 @@ export default function Settings() {
         Settings
       </h1>
       {isLoading ? (
-        <Spinner
-          size='lg'
-          className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2'
-        />
+        <Loading />
       ) : (
         <>
           <Listbox

@@ -1,5 +1,5 @@
 'use client';
-import { Spinner, useDisclosure } from '@nextui-org/react';
+import { useDisclosure } from '@nextui-org/react';
 import { IPet, Pet } from '@/entities/Pet';
 import { useContext, useState } from 'react';
 import { UserContext } from '@/app/ui';
@@ -10,6 +10,7 @@ import { doc, setDoc } from 'firebase/firestore';
 import { db } from '@/shared/config/firebase';
 import { useMediaQuery } from 'usehooks-ts';
 import { EditPet } from '@/features/EditPet';
+import { Loading } from '@/shared/ui';
 
 export default function MyPets() {
   const { isLoading, user, userPets, setUserPets } = useContext(UserContext);
@@ -57,10 +58,7 @@ export default function MyPets() {
   return (
     <main className='relative h-[calc(100%_-_64px)] flex flex-col'>
       {isLoading ? (
-        <Spinner
-          size='lg'
-          className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2'
-        />
+        <Loading />
       ) : (
         <>
           <h1 className='max-lg:mb-10 text-center text-6xl font-pacifico'>
