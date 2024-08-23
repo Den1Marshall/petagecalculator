@@ -71,7 +71,7 @@ export default function MyPets() {
             values={userPets}
             onReorder={handleReorder}
             layoutScroll
-            className={`max-lg:pb-10 flex flex-col items-center gap-10 ${overflow} lg:my-auto lg:flex-row`}
+            className={`max-lg:pb-10 h-full flex flex-col items-center gap-10 ${overflow} lg:my-auto lg:flex-row`}
           >
             <AnimatePresence initial={false} mode='popLayout'>
               {userPets.map((pet) => (
@@ -112,12 +112,7 @@ export default function MyPets() {
               onOpen={onOpen}
               onClose={onClose}
               onOpenChange={onOpenChange}
-              className='min-h-10 lg:mx-auto'
-            />
-            <EditPet
-              pet={editPet}
-              isOpen={user !== null && isEditPetOpen}
-              onClose={onEditPetClose}
+              className='min-h-10 max-lg:my-auto lg:mx-auto'
             />
           </Reorder.Group>
           <Login
@@ -125,6 +120,11 @@ export default function MyPets() {
               (user === null && isOpen) || (user === null && isEditPetOpen)
             }
             onClose={onClose}
+          />
+          <EditPet
+            pet={editPet}
+            isOpen={user !== null && isEditPetOpen}
+            onClose={onEditPetClose}
           />
         </>
       )}
