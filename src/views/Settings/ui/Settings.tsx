@@ -29,6 +29,7 @@ export default function Settings() {
       ) : (
         <>
           <Listbox
+            label='Settings'
             itemClasses={{ title: 'text-medium' }}
             variant='light'
             onAction={(key) => {
