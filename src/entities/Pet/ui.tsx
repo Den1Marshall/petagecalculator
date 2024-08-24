@@ -145,6 +145,7 @@ export const Pet: FC<PetProps> = ({
           </DropdownMenu>
         </Dropdown>
         <Image
+          priority
           quality={100}
           src={image}
           fill
