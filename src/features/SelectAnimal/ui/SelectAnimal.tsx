@@ -1,5 +1,5 @@
 'use client';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, Variants, motion } from 'framer-motion';
 import { FC } from 'react';
 import { Dialog, Heading, Modal } from 'react-aria-components';
 import { useMediaQuery } from 'usehooks-ts';
@@ -23,22 +23,27 @@ export const SelectAnimal: FC<SelectAnimalProps> = ({
 }) => {
   const lg = useMediaQuery('(min-width: 1024px)');
 
+  const variants: Variants = {
+    enter: {
+      y: lg ? undefined : '0%',
+      x: lg ? '0%' : undefined,
+    },
+    exit: {
+      y: lg ? undefined : '100%',
+      x: lg ? '-100%' : undefined,
+    },
+  };
+
   return (
     <AnimatePresence>
       {isOpen && (
         <MotionModal
           isOpen
           onOpenChange={setIsOpen}
-          layout
-          initial={{ x: lg ? '-100%' : '0%', y: lg ? '0%' : '100%' }}
-          animate={{ x: '0%', y: '0%' }}
-          exit={{ x: lg ? '-100%' : '0%', y: lg ? '0%' : '100%' }}
-          transition={{
-            type: 'spring',
-            duration: 0.5,
-            bounce: 0,
-            restDelta: 0.0001,
-          }}
+          variants={variants}
+          initial={'exit'}
+          animate={'enter'}
+          exit={'exit'}
           drag={!lg && 'y'}
           dragConstraints={{ top: -0 }}
           dragElastic={0.05}
@@ -46,17 +51,16 @@ export const SelectAnimal: FC<SelectAnimalProps> = ({
           dragTransition={{
             bounceStiffness: 500,
             bounceDamping: 50,
-            restDelta: 0.0001,
           }}
           onDragEnd={(_e, info) => {
             if (
               info.offset.y >= window.innerHeight / 2 ||
-              info.velocity.y >= 450
+              info.velocity.y >= 250
             ) {
               setIsOpen(false);
             }
           }}
-          className='fixed z-10 left-0 top-safe w-full h-full bg-white/[.3] dark:bg-black/[.3] backdrop-blur-xl rounded-t-2xl lg:w-3/12 lg:rounded-none lg:overflow-y-auto lg:overscroll-contain'
+          className='fixed z-10 left-0 top-safe w-full h-full bg-white/[.3] dark:bg-black/[.3] backdrop-blur-xl rounded-t-2xl lg:w-1/4 lg:rounded-none lg:overflow-y-auto lg:overscroll-contain'
         >
           <Dialog className='flex flex-col gap-10 p-5 outline-none max-lg:landscape:p-safe-or-5 lg:p-7'>
             <Heading
