@@ -200,179 +200,184 @@ export const EditPet: FC<EditPetProps> = ({ isOpen, onClose, pet }) => {
       className='max-h-[50%] backdrop-blur-2xl saturate-150 bg-overlay/30 overflow-y-scroll lg:max-h-full'
       classNames={{ wrapper: 'lg:max-w-[25%]' }}
     >
-      <ModalContent as={'form'} onSubmit={handleSubmit(onSubmit)}>
-        <ModalHeader>Edit your pet</ModalHeader>
-        <ModalBody>
-          <Controller
-            name='name'
-            rules={{
-              minLength: 1,
-              maxLength: 20,
-              required: 'This field is required',
-            }}
-            control={control}
-            render={({ field }) => (
-              <Input
-                isRequired
-                isClearable
-                onClear={() => setValue('name', '')}
-                variant='bordered'
-                label={'Name'}
-                isInvalid={errors.name?.message !== undefined}
-                errorMessage={errors.name?.message}
-                {...field}
-              />
-            )}
-          />
-          <Controller
-            name='birthDate'
-            rules={{ required: 'This field is required' }}
-            control={control}
-            render={({ field }) => (
-              <DatePicker
-                isRequired
-                variant='bordered'
-                label={'Birth date'}
-                maxValue={today}
-                isInvalid={errors.birthDate?.message !== undefined}
-                errorMessage={errors.birthDate?.message}
-                {...field}
-              />
-            )}
-          />
-          <Controller
-            name='image'
-            control={control}
-            render={({ field }) => (
-              <Select
-                defaultSelectedKeys={[pet?.image ?? cat.src]}
-                disallowEmptySelection
-                variant='bordered'
-                label='Select or upload image'
-                popoverProps={{
-                  backdrop: 'blur',
-                  motionProps: {
-                    variants: {
-                      enter: {
-                        opacity: 1,
-                        transform: 'scale(1)',
-                        transition: {
-                          type: 'spring',
-                          duration: 0.5,
-                          bounce: 0.15,
+      <ModalContent>
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className='h-full flex flex-col'
+        >
+          <ModalHeader>Edit your pet</ModalHeader>
+          <ModalBody>
+            <Controller
+              name='name'
+              rules={{
+                minLength: 1,
+                maxLength: 20,
+                required: 'This field is required',
+              }}
+              control={control}
+              render={({ field }) => (
+                <Input
+                  isRequired
+                  isClearable
+                  onClear={() => setValue('name', '')}
+                  variant='bordered'
+                  label={'Name'}
+                  isInvalid={errors.name?.message !== undefined}
+                  errorMessage={errors.name?.message}
+                  {...field}
+                />
+              )}
+            />
+            <Controller
+              name='birthDate'
+              rules={{ required: 'This field is required' }}
+              control={control}
+              render={({ field }) => (
+                <DatePicker
+                  isRequired
+                  variant='bordered'
+                  label={'Birth date'}
+                  maxValue={today}
+                  isInvalid={errors.birthDate?.message !== undefined}
+                  errorMessage={errors.birthDate?.message}
+                  {...field}
+                />
+              )}
+            />
+            <Controller
+              name='image'
+              control={control}
+              render={({ field }) => (
+                <Select
+                  defaultSelectedKeys={[pet?.image ?? cat.src]}
+                  disallowEmptySelection
+                  variant='bordered'
+                  label='Select or upload image'
+                  popoverProps={{
+                    backdrop: 'blur',
+                    motionProps: {
+                      variants: {
+                        enter: {
+                          opacity: 1,
+                          transform: 'scale(1)',
+                          transition: {
+                            type: 'spring',
+                            duration: 0.5,
+                            bounce: 0.15,
+                          },
                         },
-                      },
-                      exit: {
-                        opacity: 0,
-                        transform: 'scale(0)',
-                        transition: {
-                          type: 'spring',
-                          duration: 0.5,
-                          bounce: 0,
+                        exit: {
+                          opacity: 0,
+                          transform: 'scale(0)',
+                          transition: {
+                            type: 'spring',
+                            duration: 0.5,
+                            bounce: 0,
+                          },
                         },
                       },
                     },
-                  },
-                }}
-                {...field}
-              >
-                <SelectItem key={cat.src} textValue='Cat'>
-                  <Image
-                    src={cat}
-                    alt='cat image'
-                    className='max-w-[50%] mx-auto'
-                  />
-                </SelectItem>
-                <SelectItem key={dog.src} textValue='Dog'>
-                  <Image
-                    src={dog}
-                    alt='dog image'
-                    className='max-w-[50%] mx-auto'
-                  />
-                </SelectItem>
-                <SelectItem key={hamster.src} textValue='Hamster'>
-                  <Image
-                    src={hamster}
-                    alt='hamster image'
-                    className='max-w-[50%] mx-auto'
-                  />
-                </SelectItem>
-                <SelectItem key={mouse.src} textValue='Mouse'>
-                  <Image
-                    src={mouse}
-                    alt='mouse image'
-                    className='max-w-[50%] mx-auto'
-                  />
-                </SelectItem>
-                <SelectItem key={rabbit.src} textValue='Rabbit'>
-                  <Image
-                    src={rabbit}
-                    alt='rabbit image'
-                    className='max-w-[50%] mx-auto'
-                  />
-                </SelectItem>
-                <SelectItem key={fox.src} textValue='Fox'>
-                  <Image
-                    src={fox}
-                    alt='fox image'
-                    className='max-w-[50%] mx-auto'
-                  />
-                </SelectItem>
-                <SelectItem key={chick.src} textValue='Chick'>
-                  <Image
-                    src={chick}
-                    alt='chick image'
-                    className='max-w-[50%] mx-auto'
-                  />
-                </SelectItem>
-                <SelectItem key={goat.src} textValue='Goat'>
-                  <Image
-                    src={goat}
-                    alt='goat image'
-                    className='max-w-[50%] mx-auto'
-                  />
-                </SelectItem>
-                <SelectItem key={horse.src} textValue='Horse'>
-                  <Image
-                    src={horse}
-                    alt='horse image'
-                    className='max-w-[50%] mx-auto'
-                  />
-                </SelectItem>
-                <SelectItem key={cow.src} textValue='Cow'>
-                  <Image
-                    src={cow}
-                    alt='cow image'
-                    className='max-w-[50%] mx-auto'
-                  />
-                </SelectItem>
-                <SelectItem key={pig.src} textValue='Pig'>
-                  <Image
-                    src={pig}
-                    alt='pig image'
-                    className='max-w-[50%] mx-auto'
-                  />
-                </SelectItem>
-              </Select>
+                  }}
+                  {...field}
+                >
+                  <SelectItem key={cat.src} textValue='Cat'>
+                    <Image
+                      src={cat}
+                      alt='cat image'
+                      className='max-w-[50%] mx-auto'
+                    />
+                  </SelectItem>
+                  <SelectItem key={dog.src} textValue='Dog'>
+                    <Image
+                      src={dog}
+                      alt='dog image'
+                      className='max-w-[50%] mx-auto'
+                    />
+                  </SelectItem>
+                  <SelectItem key={hamster.src} textValue='Hamster'>
+                    <Image
+                      src={hamster}
+                      alt='hamster image'
+                      className='max-w-[50%] mx-auto'
+                    />
+                  </SelectItem>
+                  <SelectItem key={mouse.src} textValue='Mouse'>
+                    <Image
+                      src={mouse}
+                      alt='mouse image'
+                      className='max-w-[50%] mx-auto'
+                    />
+                  </SelectItem>
+                  <SelectItem key={rabbit.src} textValue='Rabbit'>
+                    <Image
+                      src={rabbit}
+                      alt='rabbit image'
+                      className='max-w-[50%] mx-auto'
+                    />
+                  </SelectItem>
+                  <SelectItem key={fox.src} textValue='Fox'>
+                    <Image
+                      src={fox}
+                      alt='fox image'
+                      className='max-w-[50%] mx-auto'
+                    />
+                  </SelectItem>
+                  <SelectItem key={chick.src} textValue='Chick'>
+                    <Image
+                      src={chick}
+                      alt='chick image'
+                      className='max-w-[50%] mx-auto'
+                    />
+                  </SelectItem>
+                  <SelectItem key={goat.src} textValue='Goat'>
+                    <Image
+                      src={goat}
+                      alt='goat image'
+                      className='max-w-[50%] mx-auto'
+                    />
+                  </SelectItem>
+                  <SelectItem key={horse.src} textValue='Horse'>
+                    <Image
+                      src={horse}
+                      alt='horse image'
+                      className='max-w-[50%] mx-auto'
+                    />
+                  </SelectItem>
+                  <SelectItem key={cow.src} textValue='Cow'>
+                    <Image
+                      src={cow}
+                      alt='cow image'
+                      className='max-w-[50%] mx-auto'
+                    />
+                  </SelectItem>
+                  <SelectItem key={pig.src} textValue='Pig'>
+                    <Image
+                      src={pig}
+                      alt='pig image'
+                      className='max-w-[50%] mx-auto'
+                    />
+                  </SelectItem>
+                </Select>
+              )}
+            />
+            <input ref={inputRef} type='file' accept='image/*' />
+            {errors.root && (
+              <p role='alert' className='text-danger'>
+                {errors.root?.message}
+              </p>
             )}
-          />
-          <input ref={inputRef} type='file' accept='image/*' />
-          {errors.root && (
-            <p role='alert' className='text-danger'>
-              {errors.root?.message}
-            </p>
-          )}
-        </ModalBody>
-        <ModalFooter className='mb-safe'>
-          <Button
-            type='submit'
-            isLoading={isSubmitting}
-            fullWidth
-            color='primary'
-          >
-            Edit
-          </Button>
-        </ModalFooter>
+          </ModalBody>
+          <ModalFooter className='mb-safe'>
+            <Button
+              type='submit'
+              isLoading={isSubmitting}
+              fullWidth
+              color='primary'
+            >
+              Edit
+            </Button>
+          </ModalFooter>
+        </form>
       </ModalContent>
     </Modal>
   );

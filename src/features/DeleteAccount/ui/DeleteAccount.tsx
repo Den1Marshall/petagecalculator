@@ -44,7 +44,7 @@ export const DeleteAccount: FC<DeleteAccountProps> = ({
     }
   );
 
-  const { dirtyFields, errors, isSubmitting, isSubmitSuccessful } = formState;
+  const { errors, isSubmitting, isSubmitSuccessful } = formState;
 
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
@@ -92,104 +92,104 @@ export const DeleteAccount: FC<DeleteAccountProps> = ({
       onClose={handleClose}
       motionProps={scaleFadeModal}
     >
-      <ModalContent
-        as={!isSubmitSuccessful ? 'form' : undefined}
-        onSubmit={!isSubmitSuccessful ? handleSubmit(onSubmit) : undefined}
-      >
-        <AnimatePresence>
-          {!isSubmitSuccessful ? (
-            <motion.div key={'default'}>
-              <ModalHeader>Delete account</ModalHeader>
-              <ModalBody>
-                <Controller
-                  control={control}
-                  name='email'
-                  rules={{
-                    required: true,
-                    minLength: 1,
-                  }}
-                  render={({ field }) => (
-                    <Input
-                      isRequired
-                      type='email'
-                      label='Email'
-                      errorMessage={errors.email?.message}
-                      isInvalid={errors.email?.message !== undefined}
-                      isDisabled={!user}
-                      {...field}
-                    />
+      <ModalContent>
+        <form
+          onSubmit={!isSubmitSuccessful ? handleSubmit(onSubmit) : undefined}
+        >
+          <AnimatePresence>
+            {!isSubmitSuccessful ? (
+              <motion.div key={'default'}>
+                <ModalHeader>Delete account</ModalHeader>
+                <ModalBody>
+                  <Controller
+                    control={control}
+                    name='email'
+                    rules={{
+                      required: 'Email is required',
+                      minLength: 1,
+                    }}
+                    render={({ field }) => (
+                      <Input
+                        isRequired
+                        type='email'
+                        label='Email'
+                        errorMessage={errors.email?.message}
+                        isInvalid={errors.email?.message !== undefined}
+                        isDisabled={!user}
+                        {...field}
+                      />
+                    )}
+                  />
+                  <Controller
+                    control={control}
+                    name='password'
+                    rules={{ required: 'Password is required', minLength: 1 }}
+                    render={({ field }) => (
+                      <Input
+                        isRequired
+                        type={isPasswordVisible ? 'text' : 'password'}
+                        label='Password'
+                        errorMessage={errors.password?.message}
+                        isInvalid={errors.password?.message !== undefined}
+                        isDisabled={!user}
+                        endContent={
+                          <ToggleVisibilityButton
+                            isVisible={isPasswordVisible}
+                            setIsVisible={setIsPasswordVisible}
+                          />
+                        }
+                        {...field}
+                      />
+                    )}
+                  />
+                  <Controller
+                    control={control}
+                    name='confirm'
+                    rules={{
+                      required: 'Confirmation is required',
+                      validate: (value) => value,
+                    }}
+                    render={({
+                      field: { onChange, value, onBlur, ref, name },
+                    }) => (
+                      <Checkbox
+                        isRequired
+                        isInvalid={errors.confirm?.message !== undefined}
+                        isDisabled={!user}
+                        checked={value}
+                        onChange={onChange}
+                        onBlur={onBlur}
+                        ref={ref}
+                        name={name}
+                      >
+                        I understand that deleted account isn&apos;t recoverable
+                      </Checkbox>
+                    )}
+                  />
+                  {errors.root && (
+                    <p role='alert' className='text-danger'>
+                      {errors.root?.message}
+                    </p>
                   )}
-                />
-                <Controller
-                  control={control}
-                  name='password'
-                  rules={{ required: true, minLength: 1 }}
-                  render={({ field }) => (
-                    <Input
-                      isRequired
-                      type={isPasswordVisible ? 'text' : 'password'}
-                      label='Password'
-                      errorMessage={errors.password?.message}
-                      isInvalid={errors.password?.message !== undefined}
-                      isDisabled={!user}
-                      endContent={
-                        <ToggleVisibilityButton
-                          isVisible={isPasswordVisible}
-                          setIsVisible={setIsPasswordVisible}
-                        />
-                      }
-                      {...field}
-                    />
-                  )}
-                />
-                <Controller
-                  control={control}
-                  name='confirm'
-                  rules={{
-                    required: true,
-                    validate: (value) => value,
-                  }}
-                  render={({
-                    field: { onChange, value, onBlur, ref, name },
-                  }) => (
-                    <Checkbox
-                      isRequired
-                      isInvalid={errors.confirm?.message !== undefined}
-                      isDisabled={!user}
-                      checked={value}
-                      onChange={onChange}
-                      onBlur={onBlur}
-                      ref={ref}
-                      name={name}
-                    >
-                      I understand that deleted account isn&apos;t recoverable
-                    </Checkbox>
-                  )}
-                />
-                {errors.root && (
-                  <p role='alert' className='text-danger'>
-                    {errors.root?.message}
-                  </p>
-                )}
-              </ModalBody>
-              <ModalFooter>
-                <Button color='danger' variant='light' onPress={handleClose}>
-                  Cancel
-                </Button>
-                <Button
-                  color='primary'
-                  type='submit'
-                  isLoading={isSubmitting}
-                  isDisabled={!dirtyFields.password || !dirtyFields.email}
-                >
-                  Delete
-                </Button>
-              </ModalFooter>
-            </motion.div>
-          ) : (
-            <Success onClose={handleClose} />
-          )}
-        </AnimatePresence>
+                </ModalBody>
+                <ModalFooter>
+                  <Button color='danger' variant='light' onPress={handleClose}>
+                    Cancel
+                  </Button>
+                  <Button
+                    color='primary'
+                    type='submit'
+                    isLoading={isSubmitting}
+                  >
+                    Delete
+                  </Button>
+                </ModalFooter>
+              </motion.div>
+            ) : (
+              <Success onClose={handleClose} />
+            )}
+          </AnimatePresence>
+        </form>
       </ModalContent>
     </Modal>
   );

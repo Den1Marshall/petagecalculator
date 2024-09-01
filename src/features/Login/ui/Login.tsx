@@ -112,109 +112,107 @@ export const Login: FC<LoginProps> = ({ isOpen, onClose }) => {
       }}
       className='origin-bottom'
     >
-      <ModalContent
-        as={'form'}
-        onSubmit={handleSubmit(onSubmit)}
-        className='relative min-h-[428px]'
-      >
-        <AnimatePresence initial={false}>
-          {forgotPassword ? (
-            <LoginForgotPassword
-              key={'forgotPassword'}
-              setIsOpen={setForgotPassword}
-            />
-          ) : (
-            <motion.div
-              key={'login'}
-              variants={variants}
-              initial={'exit'}
-              animate={'enter'}
-              exit='exit'
-            >
-              <ModalHeader>Log In to continue</ModalHeader>
-              <ModalBody>
-                <ButtonGroup fullWidth>
+      <ModalContent className='relative min-h-[428px]'>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <AnimatePresence initial={false}>
+            {forgotPassword ? (
+              <LoginForgotPassword
+                key={'forgotPassword'}
+                setIsOpen={setForgotPassword}
+              />
+            ) : (
+              <motion.div
+                key={'login'}
+                variants={variants}
+                initial={'exit'}
+                animate={'enter'}
+                exit='exit'
+              >
+                <ModalHeader>Log In to continue</ModalHeader>
+                <ModalBody>
+                  <ButtonGroup fullWidth>
+                    <Button
+                      color={type === 'signIn' ? 'primary' : 'default'}
+                      onPress={() => {
+                        setType('signIn');
+                        clearErrors();
+                      }}
+                    >
+                      Sign In
+                    </Button>
+                    <Button
+                      color={type !== 'signIn' ? 'primary' : 'default'}
+                      onPress={() => {
+                        setType('signUp');
+                        clearErrors();
+                      }}
+                    >
+                      Sign Up
+                    </Button>
+                  </ButtonGroup>
+                  <Button onPress={handleSignInWithPopup}>
+                    Continue With Google <GoogleIcon />
+                  </Button>
+                  <p className='text-center'>OR</p>
+                  <Controller
+                    name='email'
+                    rules={{ required: 'This field is required' }}
+                    control={control}
+                    render={({ field }) => (
+                      <Input
+                        isRequired
+                        type='email'
+                        placeholder='Email'
+                        isClearable
+                        onClear={() => setValue('email', '')}
+                        errorMessage={errors.email?.message}
+                        isInvalid={Boolean(errors.email?.message)}
+                        {...field}
+                      />
+                    )}
+                  />
+                  <Controller
+                    name='password'
+                    rules={{ required: 'This field is required' }}
+                    control={control}
+                    render={({ field }) => (
+                      <Input
+                        isRequired
+                        type={isPasswordVisible ? 'text' : 'password'}
+                        placeholder='Password'
+                        endContent={
+                          <ToggleVisibilityButton
+                            isVisible={isPasswordVisible}
+                            setIsVisible={setIsPasswordVisible}
+                          />
+                        }
+                        {...field}
+                      />
+                    )}
+                  />
+                </ModalBody>
+                <ModalFooter className='flex flex-col'>
                   <Button
-                    color={type === 'signIn' ? 'primary' : 'default'}
-                    onPress={() => {
-                      setType('signIn');
-                      clearErrors();
-                    }}
+                    type='submit'
+                    isLoading={isSubmitting}
+                    fullWidth
+                    color='primary'
                   >
-                    Sign In
+                    {type === 'signIn' ? 'Sign In' : 'Sign Up'}
                   </Button>
                   <Button
-                    color={type !== 'signIn' ? 'primary' : 'default'}
-                    onPress={() => {
-                      setType('signUp');
-                      clearErrors();
-                    }}
+                    variant='light'
+                    fullWidth
+                    color='danger'
+                    onPress={() => setForgotPassword(true)}
                   >
-                    Sign Up
+                    Forgot password?
                   </Button>
-                </ButtonGroup>
-                <Button onPress={handleSignInWithPopup}>
-                  Continue With Google <GoogleIcon />
-                </Button>
-                <p className='text-center'>OR</p>
-                <Controller
-                  name='email'
-                  rules={{ required: 'This field is required' }}
-                  control={control}
-                  render={({ field }) => (
-                    <Input
-                      isRequired
-                      type='email'
-                      placeholder='Email'
-                      isClearable
-                      onClear={() => setValue('email', '')}
-                      errorMessage={errors.email?.message}
-                      isInvalid={Boolean(errors.email?.message)}
-                      {...field}
-                    />
-                  )}
-                />
-                <Controller
-                  name='password'
-                  rules={{ required: 'This field is required' }}
-                  control={control}
-                  render={({ field }) => (
-                    <Input
-                      isRequired
-                      type={isPasswordVisible ? 'text' : 'password'}
-                      placeholder='Password'
-                      endContent={
-                        <ToggleVisibilityButton
-                          isVisible={isPasswordVisible}
-                          setIsVisible={setIsPasswordVisible}
-                        />
-                      }
-                      {...field}
-                    />
-                  )}
-                />
-              </ModalBody>
-              <ModalFooter className='flex flex-col'>
-                <Button
-                  type='submit'
-                  isLoading={isSubmitting}
-                  fullWidth
-                  color='primary'
-                >
-                  {type === 'signIn' ? 'Sign In' : 'Sign Up'}
-                </Button>
-                <Button
-                  variant='light'
-                  fullWidth
-                  color='danger'
-                  onPress={() => setForgotPassword(true)}
-                >
-                  Forgot password?
-                </Button>
-              </ModalFooter>
-            </motion.div>
-          )}
-        </AnimatePresence>
+                </ModalFooter>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </form>
       </ModalContent>
     </Modal>
   );

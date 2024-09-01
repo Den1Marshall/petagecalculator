@@ -37,7 +37,7 @@ export const ChangeEmail: FC<ChangeEmailProps> = ({ isOpen, setIsOpen }) => {
     }
   );
 
-  const { dirtyFields, errors, isSubmitting, isSubmitSuccessful } = formState;
+  const { errors, isSubmitting, isSubmitSuccessful } = formState;
 
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
@@ -75,80 +75,80 @@ export const ChangeEmail: FC<ChangeEmailProps> = ({ isOpen, setIsOpen }) => {
       onClose={handleClose}
       motionProps={scaleFadeModal}
     >
-      <ModalContent
-        as={!isSubmitSuccessful ? 'form' : undefined}
-        onSubmit={!isSubmitSuccessful ? handleSubmit(onSubmit) : undefined}
-      >
-        <AnimatePresence>
-          {!isSubmitSuccessful ? (
-            <motion.div key={'default'}>
-              <ModalHeader>Email address</ModalHeader>
-              <ModalBody>
-                <Controller
-                  control={control}
-                  name='password'
-                  rules={{ required: true, minLength: 1 }}
-                  render={({ field }) => (
-                    <Input
-                      isRequired
-                      type={isPasswordVisible ? 'text' : 'password'}
-                      label='Password'
-                      errorMessage={errors.password?.message}
-                      isInvalid={errors.password?.message !== undefined}
-                      isDisabled={!user}
-                      endContent={
-                        <ToggleVisibilityButton
-                          isVisible={isPasswordVisible}
-                          setIsVisible={setIsPasswordVisible}
-                        />
-                      }
-                      {...field}
-                    />
+      <ModalContent>
+        <form
+          onSubmit={!isSubmitSuccessful ? handleSubmit(onSubmit) : undefined}
+        >
+          <AnimatePresence>
+            {!isSubmitSuccessful ? (
+              <motion.div key={'default'}>
+                <ModalHeader>Email address</ModalHeader>
+                <ModalBody>
+                  <Controller
+                    control={control}
+                    name='password'
+                    rules={{ required: 'Password is required', minLength: 1 }}
+                    render={({ field }) => (
+                      <Input
+                        isRequired
+                        type={isPasswordVisible ? 'text' : 'password'}
+                        label='Password'
+                        errorMessage={errors.password?.message}
+                        isInvalid={errors.password?.message !== undefined}
+                        isDisabled={!user}
+                        endContent={
+                          <ToggleVisibilityButton
+                            isVisible={isPasswordVisible}
+                            setIsVisible={setIsPasswordVisible}
+                          />
+                        }
+                        {...field}
+                      />
+                    )}
+                  />
+                  <Controller
+                    control={control}
+                    name='newEmail'
+                    rules={{
+                      required: 'New email is required',
+                      minLength: 1,
+                    }}
+                    render={({ field }) => (
+                      <Input
+                        isRequired
+                        type='email'
+                        label='New email'
+                        errorMessage={errors.newEmail?.message}
+                        isInvalid={errors.newEmail?.message !== undefined}
+                        isDisabled={!user}
+                        {...field}
+                      />
+                    )}
+                  />
+                  {errors.root && (
+                    <p role='alert' className='text-danger'>
+                      {errors.root?.message}
+                    </p>
                   )}
-                />
-                <Controller
-                  control={control}
-                  name='newEmail'
-                  rules={{
-                    required: true,
-                    minLength: 1,
-                  }}
-                  render={({ field }) => (
-                    <Input
-                      isRequired
-                      type='email'
-                      label='New email'
-                      errorMessage={errors.newEmail?.message}
-                      isInvalid={errors.newEmail?.message !== undefined}
-                      isDisabled={!user}
-                      {...field}
-                    />
-                  )}
-                />
-                {errors.root && (
-                  <p role='alert' className='text-danger'>
-                    {errors.root?.message}
-                  </p>
-                )}
-              </ModalBody>
-              <ModalFooter>
-                <Button color='danger' variant='light' onPress={handleClose}>
-                  Cancel
-                </Button>
-                <Button
-                  color='primary'
-                  type='submit'
-                  isLoading={isSubmitting}
-                  isDisabled={!dirtyFields.password || !dirtyFields.newEmail}
-                >
-                  Save
-                </Button>
-              </ModalFooter>
-            </motion.div>
-          ) : (
-            <Success onClose={handleClose} />
-          )}
-        </AnimatePresence>
+                </ModalBody>
+                <ModalFooter>
+                  <Button color='danger' variant='light' onPress={handleClose}>
+                    Cancel
+                  </Button>
+                  <Button
+                    color='primary'
+                    type='submit'
+                    isLoading={isSubmitting}
+                  >
+                    Save
+                  </Button>
+                </ModalFooter>
+              </motion.div>
+            ) : (
+              <Success onClose={handleClose} />
+            )}
+          </AnimatePresence>
+        </form>
       </ModalContent>
     </Modal>
   );
