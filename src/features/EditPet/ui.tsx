@@ -163,7 +163,7 @@ export const EditPet: FC<EditPetProps> = ({ isOpen, onClose, pet }) => {
       x: lg ? '0%' : undefined,
     },
     exit: {
-      y: lg ? undefined : '100%',
+      y: lg ? undefined : '50%',
       x: lg ? '-100%' : undefined,
     },
   };
@@ -190,14 +190,14 @@ export const EditPet: FC<EditPetProps> = ({ isOpen, onClose, pet }) => {
         dragTransition: { bounceStiffness: 500, bounceDamping: 50 },
         onDragEnd: (_e, info) => {
           if (
-            info.offset.y >= window.innerHeight / 2 ||
+            info.offset.y >= window.innerHeight / 4 ||
             info.velocity.y >= 250
           ) {
             onClose();
           }
         },
       }}
-      className='max-h-[50%] backdrop-blur-2xl saturate-150 bg-overlay/30 overflow-y-scroll lg:max-h-full'
+      className='max-lg:max-h-[50%] backdrop-blur-2xl saturate-150 bg-overlay/30 overflow-y-scroll'
       classNames={{ wrapper: 'lg:max-w-[25%]' }}
     >
       <ModalContent>
