@@ -1,22 +1,21 @@
 'use client';
-import { CloseIcon } from '@/shared/ui/CloseIcon';
-import { InfoIcon } from '@/shared/ui/InfoIcon';
-import { Link } from '@nextui-org/react';
-import { AnimatePresence, Variants, motion } from 'framer-motion';
-import { FC, useState } from 'react';
+import { CloseIcon } from '@/shared/ui';
+import { InfoIcon } from '@/shared/ui';
 import {
-  Button,
-  Dialog,
-  DialogTrigger,
-  Heading,
   Modal,
-} from 'react-aria-components';
+  ModalBody,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  useDisclosure,
+} from '@nextui-org/modal';
+import { Button, Link } from '@nextui-org/react';
+import { Variants } from 'framer-motion';
+import { FC } from 'react';
 import { useMediaQuery } from 'usehooks-ts';
 
-const MotionModal = motion(Modal);
-
 export const Credits: FC = () => {
-  const [isOpen, setOpen] = useState(false);
+  const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
 
   const lg = useMediaQuery('(min-width: 1024px)');
 
@@ -33,100 +32,104 @@ export const Credits: FC = () => {
   };
 
   return (
-    <DialogTrigger>
+    <>
       <Button
-        aria-label='Open info menu'
-        onPress={() => setOpen(!isOpen)}
-        className={({ isFocusVisible }) =>
-          `z-[51] absolute top-safe-or-3 right-safe-or-5 ${
-            !isFocusVisible && 'outline-none'
-          }`
-        }
+        variant='light'
+        isIconOnly
+        aria-label='Open credits modal'
+        onPress={onOpen}
+        className='absolute top-safe right-safe'
       >
-        {isOpen ? <CloseIcon /> : <InfoIcon />}
+        <InfoIcon />
       </Button>
-      <AnimatePresence>
-        {isOpen && (
-          <MotionModal
-            isOpen
-            onOpenChange={setOpen}
-            variants={variants}
-            initial={'exit'}
-            animate={'enter'}
-            exit={'exit'}
-            drag={!lg && 'x'}
-            dragSnapToOrigin
-            dragConstraints={{ left: 0 }}
-            dragElastic={0}
-            dragTransition={{
-              bounceStiffness: 500,
-              bounceDamping: 50,
-            }}
-            onDragEnd={(_e, info) => {
-              if (
-                info.offset.x >= window.innerWidth / 2 ||
-                info.velocity.x >= 250
-              ) {
-                setOpen(false);
-              }
-            }}
-            className='z-50 fixed bottom-0 right-0 size-full p-safe-or-5 bg-white/35 dark:bg-black/35 backdrop-blur-3xl'
-          >
-            <Dialog className='size-full flex flex-col items-center gap-10 outline-none'>
-              <div className='relative w-full flex items-center justify-center'>
-                <Heading slot='title' className='text-6xl'>
-                  Credits
-                </Heading>
-              </div>
+      <Modal
+        hideCloseButton={!lg}
+        closeButton={
+          <Button variant='light' isIconOnly aria-label='Close credits modal'>
+            <CloseIcon />
+          </Button>
+        }
+        size='full'
+        backdrop='transparent'
+        isOpen={isOpen}
+        onOpenChange={onOpenChange}
+        motionProps={{
+          variants,
+          drag: !lg && 'x',
+          dragSnapToOrigin: true,
+          dragConstraints: { left: 0 },
+          dragElastic: 0,
+          dragTransition: {
+            bounceStiffness: 500,
+            bounceDamping: 50,
+          },
+          onDragEnd: (_e, info) => {
+            if (
+              info.offset.x >= window.innerWidth / 2 ||
+              info.velocity.x >= 250
+            ) {
+              onClose();
+            }
+          },
+        }}
+        classNames={{
+          base: 'bg-transparent/60 py-safe px-safe-or-5 backdrop-blur-2xl',
+          header: 'p-0 text-6xl flex justify-center',
+          body: 'p-0',
+          footer: 'p-0 flex flex-col justify-center items-center gap-5',
+        }}
+      >
+        <ModalContent>
+          <ModalHeader>Credits</ModalHeader>
+          <ModalBody>
+            <Link
+              isExternal
+              href='https://streamlinehq.com/'
+              color='primary'
+              className='m-auto'
+            >
+              Free icons from StreamLine
+            </Link>
+          </ModalBody>
+          <ModalFooter>
+            <hr className='bg-white w-screen' />
+            <div className='flex items-center gap-5'>
               <Link
                 isExternal
-                href='https://streamlinehq.com/'
+                href='https://github.com/Den1Marshall'
                 color='primary'
-                className='my-auto'
               >
-                Free icons from StreamLine
+                GitHub
               </Link>
-              <footer className='mt-auto w-full flex flex-col justify-center items-center gap-5'>
-                <hr className='bg-white w-screen' />
-                <div className='flex items-center gap-5'>
-                  <Link
-                    isExternal
-                    href='https://github.com/Den1Marshall'
-                    color='primary'
-                  >
-                    GitHub
-                  </Link>
-                  <Link
-                    isExternal
-                    href='mailto:denyshrychulevych@gmail.com'
-                    color='primary'
-                  >
-                    Email
-                  </Link>
-                  <Link
-                    isExternal
-                    href='https://www.instagram.com/d.e.n_marshall'
-                    color='primary'
-                  >
-                    Instagram
-                  </Link>
-                  <Link
-                    isExternal
-                    href='https://t.me/den_marshall'
-                    color='primary'
-                  >
-                    Telegram
-                  </Link>
-                </div>
-                <p className='text-center'>
-                  Copyright © {new Date().getFullYear()} Denys Hrychulevych. All
-                  rights reserved.
-                </p>
-              </footer>
-            </Dialog>
-          </MotionModal>
-        )}
-      </AnimatePresence>
-    </DialogTrigger>
+              <Link
+                isExternal
+                href='mailto:denyshrychulevych@gmail.com'
+                color='primary'
+              >
+                Email
+              </Link>
+              <Link
+                isExternal
+                href='https://www.instagram.com/d.e.n_marshall'
+                color='primary'
+              >
+                Instagram
+              </Link>
+              <Link isExternal href='https://t.me/den_marshall' color='primary'>
+                Telegram
+              </Link>
+            </div>
+            <p className='text-center'>
+              Copyright © {new Date().getFullYear()} Denys Hrychulevych. All
+              rights reserved.
+            </p>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+    </>
+    //         <Dialog className='size-full flex flex-col items-center gap-10 outline-none'>
+    //           <footer className='mt-auto w-full flex flex-col justify-center items-center gap-5'>
+    //           </footer>
+    //         </Dialog>
   );
 };

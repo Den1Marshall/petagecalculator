@@ -1,3 +1,5 @@
+export { CloseIcon } from './CloseIcon';
+export { InfoIcon } from './InfoIcon';
 export { GoogleIcon } from './GoogleIcon';
 export { EllipsisHorizontalIcon } from './EllipsisHorizontalIcon';
 export { TrashIcon } from './TrashIcon';
