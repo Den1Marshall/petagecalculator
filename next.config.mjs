@@ -1,4 +1,7 @@
 /** @type {import('next').NextConfig} */
+import withPWAInit from '@ducanh2912/next-pwa';
+import withBundleAnalyzerInit from '@next/bundle-analyzer';
+
 const nextConfig = {
   images: {
     remotePatterns: [
@@ -9,15 +12,15 @@ const nextConfig = {
   },
 };
 
-const withPWA = require('@ducanh2912/next-pwa').default({
+const withPWA = withPWAInit({
   dest: 'public',
   disable: process.env.NODE_ENV === 'development',
   cacheOnFrontEndNav: true,
   aggressiveFrontEndNavCaching: true,
 });
 
-const withBundleAnalyzer = require('@next/bundle-analyzer')({
+const withBundleAnalyzer = withBundleAnalyzerInit({
   enabled: process.env.ANALYZE === 'true',
 });
 
-module.exports = withBundleAnalyzer(withPWA(nextConfig));
+export default withBundleAnalyzer(withPWA(nextConfig));
