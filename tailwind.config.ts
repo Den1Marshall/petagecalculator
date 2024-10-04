@@ -1,7 +1,7 @@
-const { nextui } = require('@nextui-org/react');
+import type { Config } from 'tailwindcss';
+import { nextui } from '@nextui-org/react';
 
-/** @type {import('tailwindcss').Config} */
-module.exports = {
+const config: Config = {
   content: [
     './app/**/*.{js,ts,jsx,tsx,mdx}',
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
@@ -9,6 +9,7 @@ module.exports = {
 
     // Or if using `src` directory:
     './src/**/*.{js,ts,jsx,tsx,mdx}',
+
     // nextui
     './node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}',
   ],
@@ -26,3 +27,5 @@ module.exports = {
     nextui(),
   ],
 };
+
+export default config;
