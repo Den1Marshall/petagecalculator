@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { motion } from 'framer-motion';
-import { ModalBody, ModalFooter, ModalHeader } from '@nextui-org/modal';
+import { ModalFooter, ModalHeader } from '@nextui-org/modal';
 import { Button } from '@nextui-org/react';
 
 interface SuccessProps {

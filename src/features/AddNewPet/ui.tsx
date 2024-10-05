@@ -15,11 +15,7 @@ import {
   ModalHeader,
 } from '@nextui-org/modal';
 import { FC, useContext, useRef } from 'react';
-import {
-  CalendarDate,
-  getLocalTimeZone,
-  today as dateToday,
-} from '@internationalized/date';
+import { getLocalTimeZone, today as dateToday } from '@internationalized/date';
 import { UserContext } from '@/app/ui';
 import { IPet } from '@/entities/Pet';
 import { doc, setDoc } from 'firebase/firestore';
