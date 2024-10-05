@@ -9,6 +9,7 @@ import { NextUIProvider } from '@/app/NextUIProvider';
 import { BottomNav } from '@/widgets/BottomNav';
 import { FramerMotionConfig, UserProvider } from '@/app/ui';
 import { SpeedInsights } from '@vercel/speed-insights/next';
+import { GoogleAnalytics } from '@next/third-parties/google';
 
 export const metadata: Metadata = {
   title,
@@ -77,6 +78,7 @@ export default function RootLayout({
         </UserProvider>
         <SpeedInsights />
       </body>
+      <GoogleAnalytics gaId='G-RSXE80Q5J8' />
     </html>
   );
 }
