@@ -38,6 +38,10 @@ export const metadata: Metadata = {
     statusBarStyle: 'black-translucent',
     startupImage,
   },
+
+  verification: {
+    google: 'WJCIqKWRiKcicndkd2oU_2ZVJ9UGzHFXVK-qayzv8po',
+  },
 };
 
 export const viewport: Viewport = {
