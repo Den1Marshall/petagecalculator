@@ -10,7 +10,7 @@ import { doc, setDoc } from 'firebase/firestore';
 import { db } from '@/shared/config/firebase';
 import { useMediaQuery } from 'usehooks-ts';
 import { EditPet } from '@/features/EditPet';
-import { Loading } from '@/shared/ui';
+import { LoadingSpinner } from '@/shared/ui';
 
 export default function MyPets() {
   const { isLoading, user, userPets, setUserPets } = useContext(UserContext);
@@ -58,7 +58,7 @@ export default function MyPets() {
   return (
     <main className='relative h-[calc(100%_-_64px)] flex flex-col'>
       {isLoading ? (
-        <Loading />
+        <LoadingSpinner />
       ) : (
         <>
           <h1 className='max-lg:mb-10 text-center text-6xl font-pacifico'>
