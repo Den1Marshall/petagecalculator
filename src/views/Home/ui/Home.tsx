@@ -1,4 +1,4 @@
-import { Credits } from '@/entities/Credits';
+import { Credits } from '@/widgets/Credits';
 import { Calculator } from '@/widgets/Calculator';
 
 export default function Home() {
