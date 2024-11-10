@@ -1,15 +1,15 @@
 'use client';
-import { MotionButton } from '@/shared/ui/MotionButton';
+import { Button } from '@nextui-org/react';
 import { useAnimationControls } from 'framer-motion';
 import { StaticImport } from 'next/dist/shared/lib/get-img-props';
 import Image from 'next/image';
 import { FC } from 'react';
+import { motion } from 'framer-motion';
 
 interface AnimalButtonProps {
   src: string | StaticImport;
   name: string;
   isHuman?: boolean;
-  className?: string;
   openModal?: () => void;
 }
 
@@ -18,35 +18,36 @@ export const AnimalButton: FC<AnimalButtonProps> = ({
   name,
   isHuman,
   openModal,
-  className,
 }) => {
   const controls = useAnimationControls();
 
   return (
-    <MotionButton
-      aria-label={`Current animal is ${name}. Click to change it.`}
-      onPress={openModal}
-      onPressStart={() =>
-        controls.start({
-          transform: isHuman
-            ? ['translateX(10px)', 'translateX(0px)']
-            : 'translateX(0px)',
-        })
-      }
+    <motion.span
       animate={controls}
-      whileTap={{ scale: isHuman ? 1 : 0.85 }}
       transition={{
         type: 'spring',
         duration: isHuman ? 0.5 : 0.3,
         bounce: isHuman ? 0.95 : 0,
       }}
-      className={({ isFocusVisible }) =>
-        `bg-white rounded-full max-w-[180px] h-auto ${
-          !isFocusVisible && 'outline-none'
-        } ${className}`
-      }
     >
-      <Image quality={100} priority src={src} alt={`${name} icon`} />
-    </MotionButton>
+      <Button
+        variant='shadow'
+        isIconOnly
+        aria-label={`Current animal is a ${name}. Press to change it.`}
+        disableAnimation={isHuman}
+        radius='full'
+        onPress={openModal}
+        onPressStart={() =>
+          controls.start({
+            transform: isHuman
+              ? ['translateX(10px)', 'translateX(0px)']
+              : 'translateX(0px)',
+          })
+        }
+        className='bg-white flex items-center justify-center w-full max-w-[180px] h-auto'
+      >
+        <Image quality={100} priority src={src} alt={`${name} icon`} />
+      </Button>
+    </motion.span>
   );
 };
