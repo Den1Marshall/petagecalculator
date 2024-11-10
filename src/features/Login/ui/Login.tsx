@@ -100,18 +100,6 @@ export const Login: FC<LoginProps> = ({ isOpen, onClose }) => {
       hideCloseButton
       backdrop='blur'
       placement='center'
-      motionProps={{
-        variants: {
-          enter: {
-            transform: 'translateY(0%)',
-            opacity: 1,
-          },
-          exit: {
-            transform: 'translateY(10%)',
-            opacity: 0,
-          },
-        },
-      }}
       className='origin-bottom'
     >
       <ModalContent className='relative min-h-[428px]'>
@@ -132,6 +120,12 @@ export const Login: FC<LoginProps> = ({ isOpen, onClose }) => {
               >
                 <ModalHeader>Log In to continue</ModalHeader>
                 <ModalBody>
+                  <Button onPress={handleSignInWithPopup}>
+                    Continue With Google <GoogleIcon />
+                  </Button>
+
+                  <p className='text-center'>OR</p>
+
                   <ButtonGroup fullWidth>
                     <Button
                       color={type === 'signIn' ? 'primary' : 'default'}
@@ -142,6 +136,7 @@ export const Login: FC<LoginProps> = ({ isOpen, onClose }) => {
                     >
                       Sign In
                     </Button>
+
                     <Button
                       color={type !== 'signIn' ? 'primary' : 'default'}
                       onPress={() => {
@@ -152,10 +147,7 @@ export const Login: FC<LoginProps> = ({ isOpen, onClose }) => {
                       Sign Up
                     </Button>
                   </ButtonGroup>
-                  <Button onPress={handleSignInWithPopup}>
-                    Continue With Google <GoogleIcon />
-                  </Button>
-                  <p className='text-center'>OR</p>
+
                   <Controller
                     name='email'
                     rules={{ required: 'This field is required' }}
@@ -173,6 +165,7 @@ export const Login: FC<LoginProps> = ({ isOpen, onClose }) => {
                       />
                     )}
                   />
+
                   <Controller
                     name='password'
                     rules={{ required: 'This field is required' }}
@@ -192,7 +185,14 @@ export const Login: FC<LoginProps> = ({ isOpen, onClose }) => {
                       />
                     )}
                   />
+
+                  {errors.root && (
+                    <p role='alert' className='text-danger self-start'>
+                      Error: {errors.root?.message}
+                    </p>
+                  )}
                 </ModalBody>
+
                 <ModalFooter className='flex flex-col'>
                   <Button
                     type='submit'
@@ -202,6 +202,7 @@ export const Login: FC<LoginProps> = ({ isOpen, onClose }) => {
                   >
                     {type === 'signIn' ? 'Sign In' : 'Sign Up'}
                   </Button>
+
                   <Button
                     variant='light'
                     fullWidth
