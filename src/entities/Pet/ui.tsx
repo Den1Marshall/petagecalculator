@@ -23,6 +23,7 @@ import { db } from '@/shared/config/firebase';
 import { deleteUserPetImage } from '@/shared/api';
 import { FirebaseError } from 'firebase/app';
 import { isImageLocal } from '@/shared/lib';
+import { Transition, Variants } from 'framer-motion';
 
 interface PetProps extends IPet {
   openAddNewPet: () => void;
@@ -88,6 +89,27 @@ export const Pet: FC<PetProps> = ({
     }
   };
 
+  const dropdownTransition: Transition = {
+    type: 'spring',
+    duration: 0.5,
+    bounce: 0,
+    restDelta: 0.0001,
+    restSpeed: 0.0001,
+  };
+
+  const dropdownVariants: Variants = {
+    enter: {
+      transform: 'scale(1)',
+      opacity: 1,
+      transition: { ...dropdownTransition, bounce: 0.2 },
+    },
+    exit: {
+      transform: 'scale(0.8)',
+      opacity: 0,
+      transition: dropdownTransition,
+    },
+  };
+
   return (
     <Card
       isBlurred
@@ -100,7 +122,11 @@ export const Pet: FC<PetProps> = ({
       className='w-full h-full font-pacifico'
     >
       <CardBody>
-        <Dropdown isOpen={isMenuOpen} onOpenChange={onMenuOpenChange}>
+        <Dropdown
+          motionProps={{ variants: dropdownVariants }}
+          isOpen={isMenuOpen}
+          onOpenChange={onMenuOpenChange}
+        >
           <DropdownTrigger>
             <Button
               aria-label='open menu'
