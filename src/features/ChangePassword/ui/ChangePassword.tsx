@@ -3,13 +3,14 @@ import { UserContext } from '@/app/ui';
 import { reauthenticateUser } from '@/shared/api';
 import { scaleFadeModal, ToggleVisibilityButton } from '@/shared/ui';
 import {
+  Button,
+  Input,
   Modal,
   ModalBody,
   ModalContent,
   ModalFooter,
   ModalHeader,
-} from '@nextui-org/modal';
-import { Button, Input } from '@nextui-org/react';
+} from '@nextui-org/react';
 import { updatePassword } from 'firebase/auth';
 import { FC, useContext, useState } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';

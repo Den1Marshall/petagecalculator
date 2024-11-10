@@ -5,14 +5,12 @@ import {
   Input,
   Select,
   SelectItem,
-} from '@nextui-org/react';
-import {
   Modal,
   ModalBody,
   ModalContent,
   ModalFooter,
   ModalHeader,
-} from '@nextui-org/modal';
+} from '@nextui-org/react';
 import { FC, useContext, useEffect, useRef } from 'react';
 import {
   CalendarDate,

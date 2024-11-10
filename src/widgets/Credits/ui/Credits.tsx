@@ -2,14 +2,15 @@
 import { CloseIcon } from '@/shared/ui';
 import { InfoIcon } from '@/shared/ui';
 import {
+  Button,
+  Link,
   Modal,
   ModalBody,
   ModalContent,
   ModalFooter,
   ModalHeader,
   useDisclosure,
-} from '@nextui-org/modal';
-import { Button, Link } from '@nextui-org/react';
+} from '@nextui-org/react';
 import { Variants } from 'framer-motion';
 import { FC } from 'react';
 import { useMediaQuery } from 'usehooks-ts';

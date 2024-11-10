@@ -1,7 +1,6 @@
 import { FC } from 'react';
 import { motion } from 'framer-motion';
-import { ModalFooter, ModalHeader } from '@nextui-org/modal';
-import { Button } from '@nextui-org/react';
+import { Button, ModalFooter, ModalHeader } from '@nextui-org/react';
 
 interface SuccessProps {
   onClose: () => void;

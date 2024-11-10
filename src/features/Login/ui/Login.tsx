@@ -1,12 +1,14 @@
 'use client';
-import { Button, ButtonGroup, Input } from '@nextui-org/react';
 import {
+  Button,
+  ButtonGroup,
+  Input,
   Modal,
   ModalBody,
   ModalContent,
   ModalFooter,
   ModalHeader,
-} from '@nextui-org/modal';
+} from '@nextui-org/react';
 import { FC, useState } from 'react';
 import {
   createUserWithEmailAndPassword,

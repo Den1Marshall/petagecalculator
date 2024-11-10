@@ -1,6 +1,11 @@
 'use client';
-import { Button, Input } from '@nextui-org/react';
-import { ModalBody, ModalFooter, ModalHeader } from '@nextui-org/modal';
+import {
+  Button,
+  Input,
+  ModalBody,
+  ModalFooter,
+  ModalHeader,
+} from '@nextui-org/react';
 import { FC, useState } from 'react';
 import { Variants, motion } from 'framer-motion';
 import { sendPasswordResetEmail } from 'firebase/auth';

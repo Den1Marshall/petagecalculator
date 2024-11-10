@@ -3,13 +3,15 @@ import { UserContext } from '@/app/ui';
 import { reauthenticateUser } from '@/shared/api';
 import { scaleFadeModal, ToggleVisibilityButton } from '@/shared/ui';
 import {
+  Button,
+  Checkbox,
+  Input,
   Modal,
   ModalBody,
   ModalContent,
   ModalFooter,
   ModalHeader,
-} from '@nextui-org/modal';
-import { Button, Checkbox, Input } from '@nextui-org/react';
+} from '@nextui-org/react';
 import { deleteUser } from 'firebase/auth';
 import { FC, useContext, useState } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
