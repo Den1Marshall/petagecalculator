@@ -34,6 +34,7 @@ interface Inputs {
 }
 
 export const DeleteAccount: FC<DeleteAccountProps> = ({
+  // TODO: refactor component
   isOpen,
   setIsOpen,
 }) => {
@@ -85,6 +86,8 @@ export const DeleteAccount: FC<DeleteAccountProps> = ({
     reset();
   };
 
+  const isGoogleProvider = user?.providerData[0].providerId === 'google.com';
+
   return (
     <Modal
       hideCloseButton={isSubmitSuccessful}
@@ -103,47 +106,54 @@ export const DeleteAccount: FC<DeleteAccountProps> = ({
               <motion.div key={'default'}>
                 <ModalHeader>Delete account</ModalHeader>
                 <ModalBody>
-                  <Controller
-                    control={control}
-                    name='email'
-                    rules={{
-                      required: 'Email is required',
-                      minLength: 1,
-                    }}
-                    render={({ field }) => (
-                      <Input
-                        isRequired
-                        type='email'
-                        label='Email'
-                        errorMessage={errors.email?.message}
-                        isInvalid={errors.email?.message !== undefined}
-                        isDisabled={!user}
-                        {...field}
-                      />
-                    )}
-                  />
-                  <Controller
-                    control={control}
-                    name='password'
-                    rules={{ required: 'Password is required', minLength: 1 }}
-                    render={({ field }) => (
-                      <Input
-                        isRequired
-                        type={isPasswordVisible ? 'text' : 'password'}
-                        label='Password'
-                        errorMessage={errors.password?.message}
-                        isInvalid={errors.password?.message !== undefined}
-                        isDisabled={!user}
-                        endContent={
-                          <ToggleVisibilityButton
-                            isVisible={isPasswordVisible}
-                            setIsVisible={setIsPasswordVisible}
+                  {!isGoogleProvider && (
+                    <>
+                      <Controller
+                        control={control}
+                        name='email'
+                        rules={{
+                          required: 'Email is required',
+                          minLength: 1,
+                        }}
+                        render={({ field }) => (
+                          <Input
+                            isRequired
+                            type='email'
+                            label='Email'
+                            errorMessage={errors.email?.message}
+                            isInvalid={errors.email?.message !== undefined}
+                            isDisabled={!user}
+                            {...field}
                           />
-                        }
-                        {...field}
+                        )}
                       />
-                    )}
-                  />
+                      <Controller
+                        control={control}
+                        name='password'
+                        rules={{
+                          required: 'Password is required',
+                          minLength: 1,
+                        }}
+                        render={({ field }) => (
+                          <Input
+                            isRequired
+                            type={isPasswordVisible ? 'text' : 'password'}
+                            label='Password'
+                            errorMessage={errors.password?.message}
+                            isInvalid={errors.password?.message !== undefined}
+                            isDisabled={!user}
+                            endContent={
+                              <ToggleVisibilityButton
+                                isVisible={isPasswordVisible}
+                                setIsVisible={setIsPasswordVisible}
+                              />
+                            }
+                            {...field}
+                          />
+                        )}
+                      />
+                    </>
+                  )}
                   <Controller
                     control={control}
                     name='confirm'
