@@ -51,6 +51,7 @@ export const SelectTheme: FC = () => {
         disallowEmptySelection
         selectionMode='single'
         selectedKeys={selectedKeys}
+        disabledKeys={new Set(['light'])}
         onSelectionChange={(keys) => setSelectedKeys(keys)}
         onAction={(key) => setTheme(key as string)}
       >
