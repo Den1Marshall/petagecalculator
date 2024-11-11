@@ -11,23 +11,19 @@ export const reauthenticateUser = async (
   email: string,
   password: string
 ): Promise<void> => {
-  try {
-    switch (user.providerData[0].providerId) {
-      case 'google.com':
-        await reauthenticateWithPopup(user, new GoogleAuthProvider());
-        break;
+  switch (user.providerData[0].providerId) {
+    case 'google.com':
+      await reauthenticateWithPopup(user, new GoogleAuthProvider());
+      break;
 
-      case 'password':
-        await reauthenticateWithCredential(
-          user,
-          EmailAuthProvider.credential(email, password)
-        );
-        break;
+    case 'password':
+      await reauthenticateWithCredential(
+        user,
+        EmailAuthProvider.credential(email, password)
+      );
+      break;
 
-      default:
-        break;
-    }
-  } catch (error) {
-    throw error;
+    default:
+      break;
   }
 };
