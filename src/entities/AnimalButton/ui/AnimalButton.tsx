@@ -1,6 +1,6 @@
 'use client';
 import { Button } from '@nextui-org/react';
-import { useAnimationControls } from 'framer-motion';
+import { AnimatePresence, useAnimationControls } from 'framer-motion';
 import { StaticImport } from 'next/dist/shared/lib/get-img-props';
 import Image from 'next/image';
 import { FC } from 'react';
@@ -46,7 +46,17 @@ export const AnimalButton: FC<AnimalButtonProps> = ({
         }
         className='bg-white flex items-center justify-center w-full max-w-[180px] h-auto'
       >
-        <Image quality={100} priority src={src} alt={`${name} icon`} />
+        <AnimatePresence mode='popLayout' initial={false}>
+          <motion.span
+            key={name}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ type: 'tween', ease: 'easeInOut', duration: 0.25 }}
+          >
+            <Image quality={100} priority src={src} alt={`${name} icon`} />
+          </motion.span>
+        </AnimatePresence>
       </Button>
     </motion.span>
   );
