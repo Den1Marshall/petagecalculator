@@ -2,7 +2,6 @@ import type { Metadata, Viewport } from 'next';
 import '@/app/index.css';
 import { startupImage } from './startupImage';
 import { Pacifico } from 'next/font/google';
-import { title } from './title';
 import { description } from './description';
 import { Analytics } from '@vercel/analytics/react';
 import { NextUIProvider } from '@/app/NextUIProvider';
@@ -12,7 +11,10 @@ import { SpeedInsights } from '@vercel/speed-insights/next';
 import { GoogleAnalytics } from '@next/third-parties/google';
 
 export const metadata: Metadata = {
-  title,
+  title: {
+    template: '%s | Pet Age Calculator',
+    default: 'Pet Age Calculator',
+  },
   description,
   metadataBase: new URL('https://petagecalculator.vercel.app/'),
   robots: 'all',
@@ -23,13 +25,13 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     url: '/',
-    title,
+    title: 'Pet Age Calculator',
     description,
   },
 
   twitter: {
     card: 'summary_large_image',
-    title,
+    title: 'Pet Age Calculator',
     description,
   },
 
