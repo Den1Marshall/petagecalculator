@@ -19,7 +19,7 @@ import { IPet } from '@/entities/Pet';
 import { doc, setDoc } from 'firebase/firestore';
 import { db } from '@/shared/config/firebase';
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
-import { Variants } from 'framer-motion';
+import { Variants, motion } from 'framer-motion';
 import { useMediaQuery } from 'usehooks-ts';
 import cat from '@/../public/images/animals/cat.png';
 import dog from '@/../public/images/animals/dog.png';
@@ -123,18 +123,27 @@ export const AddNewPet: FC<AddNewPetProps> = ({
 
   const inputRef = useRef<HTMLInputElement>(null);
 
+  // TODO: refactor span styles?
   return (
     <>
-      <Button
-        isIconOnly
-        aria-label='Add new pet'
-        variant='shadow'
-        color='primary'
-        onPress={onOpen}
-        className={className}
+      <motion.span
+        layout
+        className={` ${
+          userPets.length === 0 ? '!min-w-full' : ''
+        } min-w-[80%] aspect-square flex items-center justify-center cursor-grab lg:min-w-[33.333333%]`}
       >
-        <AddIcon />
-      </Button>
+        <Button
+          isIconOnly
+          aria-label='Add new pet'
+          variant='shadow'
+          color='primary'
+          onPress={onOpen}
+          className={className}
+        >
+          <AddIcon />
+        </Button>
+      </motion.span>
+
       <Modal
         hideCloseButton
         backdrop='transparent'
