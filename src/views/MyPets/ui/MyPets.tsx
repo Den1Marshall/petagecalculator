@@ -69,7 +69,7 @@ export default function MyPets() {
             values={userPets}
             onReorder={handleReorder}
             layoutScroll
-            className={`max-lg:pb-10 h-full flex flex-col items-center gap-10 ${overflow} lg:my-auto lg:flex-row`}
+            className={`max-lg:pb-10 h-full flex flex-col items-center gap-10 ${overflow} no-scrollbar lg:my-auto lg:flex-row`}
           >
             <AnimatePresence initial={false} mode='popLayout'>
               {userPets.map((pet) => (
