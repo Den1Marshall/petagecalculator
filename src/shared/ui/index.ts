@@ -1,3 +1,4 @@
+export { MotionButton } from './MotionButton';
 export { GoogleIcon } from './GoogleIcon';
 export { EllipsisHorizontalIcon } from './EllipsisHorizontalIcon';
 export { TrashIcon } from './TrashIcon';
