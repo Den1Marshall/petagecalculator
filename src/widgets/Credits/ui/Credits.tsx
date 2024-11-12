@@ -1,6 +1,5 @@
 'use client';
-import { CloseIcon } from '@/shared/ui';
-import { InfoIcon } from '@/shared/ui';
+import { Icon } from './Icon';
 import {
   Button,
   Link,
@@ -13,22 +12,17 @@ import {
 } from '@nextui-org/react';
 import { Variants } from 'framer-motion';
 import { FC } from 'react';
-import { useMediaQuery } from 'usehooks-ts';
 
 export const Credits: FC = () => {
-  const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
-
-  const lg = useMediaQuery('(min-width: 1024px)');
+  const { isOpen, onOpenChange } = useDisclosure();
 
   const variants: Variants = {
     enter: {
-      x: lg ? undefined : '0%',
-      opacity: lg ? 1 : undefined,
+      transform: 'translateX(0%)',
     },
 
     exit: {
-      x: lg ? undefined : '100%',
-      opacity: lg ? 0 : undefined,
+      transform: 'translateX(100%)',
     },
   };
 
@@ -37,51 +31,32 @@ export const Credits: FC = () => {
       <Button
         variant='light'
         isIconOnly
-        aria-label='Open credits modal'
-        onPress={onOpen}
-        className='absolute top-safe right-safe'
+        aria-label={`${isOpen ? 'Close' : 'Open'} credits modal`}
+        onPress={onOpenChange}
+        className='absolute z-[51] top-safe-or-1 right-safe-or-1'
       >
-        <InfoIcon />
+        <Icon isOpen={isOpen} />
       </Button>
+
       <Modal
-        hideCloseButton={!lg}
-        closeButton={
-          <Button variant='light' isIconOnly aria-label='Close credits modal'>
-            <CloseIcon />
-          </Button>
-        }
+        hideCloseButton
         size='full'
         backdrop='transparent'
         isOpen={isOpen}
         onOpenChange={onOpenChange}
         motionProps={{
           variants,
-          drag: !lg && 'x',
-          dragSnapToOrigin: true,
-          dragConstraints: { left: 0 },
-          dragElastic: 0,
-          dragTransition: {
-            bounceStiffness: 500,
-            bounceDamping: 50,
-          },
-          onDragEnd: (_e, info) => {
-            if (
-              info.offset.x >= window.innerWidth / 2 ||
-              info.velocity.x >= 250
-            ) {
-              onClose();
-            }
-          },
         }}
         classNames={{
-          base: 'bg-transparent/60 py-safe px-safe-or-5 backdrop-blur-2xl',
-          header: 'p-0 text-6xl flex justify-center',
+          base: 'p-safe-or-5 backdrop-blur-2xl bg-overlay/3',
+          header: 'p-0 flex justify-center text-6xl',
           body: 'p-0',
           footer: 'p-0 flex flex-col justify-center items-center gap-5',
         }}
       >
         <ModalContent>
           <ModalHeader>Credits</ModalHeader>
+
           <ModalBody>
             <Link
               isExternal
@@ -92,6 +67,7 @@ export const Credits: FC = () => {
               Free icons from StreamLine
             </Link>
           </ModalBody>
+
           <ModalFooter>
             <hr className='bg-white w-screen' />
             <div className='flex items-center gap-5'>
