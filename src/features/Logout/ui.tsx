@@ -31,11 +31,9 @@ export const Logout: FC<LogoutProps> = ({ isOpen, setIsOpen }) => {
 
       await signOut(auth);
     } catch (error) {
-      const firebaseError = error as FirebaseError;
-
-      if (firebaseError.code) {
-        setError(firebaseError.code);
-      }
+      error instanceof FirebaseError
+        ? setError(error.code)
+        : setError('Something has went wrong');
     } finally {
       setIsLoading(false);
 

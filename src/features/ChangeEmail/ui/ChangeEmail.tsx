@@ -51,13 +51,12 @@ export const ChangeEmail: FC<ChangeEmailProps> = ({ isOpen, setIsOpen }) => {
         setError('root', { message: 'User email is null' });
       }
     } catch (error) {
-      const firebaseError = error as FirebaseError;
-
-      if (firebaseError.code) {
-        setError('root', { message: firebaseError.code });
-      } else {
-        console.log(error);
-      }
+      error instanceof FirebaseError
+        ? setError('root', { type: 'custom', message: error.code })
+        : setError('root', {
+            type: 'custom',
+            message: 'Something has went wrong',
+          });
     }
   };
 

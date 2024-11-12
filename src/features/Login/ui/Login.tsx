@@ -52,9 +52,12 @@ export const Login: FC<LoginProps> = ({ isOpen, onClose }) => {
 
       await addNewUserToDatabase(userCredential.user.uid);
     } catch (error) {
-      const firebaseError = error as FirebaseError;
-
-      setError('email', { type: 'custom', message: firebaseError.code });
+      error instanceof FirebaseError
+        ? setError('root', { type: 'custom', message: error.code })
+        : setError('root', {
+            type: 'custom',
+            message: 'Something has went wrong',
+          });
     }
   };
 
@@ -78,9 +81,12 @@ export const Login: FC<LoginProps> = ({ isOpen, onClose }) => {
         await addNewUserToDatabase(userCredential.user.uid);
       }
     } catch (error) {
-      const firebaseError = error as FirebaseError;
-
-      setError('email', { type: 'custom', message: firebaseError.code });
+      error instanceof FirebaseError
+        ? setError('root', { type: 'custom', message: error.code })
+        : setError('root', {
+            type: 'custom',
+            message: 'Something has went wrong',
+          });
     }
   };
 
@@ -100,7 +106,6 @@ export const Login: FC<LoginProps> = ({ isOpen, onClose }) => {
       hideCloseButton
       backdrop='blur'
       placement='center'
-      className='origin-bottom'
     >
       <ModalContent className='relative min-h-[428px]'>
         <form onSubmit={handleSubmit(onSubmit)}>

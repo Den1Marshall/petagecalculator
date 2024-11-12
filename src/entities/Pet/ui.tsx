@@ -77,13 +77,9 @@ export const Pet: FC<PetProps> = ({
         setUserPets(userPets.filter((pet) => pet.uuid !== uuid));
       }
     } catch (error) {
-      const firebaseError = error as FirebaseError;
-
-      if (firebaseError.code) {
-        alert(firebaseError.code);
-      } else {
-        console.log(error);
-      }
+      error instanceof FirebaseError
+        ? alert(error.code) // TODO: use nextui alert, when released
+        : alert('Something has went wrong');
     } finally {
       setIsDeleting(false);
     }
