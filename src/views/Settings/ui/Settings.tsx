@@ -19,6 +19,8 @@ export default function Settings() {
   const [isDeleteAccountOpen, setIsDeleteAccountOpen] = useState(false);
   const [isLoginOpen, setIsLoginOpen] = useState(false);
 
+  const isGoogleProvider = user?.providerData[0].providerId === 'google.com';
+
   if (isLoading) return <LoadingSpinner />;
 
   return (
@@ -27,6 +29,11 @@ export default function Settings() {
         Settings
       </h1>
       <Listbox
+        disabledKeys={
+          isGoogleProvider
+            ? new Set(['changeEmail', 'changePassword'])
+            : undefined
+        }
         label='Settings'
         itemClasses={{ title: 'text-medium' }}
         variant='light'
