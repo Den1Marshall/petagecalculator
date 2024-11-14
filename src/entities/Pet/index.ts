@@ -1,2 +1,2 @@
-export { Pet } from './ui';
-export type { IPet } from './model';
+export type { IPet } from './model/IPet';
+export { Pet } from './ui/Pet';

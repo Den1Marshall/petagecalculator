@@ -13,7 +13,7 @@ import {
 } from '@nextui-org/react';
 import Image from 'next/image';
 import { FC, useContext, useState } from 'react';
-import { IPet } from './model';
+import { IPet } from '../model/IPet';
 import { getLocalTimeZone, now } from '@internationalized/date';
 import { UserContext } from '@/app/ui';
 import { EditIcon, EllipsisHorizontalIcon, TrashIcon } from '@/shared/ui';
