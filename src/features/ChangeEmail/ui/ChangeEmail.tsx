@@ -1,7 +1,7 @@
 'use client';
 import { UserContext } from '@/app/ui';
 import { reauthenticateUser } from '@/shared/api';
-import { scaleFadeModal, ToggleVisibilityButton } from '@/shared/ui';
+import { ToggleVisibilityButton } from '@/shared/ui';
 import {
   Button,
   Input,
@@ -17,6 +17,7 @@ import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { FirebaseError } from 'firebase/app';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Success } from './Success';
+import { useScaleModalMotionProps } from '@/shared/lib';
 
 interface ChangeEmailProps {
   isOpen: boolean;
@@ -66,6 +67,8 @@ export const ChangeEmail: FC<ChangeEmailProps> = ({ isOpen, setIsOpen }) => {
     reset();
   };
 
+  const scaleModalMotionProps = useScaleModalMotionProps();
+
   return (
     <Modal
       hideCloseButton={isSubmitSuccessful}
@@ -73,7 +76,7 @@ export const ChangeEmail: FC<ChangeEmailProps> = ({ isOpen, setIsOpen }) => {
       backdrop='blur'
       isOpen={isOpen}
       onClose={handleClose}
-      motionProps={scaleFadeModal}
+      motionProps={scaleModalMotionProps}
     >
       <ModalContent>
         <form

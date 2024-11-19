@@ -12,7 +12,7 @@ import {
 import { FirebaseError } from 'firebase/app';
 import { FC, useContext, useState } from 'react';
 import { signOut } from 'firebase/auth';
-import { scaleFadeModal } from '@/shared/ui';
+import { useScaleModalMotionProps } from '@/shared/lib';
 
 interface LogoutProps {
   isOpen: boolean;
@@ -46,13 +46,15 @@ export const Logout: FC<LogoutProps> = ({ isOpen, setIsOpen }) => {
     setIsOpen(false);
   };
 
+  const scaleModalMotionProps = useScaleModalMotionProps();
+
   return (
     <Modal
       placement='center'
       backdrop='blur'
       isOpen={isOpen}
       onClose={handleClose}
-      motionProps={scaleFadeModal}
+      motionProps={scaleModalMotionProps}
     >
       <ModalContent>
         <ModalHeader>Logout</ModalHeader>

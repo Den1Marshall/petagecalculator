@@ -25,6 +25,7 @@ import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { GoogleIcon, ToggleVisibilityButton } from '@/shared/ui';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { loginSchema, registerSchema } from '../model/zodSchema';
+import { useScaleModalMotionProps } from '@/shared/lib';
 
 interface LoginProps {
   isOpen: boolean;
@@ -108,6 +109,8 @@ export const Login: FC<LoginProps> = ({ isOpen, onClose }) => {
     },
   };
 
+  const scaleModalMotionProps = useScaleModalMotionProps();
+
   return (
     <Modal
       isOpen={isOpen}
@@ -115,6 +118,7 @@ export const Login: FC<LoginProps> = ({ isOpen, onClose }) => {
       hideCloseButton
       backdrop='blur'
       placement='center'
+      motionProps={scaleModalMotionProps}
     >
       <ModalContent className='relative min-h-[428px]'>
         <AnimatePresence initial={false}>

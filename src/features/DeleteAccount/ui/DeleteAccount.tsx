@@ -1,7 +1,7 @@
 'use client';
 import { UserContext } from '@/app/ui';
 import { reauthenticateUser } from '@/shared/api';
-import { scaleFadeModal, ToggleVisibilityButton } from '@/shared/ui';
+import { ToggleVisibilityButton } from '@/shared/ui';
 import {
   Button,
   Checkbox,
@@ -21,6 +21,7 @@ import { deleteObject, listAll, ref } from 'firebase/storage';
 import { db, storage } from '@/shared/config/firebase';
 import { deleteDoc, doc } from 'firebase/firestore';
 import { Success } from './Success';
+import { useScaleModalMotionProps } from '@/shared/lib';
 
 interface DeleteAccountProps {
   isOpen: boolean;
@@ -87,6 +88,8 @@ export const DeleteAccount: FC<DeleteAccountProps> = ({
 
   const isGoogleProvider = user?.providerData[0].providerId === 'google.com';
 
+  const scaleModalMotionProps = useScaleModalMotionProps();
+
   return (
     <Modal
       hideCloseButton={isSubmitSuccessful}
@@ -94,7 +97,7 @@ export const DeleteAccount: FC<DeleteAccountProps> = ({
       backdrop='blur'
       isOpen={isOpen}
       onClose={handleClose}
-      motionProps={scaleFadeModal}
+      motionProps={scaleModalMotionProps}
     >
       <ModalContent>
         <form
