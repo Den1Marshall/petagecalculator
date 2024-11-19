@@ -9,8 +9,8 @@ import {
 import { FC } from 'react';
 import { Variants, motion } from 'framer-motion';
 import { sendPasswordResetEmail } from 'firebase/auth';
-import { auth } from '@/shared/config/firebase';
-import { ArrowReturnIcon } from '@/shared/ui/ArrowReturnIcon';
+import { auth } from '@/shared/config';
+import { ArrowReturnIcon } from './ArrowReturnIcon';
 import { FirebaseError } from 'firebase/app';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';

@@ -1,1 +1,1 @@
-export { EditPet } from './ui';
+export { EditPet } from './ui/EditPet';

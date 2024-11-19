@@ -1,6 +1,6 @@
 'use client';
-import { UserContext } from '@/app/ui';
-import { auth } from '@/shared/config/firebase';
+import { UserContext } from '@/app/model';
+import { auth } from '@/shared/config';
 import {
   Modal,
   ModalBody,

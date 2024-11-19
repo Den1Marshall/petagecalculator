@@ -1,9 +1,8 @@
 'use client';
 import { FC, ReactNode, useEffect, useState } from 'react';
-import { auth, db } from '@/shared/config/firebase';
+import { auth, db } from '@/shared/config';
 import { IPet } from '@/entities/Pet';
-import { UserContext } from './model/UserContext';
-import { petsPlaceholder } from './model/petsPlaceholder';
+import { petsPlaceholder, UserContext } from '../model';
 import { doc, onSnapshot } from 'firebase/firestore';
 import { Unsubscribe } from 'firebase/auth';
 

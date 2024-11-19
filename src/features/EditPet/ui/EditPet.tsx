@@ -17,10 +17,10 @@ import {
   getLocalTimeZone,
   today as dateToday,
 } from '@internationalized/date';
-import { UserContext } from '@/app/ui';
+import { UserContext } from '@/app/model';
 import { IPet } from '@/entities/Pet';
 import { doc, setDoc } from 'firebase/firestore';
-import { db } from '@/shared/config/firebase';
+import { db } from '@/shared/config';
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import { Variants } from 'framer-motion';
 import { useMediaQuery } from 'usehooks-ts';

@@ -16,13 +16,14 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
 } from 'firebase/auth';
-import { auth } from '@/shared/config/firebase';
+import { auth } from '@/shared/config';
 import { FirebaseError } from 'firebase/app';
 import { LoginForgotPassword } from './LoginForgotPassword';
 import { AnimatePresence, Variants, motion } from 'framer-motion';
 import { addNewUserToDatabase } from '../api';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
-import { GoogleIcon, ToggleVisibilityButton } from '@/shared/ui';
+import { ToggleVisibilityButton } from '@/shared/ui';
+import { GoogleIcon } from './GoogleIcon';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { loginSchema, registerSchema } from '../model/zodSchema';
 import { useScaleModalMotionProps } from '@/shared/lib';

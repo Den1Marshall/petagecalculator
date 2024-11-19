@@ -1,5 +1,5 @@
 'use client';
-import { UserContext } from '@/app/ui';
+import { UserContext } from '@/app/model';
 import { reauthenticateUser } from '@/shared/api';
 import { ToggleVisibilityButton } from '@/shared/ui';
 import {

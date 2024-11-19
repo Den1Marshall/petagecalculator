@@ -1,4 +1,4 @@
-import { storage } from '@/shared/config/firebase';
+import { storage } from '@/shared/config';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 
 export const uploadUserPetImage = async (

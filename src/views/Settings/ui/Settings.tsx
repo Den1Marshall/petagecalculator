@@ -4,7 +4,7 @@ import { Logout } from '@/features/Logout';
 import { DeleteAccount } from '@/features/DeleteAccount';
 import { Listbox, ListboxItem, ListboxSection } from '@nextui-org/react';
 import { useContext, useState } from 'react';
-import { UserContext } from '@/app/ui';
+import { UserContext } from '@/app/model';
 import { ChangeEmail } from '@/features/ChangeEmail';
 import { ChangePassword } from '@/features/ChangePassword';
 import { Login } from '@/features/Login';

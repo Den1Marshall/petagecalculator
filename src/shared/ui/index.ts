@@ -1,7 +1,4 @@
 export { MotionButton } from './MotionButton';
-export { GoogleIcon } from './GoogleIcon';
-export { EllipsisHorizontalIcon } from './EllipsisHorizontalIcon';
-export { TrashIcon } from './TrashIcon';
+export { AddIcon } from './AddIcon';
 export { ToggleVisibilityButton } from './ToggleVisibilityButton';
-export { EditIcon } from './EditIcon';
 export { LoadingSpinner } from './LoadingSpinner';

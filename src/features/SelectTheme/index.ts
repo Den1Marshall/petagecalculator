@@ -1,1 +1,1 @@
-export { SelectTheme } from './ui';
+export { SelectTheme } from './ui/SelectTheme';

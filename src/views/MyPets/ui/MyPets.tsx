@@ -2,12 +2,12 @@
 import { useDisclosure } from '@nextui-org/react';
 import { IPet, Pet } from '@/entities/Pet';
 import { useContext, useState } from 'react';
-import { UserContext } from '@/app/ui';
+import { UserContext } from '@/app/model';
 import { AddNewPet } from '@/features/AddNewPet';
 import { Login } from '@/features/Login';
 import { AnimatePresence, Reorder } from 'framer-motion';
 import { doc, setDoc } from 'firebase/firestore';
-import { db } from '@/shared/config/firebase';
+import { db } from '@/shared/config';
 import { useMediaQuery } from 'usehooks-ts';
 import { EditPet } from '@/features/EditPet';
 import { LoadingSpinner } from '@/shared/ui';

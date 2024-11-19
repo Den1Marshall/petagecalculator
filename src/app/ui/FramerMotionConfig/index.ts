@@ -1,1 +1,0 @@
-export { FramerMotionConfig } from './ui';

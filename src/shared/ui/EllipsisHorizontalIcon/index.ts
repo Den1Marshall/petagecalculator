@@ -1,1 +1,0 @@
-export { EllipsisHorizontalIcon } from './ui';

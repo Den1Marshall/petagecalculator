@@ -14,10 +14,10 @@ import {
 } from '@nextui-org/react';
 import { FC, useContext, useRef } from 'react';
 import { getLocalTimeZone, today as dateToday } from '@internationalized/date';
-import { UserContext } from '@/app/ui';
+import { UserContext } from '@/app/model';
 import { IPet } from '@/entities/Pet';
 import { doc, setDoc } from 'firebase/firestore';
-import { db } from '@/shared/config/firebase';
+import { db } from '@/shared/config';
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import { Variants, motion } from 'framer-motion';
 import { useMediaQuery } from 'usehooks-ts';
@@ -112,25 +112,22 @@ export const AddNewPet: FC<AddNewPetProps> = ({
 
   const variants: Variants = {
     enter: {
-      y: lg ? undefined : '0%',
-      x: lg ? '0%' : undefined,
+      transform: lg ? 'translateX(0%)' : 'translateY(100%)',
     },
     exit: {
-      y: lg ? undefined : '50%',
-      x: lg ? '-100%' : undefined,
+      transform: lg ? 'translateX(-100%)' : 'translateY(100%)',
     },
   };
 
   const inputRef = useRef<HTMLInputElement>(null);
 
-  // TODO: refactor span styles?
   return (
     <>
       <motion.span
         layout
         className={` ${
           userPets.length === 0 ? '!min-w-full' : ''
-        } min-w-[80%] aspect-square flex items-center justify-center cursor-grab lg:min-w-[33.333333%]`}
+        } min-w-[80%] aspect-square flex items-center justify-center lg:min-w-[33.333333%]`}
       >
         <Button
           isIconOnly
@@ -168,8 +165,12 @@ export const AddNewPet: FC<AddNewPetProps> = ({
             }
           },
         }}
-        className='max-lg:max-h-[50%] backdrop-blur-2xl saturate-150 bg-overlay/30 overflow-y-scroll'
-        classNames={{ wrapper: 'lg:max-w-[25%]' }}
+        className='backdrop-blur-2xl saturate-150 bg-overlay/30 overflow-y-scroll'
+        classNames={{
+          wrapper: 'lg:max-w-[25%]',
+          base: 'max-sm:min-w-full max-sm:pb-safe max-sm:bottom-safe max-sm:mb-0 max-sm:mx-0',
+          body: 'max-sm:max-h-[50%] max-sm:bottom-safe',
+        }}
       >
         <ModalContent>
           <form

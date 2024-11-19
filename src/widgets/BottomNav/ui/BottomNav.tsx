@@ -3,9 +3,9 @@ import { FC } from 'react';
 import { BottomNavLink } from './BottomNavLink';
 import { usePathname } from 'next/navigation';
 import { Navbar, NavbarContent, NavbarItem } from '@nextui-org/react';
-import { HomeIcon } from '@/shared/ui/HomeIcon';
-import { SettingsIcon } from '@/shared/ui/SettingsIcon';
-import { UserIcon } from '@/shared/ui/UserIcon';
+import { HomeIcon } from './HomeIcon';
+import { SettingsIcon } from './SettingsIcon';
+import { UserIcon } from './UserIcon';
 
 export const BottomNav: FC = () => {
   const pathname = usePathname();

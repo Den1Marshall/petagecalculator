@@ -1,1 +1,0 @@
-export { AddIcon } from './ui';

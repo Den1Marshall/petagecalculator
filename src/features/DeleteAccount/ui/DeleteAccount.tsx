@@ -1,5 +1,5 @@
 'use client';
-import { UserContext } from '@/app/ui';
+import { UserContext } from '@/app/model';
 import { reauthenticateUser } from '@/shared/api';
 import { ToggleVisibilityButton } from '@/shared/ui';
 import {
@@ -18,7 +18,7 @@ import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { FirebaseError } from 'firebase/app';
 import { AnimatePresence, motion } from 'framer-motion';
 import { deleteObject, listAll, ref } from 'firebase/storage';
-import { db, storage } from '@/shared/config/firebase';
+import { db, storage } from '@/shared/config';
 import { deleteDoc, doc } from 'firebase/firestore';
 import { Success } from './Success';
 import { useScaleModalMotionProps } from '@/shared/lib';

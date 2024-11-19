@@ -1,4 +1,4 @@
-import { db } from '@/shared/config/firebase';
+import { db } from '@/shared/config';
 import { setDoc, doc, getDoc } from 'firebase/firestore';
 
 export const addNewUserToDatabase = async (userUid: string) => {

@@ -2,11 +2,11 @@
 import { FC, ReactNode } from 'react';
 import { MotionConfig } from 'framer-motion';
 
-interface FramerMotionConfigProps {
+interface FramerMotionProviderProps {
   children: ReactNode;
 }
 
-export const FramerMotionConfig: FC<FramerMotionConfigProps> = ({
+export const FramerMotionProvider: FC<FramerMotionProviderProps> = ({
   children,
 }) => {
   return (
