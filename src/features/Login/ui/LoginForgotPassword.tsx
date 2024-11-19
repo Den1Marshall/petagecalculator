@@ -6,46 +6,45 @@ import {
   ModalFooter,
   ModalHeader,
 } from '@nextui-org/react';
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import { Variants, motion } from 'framer-motion';
 import { sendPasswordResetEmail } from 'firebase/auth';
 import { auth } from '@/shared/config/firebase';
 import { ArrowReturnIcon } from '@/shared/ui/ArrowReturnIcon';
 import { FirebaseError } from 'firebase/app';
+import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { loginForgotPasswordSchema } from '../model/zodSchema';
 
 interface LoginForgotPasswordProps {
   setIsOpen: (value: boolean) => void;
 }
 
-enum SentStatus {
-  NotSent,
-  Error,
-  Sent,
+interface FormData {
+  email: string;
 }
 
 export const LoginForgotPassword: FC<LoginForgotPasswordProps> = ({
   setIsOpen,
 }) => {
-  const [email, setEmail] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
-  const [sentStatus, setSentStatus] = useState<SentStatus>(SentStatus.NotSent);
+  const {
+    control,
+    formState: { isSubmitting, isSubmitSuccessful, errors },
+    handleSubmit,
+    setValue,
+    setError,
+  } = useForm<FormData>({ resolver: zodResolver(loginForgotPasswordSchema) });
 
-  const handleForgotPassword = async () => {
-    setIsLoading(true);
-
+  const onSubmit: SubmitHandler<FormData> = async ({ email }) => {
     try {
       await sendPasswordResetEmail(auth, email);
-
-      setSentStatus(SentStatus.Sent);
-      setErrorMessage('');
     } catch (error) {
-      const fireabseError = error as FirebaseError;
-      setErrorMessage(fireabseError.code);
-
-      setSentStatus(SentStatus.Error);
-    } finally {
-      setIsLoading(false);
+      error instanceof FirebaseError
+        ? setError('root', { type: 'custom', message: error.code })
+        : setError('root', {
+            type: 'custom',
+            message: 'Something has went wrong',
+          });
     }
   };
 
@@ -59,7 +58,8 @@ export const LoginForgotPassword: FC<LoginForgotPasswordProps> = ({
   };
 
   return (
-    <motion.div
+    <motion.form
+      onSubmit={handleSubmit(onSubmit)}
       variants={variants}
       initial='exit'
       animate='enter'
@@ -69,7 +69,7 @@ export const LoginForgotPassword: FC<LoginForgotPasswordProps> = ({
       <ModalHeader className='flex items-center gap-1'>
         <Button
           isIconOnly
-          aria-label='go back to login'
+          aria-label='Go back to login'
           variant='light'
           onPress={() => setIsOpen(false)}
         >
@@ -77,33 +77,42 @@ export const LoginForgotPassword: FC<LoginForgotPasswordProps> = ({
         </Button>
         Reset Password
       </ModalHeader>
+
       <ModalBody>
-        <Input
-          isClearable
-          placeholder='Enter your email'
-          value={email}
-          onValueChange={setEmail}
-          isInvalid={Boolean(errorMessage)}
-          errorMessage={errorMessage}
+        <Controller
+          control={control}
+          name='email'
+          render={({ field }) => (
+            <Input
+              isRequired
+              type='email'
+              placeholder='Enter your email'
+              isClearable
+              onClear={() => setValue('email', '')}
+              isInvalid={errors.email?.message !== undefined}
+              errorMessage={errors.email?.message}
+              {...field}
+            />
+          )}
         />
+
+        {errors.root && (
+          <p role='alert' className='text-danger self-start'>
+            Error: {errors.root?.message}
+          </p>
+        )}
       </ModalBody>
+
       <ModalFooter>
         <Button
           type='submit'
-          isLoading={isLoading}
-          onPress={handleForgotPassword}
+          isLoading={isSubmitting}
           fullWidth
-          color={
-            sentStatus === SentStatus.Sent
-              ? 'success'
-              : sentStatus === SentStatus.Error
-              ? 'danger'
-              : 'primary'
-          }
+          color={isSubmitSuccessful ? 'success' : 'primary'}
         >
-          {sentStatus === SentStatus.Sent ? 'Sent' : 'Send'}
+          {isSubmitSuccessful ? 'Sent' : 'Send'}
         </Button>
       </ModalFooter>
-    </motion.div>
+    </motion.form>
   );
 };

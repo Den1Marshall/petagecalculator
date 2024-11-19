@@ -23,13 +23,15 @@ import { AnimatePresence, Variants, motion } from 'framer-motion';
 import { addNewUserToDatabase } from '../api';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { GoogleIcon, ToggleVisibilityButton } from '@/shared/ui';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { loginSchema, registerSchema } from '../model/zodSchema';
 
 interface LoginProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
-interface Inputs {
+interface FormData {
   email: string;
   password: string;
 }
@@ -37,9 +39,16 @@ interface Inputs {
 export const Login: FC<LoginProps> = ({ isOpen, onClose }) => {
   const [type, setType] = useState<'signIn' | 'signUp'>('signIn');
 
-  const { control, formState, handleSubmit, clearErrors, setValue, setError } =
-    useForm<Inputs>();
-  const { isSubmitting, errors } = formState;
+  const {
+    control,
+    formState: { isSubmitting, errors },
+    handleSubmit,
+    clearErrors,
+    setValue,
+    setError,
+  } = useForm<FormData>({
+    resolver: zodResolver(type === 'signIn' ? loginSchema : registerSchema),
+  });
 
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [forgotPassword, setForgotPassword] = useState(false);
@@ -61,7 +70,7 @@ export const Login: FC<LoginProps> = ({ isOpen, onClose }) => {
     }
   };
 
-  const onSubmit: SubmitHandler<Inputs> = async ({ email, password }) => {
+  const onSubmit: SubmitHandler<FormData> = async ({ email, password }) => {
     try {
       if (type === 'signIn') {
         const userCredential = await signInWithEmailAndPassword(
@@ -108,119 +117,122 @@ export const Login: FC<LoginProps> = ({ isOpen, onClose }) => {
       placement='center'
     >
       <ModalContent className='relative min-h-[428px]'>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <AnimatePresence initial={false}>
-            {forgotPassword ? (
-              <LoginForgotPassword
-                key={'forgotPassword'}
-                setIsOpen={setForgotPassword}
-              />
-            ) : (
-              <motion.div
-                key={'login'}
-                variants={variants}
-                initial={'exit'}
-                animate={'enter'}
-                exit='exit'
-              >
-                <ModalHeader>Log In to continue</ModalHeader>
-                <ModalBody>
-                  <Button onPress={handleSignInWithPopup}>
-                    Continue With Google <GoogleIcon />
+        <AnimatePresence initial={false}>
+          {forgotPassword ? (
+            <LoginForgotPassword
+              key={'forgotPassword'}
+              setIsOpen={setForgotPassword}
+            />
+          ) : (
+            <motion.form
+              onSubmit={handleSubmit(onSubmit)}
+              key='login'
+              variants={variants}
+              initial='exit'
+              animate='enter'
+              exit='exit'
+            >
+              <ModalHeader>Log In to continue</ModalHeader>
+              <ModalBody>
+                <Button onPress={handleSignInWithPopup}>
+                  Continue With Google <GoogleIcon />
+                </Button>
+
+                <p className='text-center'>OR</p>
+
+                <ButtonGroup fullWidth>
+                  <Button
+                    color={type === 'signIn' ? 'primary' : 'default'}
+                    onPress={() => {
+                      setType('signIn');
+                      clearErrors();
+                    }}
+                  >
+                    Sign In
                   </Button>
 
-                  <p className='text-center'>OR</p>
+                  <Button
+                    color={type !== 'signIn' ? 'primary' : 'default'}
+                    onPress={() => {
+                      setType('signUp');
+                      clearErrors();
+                    }}
+                  >
+                    Sign Up
+                  </Button>
+                </ButtonGroup>
 
-                  <ButtonGroup fullWidth>
-                    <Button
-                      color={type === 'signIn' ? 'primary' : 'default'}
-                      onPress={() => {
-                        setType('signIn');
-                        clearErrors();
-                      }}
-                    >
-                      Sign In
-                    </Button>
-
-                    <Button
-                      color={type !== 'signIn' ? 'primary' : 'default'}
-                      onPress={() => {
-                        setType('signUp');
-                        clearErrors();
-                      }}
-                    >
-                      Sign Up
-                    </Button>
-                  </ButtonGroup>
-
-                  <Controller
-                    name='email'
-                    rules={{ required: 'This field is required' }}
-                    control={control}
-                    render={({ field }) => (
-                      <Input
-                        isRequired
-                        type='email'
-                        placeholder='Email'
-                        isClearable
-                        onClear={() => setValue('email', '')}
-                        errorMessage={errors.email?.message}
-                        isInvalid={Boolean(errors.email?.message)}
-                        {...field}
-                      />
-                    )}
-                  />
-
-                  <Controller
-                    name='password'
-                    rules={{ required: 'This field is required' }}
-                    control={control}
-                    render={({ field }) => (
-                      <Input
-                        isRequired
-                        type={isPasswordVisible ? 'text' : 'password'}
-                        placeholder='Password'
-                        endContent={
-                          <ToggleVisibilityButton
-                            isVisible={isPasswordVisible}
-                            setIsVisible={setIsPasswordVisible}
-                          />
-                        }
-                        {...field}
-                      />
-                    )}
-                  />
-
-                  {errors.root && (
-                    <p role='alert' className='text-danger self-start'>
-                      Error: {errors.root?.message}
-                    </p>
+                <Controller
+                  control={control}
+                  name='email'
+                  render={({ field }) => (
+                    <Input
+                      isRequired
+                      type='email'
+                      placeholder='Email'
+                      isClearable
+                      onClear={() => setValue('email', '')}
+                      isInvalid={errors.email?.message !== undefined}
+                      errorMessage={errors.email?.message}
+                      {...field}
+                    />
                   )}
-                </ModalBody>
+                />
 
-                <ModalFooter className='flex flex-col'>
-                  <Button
-                    type='submit'
-                    isLoading={isSubmitting}
-                    fullWidth
-                    color='primary'
-                  >
-                    {type === 'signIn' ? 'Sign In' : 'Sign Up'}
-                  </Button>
+                <Controller
+                  control={control}
+                  name='password'
+                  render={({ field }) => (
+                    <Input
+                      isRequired
+                      type={isPasswordVisible ? 'text' : 'password'}
+                      placeholder='Password'
+                      isInvalid={errors.password?.message !== undefined}
+                      errorMessage={errors.password?.message}
+                      endContent={
+                        <ToggleVisibilityButton
+                          isVisible={isPasswordVisible}
+                          setIsVisible={setIsPasswordVisible}
+                        />
+                      }
+                      {...field}
+                    />
+                  )}
+                />
 
-                  <Button
-                    variant='light'
-                    fullWidth
-                    color='danger'
-                    onPress={() => setForgotPassword(true)}
-                  >
-                    Forgot password?
-                  </Button>
-                </ModalFooter>
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </form>
+                {errors.root && (
+                  <p role='alert' className='text-danger self-start'>
+                    Error: {errors.root?.message}
+                  </p>
+                )}
+              </ModalBody>
+
+              <ModalFooter className='flex flex-col'>
+                <Button
+                  type='submit'
+                  isLoading={isSubmitting}
+                  fullWidth
+                  color='primary'
+                >
+                  {type === 'signIn' ? 'Sign In' : 'Sign Up'}
+                </Button>
+
+                <Button
+                  variant='light'
+                  fullWidth
+                  color='danger'
+                  onPress={() => {
+                    setType('signIn');
+                    setForgotPassword(true);
+                    setIsPasswordVisible(false);
+                  }}
+                >
+                  Forgot password?
+                </Button>
+              </ModalFooter>
+            </motion.form>
+          )}
+        </AnimatePresence>
       </ModalContent>
     </Modal>
   );
