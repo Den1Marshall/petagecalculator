@@ -1,12 +1,12 @@
 'use client';
-import { MotionProps, Transition, Variants } from 'framer-motion';
+import { MotionProps, Variants } from 'framer-motion';
 import { FC } from 'react';
 import { useMediaQuery } from 'usehooks-ts';
 import { animals } from '../model/animals';
 import { Animal } from '../model/types';
 import Image from 'next/image';
 import { Modal, ModalBody, ModalContent, ModalHeader } from '@nextui-org/react';
-import { MotionButton } from '@/shared/ui';
+import { PressableButton } from '@/shared/ui';
 
 interface SelectAnimalProps {
   isOpen: boolean;
@@ -50,14 +50,6 @@ export const SelectAnimal: FC<SelectAnimalProps> = ({
     },
   };
 
-  const buttonTransition: Transition = {
-    type: 'spring',
-    duration: 0.3,
-    bounce: 0,
-    restDelta: 0.0001,
-    restSpeed: 0.0001,
-  };
-
   return (
     <Modal
       hideCloseButton
@@ -78,14 +70,10 @@ export const SelectAnimal: FC<SelectAnimalProps> = ({
 
         <ModalBody className='grid grid-cols-3 gap-3 content-start max-lg:landscape:grid-cols-4 lg:grid-cols-2'>
           {animals.map((animal) => (
-            <MotionButton
+            <PressableButton
               key={animal.name}
               aria-label={`Select ${animal.name.toLowerCase()} as the current animal`}
-              whileTap={{
-                scale: 0.97,
-                transition: buttonTransition,
-              }}
-              onTap={() => {
+              onPress={() => {
                 selectNewAnimal(animal);
                 !lg && setIsOpen(false);
               }}
@@ -99,7 +87,7 @@ export const SelectAnimal: FC<SelectAnimalProps> = ({
                 src={animal.src}
                 alt={`${animal.name} icon`}
               />
-            </MotionButton>
+            </PressableButton>
           ))}
         </ModalBody>
       </ModalContent>
