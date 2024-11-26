@@ -1,5 +1,7 @@
 import type { Config } from 'tailwindcss';
 import { nextui } from '@nextui-org/react';
+import tailwindcssReactAriaComponents from 'tailwindcss-react-aria-components';
+import tailwindcssSafeArea from 'tailwindcss-safe-area';
 
 const config: Config = {
   content: [
@@ -21,11 +23,7 @@ const config: Config = {
     },
   },
   darkMode: 'class',
-  plugins: [
-    require('tailwindcss-react-aria-components'),
-    require('tailwindcss-safe-area'),
-    nextui(),
-  ],
+  plugins: [tailwindcssReactAriaComponents, tailwindcssSafeArea, nextui()],
 };
 
 export default config;
