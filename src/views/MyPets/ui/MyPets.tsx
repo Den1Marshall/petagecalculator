@@ -90,9 +90,9 @@ export default function MyPets() {
                   onDragEnd={() => {
                     setOverflow('overflow-scroll');
                   }}
-                  className={`min-w-[80%] aspect-square ${
+                  className={`w-full max-w-96 aspect-square ${
                     drag && 'cursor-grab'
-                  } lg:min-w-[33.333333%]`}
+                  }`}
                 >
                   <Pet
                     openEditPet={openEditPet}

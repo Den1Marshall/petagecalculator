@@ -125,9 +125,9 @@ export const AddNewPet: FC<AddNewPetProps> = ({
     <>
       <motion.span
         layout
-        className={` ${
-          userPets.length === 0 ? '!min-w-full' : ''
-        } min-w-[80%] aspect-square flex items-center justify-center lg:min-w-[33.333333%]`}
+        className={`${
+          userPets.length === 0 ? 'mx-auto' : ''
+        } w-full max-w-96 aspect-square flex items-center justify-center`}
       >
         <Button
           isIconOnly
