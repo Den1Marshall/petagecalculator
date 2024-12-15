@@ -151,6 +151,7 @@ export const AddNewPet: FC<AddNewPetProps> = ({
         onOpenChange={onOpenChange}
         onClose={reset}
         motionProps={{
+          transition: defaultTransition,
           variants,
           drag: !lg && 'y',
           dragConstraints: { top: -0 },

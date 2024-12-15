@@ -6,7 +6,7 @@ import { animals } from '../model/animals';
 import { Animal } from '../model/types';
 import Image from 'next/image';
 import { Modal, ModalBody, ModalContent, ModalHeader } from '@nextui-org/react';
-import { PressableButton } from '@/shared/ui';
+import { defaultTransition, PressableButton } from '@/shared/ui';
 
 interface SelectAnimalProps {
   isOpen: boolean;
@@ -33,6 +33,7 @@ export const SelectAnimal: FC<SelectAnimalProps> = ({
   };
 
   const motionProps: MotionProps = {
+    transition: defaultTransition,
     variants,
     drag: !lg && 'y',
     dragConstraints: { top: -0 },

@@ -1,4 +1,5 @@
 'use client';
+import { defaultTransition } from '@/shared/ui';
 import { Icon } from './Icon';
 import {
   Button,
@@ -45,6 +46,7 @@ export const Credits: FC = () => {
         isOpen={isOpen}
         onOpenChange={onOpenChange}
         motionProps={{
+          transition: defaultTransition,
           variants,
         }}
         classNames={{

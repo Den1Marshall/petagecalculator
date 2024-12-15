@@ -180,6 +180,7 @@ export const EditPet: FC<EditPetProps> = ({ isOpen, onClose, pet }) => {
         onClose();
       }}
       motionProps={{
+        transition: defaultTransition,
         variants,
         drag: !lg && 'y',
         dragConstraints: { top: -0 },
