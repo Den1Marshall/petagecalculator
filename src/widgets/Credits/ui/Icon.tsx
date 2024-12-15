@@ -1,6 +1,6 @@
 'use client';
 import { FC } from 'react';
-import { AnimatePresence, motion, Variants } from 'framer-motion';
+import { AnimatePresence, motion, Variants } from 'motion/react';
 
 interface IconProps {
   isOpen: boolean;

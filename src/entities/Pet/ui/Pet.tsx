@@ -25,7 +25,7 @@ import { db } from '@/shared/config';
 import { deleteUserPetImage } from '@/shared/api';
 import { FirebaseError } from 'firebase/app';
 import { isImageLocal } from '@/shared/lib';
-import { Transition, Variants } from 'framer-motion';
+import { Transition, Variants } from 'motion/react';
 
 interface PetProps extends IPet {
   openAddNewPet: () => void;

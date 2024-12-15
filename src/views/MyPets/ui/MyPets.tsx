@@ -5,7 +5,7 @@ import { useContext, useState } from 'react';
 import { UserContext } from '@/app/model';
 import { AddNewPet } from '@/features/AddNewPet';
 import { Login } from '@/features/Login';
-import { AnimatePresence, Reorder } from 'framer-motion';
+import { AnimatePresence, Reorder } from 'motion/react';
 import { doc, setDoc } from 'firebase/firestore';
 import { db } from '@/shared/config';
 import { useMediaQuery } from 'usehooks-ts';

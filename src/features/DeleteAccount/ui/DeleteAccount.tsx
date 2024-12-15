@@ -16,7 +16,7 @@ import { deleteUser } from 'firebase/auth';
 import { FC, useContext, useState } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { FirebaseError } from 'firebase/app';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'motion/react';
 import { deleteObject, listAll, ref } from 'firebase/storage';
 import { db, storage } from '@/shared/config';
 import { deleteDoc, doc } from 'firebase/firestore';

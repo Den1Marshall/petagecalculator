@@ -1,5 +1,5 @@
 'use client';
-import { MotionProps, Variants } from 'framer-motion';
+import { MotionProps, Variants } from 'motion/react';
 import { FC } from 'react';
 import { useMediaQuery } from 'usehooks-ts';
 import { animals } from '../model/animals';

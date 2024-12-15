@@ -19,7 +19,7 @@ import {
 import { auth } from '@/shared/config';
 import { FirebaseError } from 'firebase/app';
 import { LoginForgotPassword } from './LoginForgotPassword';
-import { AnimatePresence, Variants, motion } from 'framer-motion';
+import { AnimatePresence, Variants, motion } from 'motion/react';
 import { addNewUserToDatabase } from '../api';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { ToggleVisibilityButton } from '@/shared/ui';

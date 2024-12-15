@@ -1,4 +1,4 @@
-import { MotionProps } from 'framer-motion';
+import { MotionProps } from 'motion/react';
 import { useMediaQuery } from 'usehooks-ts';
 
 export const useScaleModalMotionProps = (): MotionProps => {

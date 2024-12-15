@@ -10,7 +10,7 @@ import {
   ModalHeader,
   useDisclosure,
 } from '@nextui-org/react';
-import { Variants } from 'framer-motion';
+import { Variants } from 'motion/react';
 import { FC } from 'react';
 
 export const Credits: FC = () => {

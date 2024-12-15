@@ -1,5 +1,5 @@
 'use client';
-import { Transition, motion } from 'framer-motion';
+import { Transition, motion } from 'motion/react';
 import { FC, PropsWithChildren } from 'react';
 import { Button, ButtonProps } from 'react-aria-components';
 

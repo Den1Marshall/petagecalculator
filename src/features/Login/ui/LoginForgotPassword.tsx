@@ -7,7 +7,7 @@ import {
   ModalHeader,
 } from '@nextui-org/react';
 import { FC } from 'react';
-import { Variants, motion } from 'framer-motion';
+import { Variants, motion } from 'motion/react';
 import { sendPasswordResetEmail } from 'firebase/auth';
 import { auth } from '@/shared/config';
 import { ArrowReturnIcon } from './ArrowReturnIcon';

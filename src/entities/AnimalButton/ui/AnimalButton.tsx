@@ -1,10 +1,10 @@
 'use client';
 import { Button } from '@nextui-org/react';
-import { AnimatePresence, useAnimationControls } from 'framer-motion';
+import { AnimatePresence, useAnimationControls } from 'motion/react';
 import { StaticImport } from 'next/dist/shared/lib/get-img-props';
 import Image from 'next/image';
 import { FC } from 'react';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 
 interface AnimalButtonProps {
   src: string | StaticImport;

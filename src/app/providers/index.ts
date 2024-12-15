@@ -1,3 +1,3 @@
-export { FramerMotionProvider } from './FramerMotionProvider';
+export { MotionProvider } from './MotionProvider';
 export { UserProvider } from './UserProvider';
 export { NextUIProvider } from './NextUIProvider';

@@ -19,7 +19,7 @@ import { IPet } from '@/entities/Pet';
 import { doc, setDoc } from 'firebase/firestore';
 import { db } from '@/shared/config';
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
-import { Variants, motion } from 'framer-motion';
+import { Variants, motion } from 'motion/react';
 import { useMediaQuery } from 'usehooks-ts';
 import cat from '@/../public/images/animals/cat.png';
 import dog from '@/../public/images/animals/dog.png';
