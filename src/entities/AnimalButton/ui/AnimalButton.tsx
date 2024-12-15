@@ -5,6 +5,7 @@ import { StaticImport } from 'next/dist/shared/lib/get-img-props';
 import Image from 'next/image';
 import { FC } from 'react';
 import { motion } from 'motion/react';
+import { defaultTransition } from '@/shared/ui';
 
 interface AnimalButtonProps {
   src: string | StaticImport;
@@ -25,9 +26,9 @@ export const AnimalButton: FC<AnimalButtonProps> = ({
     <motion.span
       animate={controls}
       transition={{
-        type: 'spring',
-        duration: isHuman ? 0.5 : 0.3,
-        bounce: isHuman ? 0.95 : 0,
+        ...defaultTransition,
+        visualDuration: isHuman ? 0.035 : 0.25,
+        bounce: isHuman ? 0.999 : 0,
       }}
     >
       <Button

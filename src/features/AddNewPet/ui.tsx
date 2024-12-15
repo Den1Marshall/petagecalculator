@@ -36,6 +36,7 @@ import Image from 'next/image';
 import { uploadUserPetImage } from '@/shared/api';
 import { v4 as uuidv4 } from 'uuid';
 import { FirebaseError } from 'firebase/app';
+import { defaultTransition } from '@/shared/ui';
 
 interface AddNewPetProps {
   isOpen: boolean;
@@ -233,8 +234,8 @@ export const AddNewPet: FC<AddNewPetProps> = ({
                             opacity: 1,
                             transform: 'scale(1)',
                             transition: {
-                              type: 'spring',
-                              duration: 0.5,
+                              ...defaultTransition,
+                              visualDuration: 0.3,
                               bounce: 0.15,
                             },
                           },
@@ -242,9 +243,8 @@ export const AddNewPet: FC<AddNewPetProps> = ({
                             opacity: 0,
                             transform: 'scale(0)',
                             transition: {
-                              type: 'spring',
-                              duration: 0.5,
-                              bounce: 0,
+                              ...defaultTransition,
+                              visualDuration: 0.3,
                             },
                           },
                         },

@@ -1,15 +1,8 @@
 'use client';
-import { Transition, motion } from 'motion/react';
+import { motion } from 'motion/react';
 import { FC, PropsWithChildren } from 'react';
 import { Button, ButtonProps } from 'react-aria-components';
-
-const buttonTransition: Transition = {
-  type: 'spring',
-  duration: 0.3,
-  bounce: 0,
-  restDelta: 0.0001,
-  restSpeed: 0.0001,
-};
+import { defaultTransition } from './defaultTransition';
 
 export const PressableButton: FC<PropsWithChildren & ButtonProps> = ({
   children,
@@ -19,7 +12,7 @@ export const PressableButton: FC<PropsWithChildren & ButtonProps> = ({
     <motion.span
       whileTap={{
         scale: 0.97,
-        transition: buttonTransition,
+        transition: { ...defaultTransition, visualDuration: 0.15 },
       }}
     >
       <Button {...rest}>{children}</Button>

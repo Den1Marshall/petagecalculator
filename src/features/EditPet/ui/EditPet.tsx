@@ -39,6 +39,7 @@ import Image from 'next/image';
 import { deleteUserPetImage, uploadUserPetImage } from '@/shared/api';
 import { FirebaseError } from 'firebase/app';
 import { isImageLocal } from '@/shared/lib';
+import { defaultTransition } from '@/shared/ui';
 
 interface EditPetProps {
   isOpen: boolean;
@@ -258,8 +259,8 @@ export const EditPet: FC<EditPetProps> = ({ isOpen, onClose, pet }) => {
                           opacity: 1,
                           transform: 'scale(1)',
                           transition: {
-                            type: 'spring',
-                            duration: 0.5,
+                            ...defaultTransition,
+                            visualDuration: 0.3,
                             bounce: 0.15,
                           },
                         },
@@ -267,9 +268,8 @@ export const EditPet: FC<EditPetProps> = ({ isOpen, onClose, pet }) => {
                           opacity: 0,
                           transform: 'scale(0)',
                           transition: {
-                            type: 'spring',
-                            duration: 0.5,
-                            bounce: 0,
+                            ...defaultTransition,
+                            visualDuration: 0.3,
                           },
                         },
                       },

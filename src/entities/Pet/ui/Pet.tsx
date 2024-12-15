@@ -25,7 +25,8 @@ import { db } from '@/shared/config';
 import { deleteUserPetImage } from '@/shared/api';
 import { FirebaseError } from 'firebase/app';
 import { isImageLocal } from '@/shared/lib';
-import { Transition, Variants } from 'motion/react';
+import { Variants } from 'motion/react';
+import { defaultTransition } from '@/shared/ui';
 
 interface PetProps extends IPet {
   openAddNewPet: () => void;
@@ -87,24 +88,16 @@ export const Pet: FC<PetProps> = ({
     }
   };
 
-  const dropdownTransition: Transition = {
-    type: 'spring',
-    duration: 0.5,
-    bounce: 0,
-    restDelta: 0.0001,
-    restSpeed: 0.0001,
-  };
-
   const dropdownVariants: Variants = {
     enter: {
       transform: 'scale(1)',
       opacity: 1,
-      transition: { ...dropdownTransition, bounce: 0.2 },
+      transition: { ...defaultTransition, bounce: 0.2 },
     },
     exit: {
       transform: 'scale(0.8)',
       opacity: 0,
-      transition: dropdownTransition,
+      transition: defaultTransition,
     },
   };
 

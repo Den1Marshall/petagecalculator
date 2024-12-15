@@ -1,3 +1,4 @@
+export { defaultTransition } from './defaultTransition';
 export { PressableButton } from './PressableButton';
 export { AddIcon } from './AddIcon';
 export { ToggleVisibilityButton } from './ToggleVisibilityButton';
