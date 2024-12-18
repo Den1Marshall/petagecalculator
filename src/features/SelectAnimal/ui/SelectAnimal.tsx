@@ -76,7 +76,7 @@ export const SelectAnimal: FC<SelectAnimalProps> = ({
               aria-label={`Select ${animal.name.toLowerCase()} as the current animal`}
               onPress={() => {
                 selectNewAnimal(animal);
-                !lg && setIsOpen(false);
+                if (!lg) setIsOpen(false);
               }}
               className={({ isFocusVisible }) =>
                 `bg-overlay/20 rounded-2xl ${!isFocusVisible && 'outline-none'}`

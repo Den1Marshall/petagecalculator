@@ -64,12 +64,14 @@ export const ChangePassword: FC<ChangePasswordProps> = ({
         setError('root', { message: 'User email is null' });
       }
     } catch (error) {
-      error instanceof FirebaseError
-        ? setError('root', { type: 'custom', message: error.code })
-        : setError('root', {
-            type: 'custom',
-            message: 'Something has went wrong',
-          });
+      if (error instanceof FirebaseError) {
+        setError('root', { type: 'custom', message: error.code });
+      } else {
+        setError('root', {
+          type: 'custom',
+          message: 'Something went wrong',
+        });
+      }
     }
   };
 

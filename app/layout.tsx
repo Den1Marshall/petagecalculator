@@ -1,5 +1,4 @@
 import type { Metadata, Viewport } from 'next';
-import '@/app/index.css';
 import { startupImage } from './startupImage';
 import { Pacifico } from 'next/font/google';
 import { description } from './description';
@@ -8,6 +7,8 @@ import { MotionProvider, UserProvider, NextUIProvider } from '@/app/providers';
 import { BottomNav } from '@/widgets/BottomNav';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { GoogleAnalytics } from '@next/third-parties/google';
+
+import '@/app/index.css';
 
 export const metadata: Metadata = {
   title: {
@@ -71,7 +72,7 @@ export default function RootLayout({
       suppressHydrationWarning={true}
       className={`${pacifico.variable} h-[max(calc(100%_+_env(safe-area-inset-top)),_100%)] font-sans overscroll-none touch-pan-x touch-pan-y motion-safe:scroll-smooth bg-gradient-to-r from-[#8360c3] to-[#2ebf91]`}
     >
-      <body className='h-full py-safe px-safe-or-5 overscroll-none'>
+      <body className='h-full py-safe px-safe-or-5 overscroll-none antialiased'>
         <UserProvider>
           <NextUIProvider>
             <MotionProvider>

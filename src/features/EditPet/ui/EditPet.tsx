@@ -141,12 +141,14 @@ export const EditPet: FC<EditPetProps> = ({ isOpen, onClose, pet }) => {
         reset();
         onClose();
       } catch (error) {
-        error instanceof FirebaseError
-          ? setError('root', { type: 'custom', message: error.code })
-          : setError('root', {
-              type: 'custom',
-              message: 'Something has went wrong',
-            });
+        if (error instanceof FirebaseError) {
+          setError('root', { type: 'custom', message: error.code });
+        } else {
+          setError('root', {
+            type: 'custom',
+            message: 'Something went wrong',
+          });
+        }
       }
     }
   };

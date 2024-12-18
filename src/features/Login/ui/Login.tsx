@@ -63,12 +63,14 @@ export const Login: FC<LoginProps> = ({ isOpen, onClose }) => {
 
       await addNewUserToDatabase(userCredential.user.uid);
     } catch (error) {
-      error instanceof FirebaseError
-        ? setError('root', { type: 'custom', message: error.code })
-        : setError('root', {
-            type: 'custom',
-            message: 'Something has went wrong',
-          });
+      if (error instanceof FirebaseError) {
+        setError('root', { type: 'custom', message: error.code });
+      } else {
+        setError('root', {
+          type: 'custom',
+          message: 'Something went wrong',
+        });
+      }
     }
   };
 
@@ -92,12 +94,14 @@ export const Login: FC<LoginProps> = ({ isOpen, onClose }) => {
         await addNewUserToDatabase(userCredential.user.uid);
       }
     } catch (error) {
-      error instanceof FirebaseError
-        ? setError('root', { type: 'custom', message: error.code })
-        : setError('root', {
-            type: 'custom',
-            message: 'Something has went wrong',
-          });
+      if (error instanceof FirebaseError) {
+        setError('root', { type: 'custom', message: error.code });
+      } else {
+        setError('root', {
+          type: 'custom',
+          message: 'Something has went wrong',
+        });
+      }
     }
   };
 
