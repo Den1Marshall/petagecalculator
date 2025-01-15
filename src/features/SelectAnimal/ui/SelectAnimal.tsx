@@ -23,32 +23,16 @@ export const SelectAnimal: FC<SelectAnimalProps> = ({
 
   const variants: Variants = {
     enter: {
-      y: lg ? undefined : '0%',
-      x: lg ? '0%' : undefined,
+      transform: lg ? 'translateX(0%)' : 'translateY(0%)',
     },
     exit: {
-      y: lg ? undefined : '100%',
-      x: lg ? '-100%' : undefined,
+      transform: lg ? 'translateX(-100%)' : 'translateY(100%)',
     },
   };
 
   const motionProps: MotionProps = {
     transition: defaultTransition,
     variants,
-    drag: !lg && 'y',
-    dragConstraints: { top: -0 },
-    dragElastic: 0.05,
-    dragSnapToOrigin: true,
-    dragTransition: {
-      bounceStiffness: 500,
-      bounceDamping: 50,
-      restDelta: 0.0001,
-    },
-    onDragEnd: (_e, info) => {
-      if (info.offset.y >= window.innerHeight / 2 || info.velocity.y >= 250) {
-        setIsOpen(false);
-      }
-    },
   };
 
   return (
