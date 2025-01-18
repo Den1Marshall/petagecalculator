@@ -51,37 +51,44 @@ export const Logout: FC<LogoutProps> = ({ isOpen, setIsOpen }) => {
   const scaleModalMotionProps = useScaleModalMotionProps();
 
   return (
-    <Modal
-      placement='center'
-      backdrop='blur'
-      isOpen={isOpen}
-      onClose={handleClose}
-      motionProps={scaleModalMotionProps}
-    >
-      <ModalContent>
-        <ModalHeader>Logout</ModalHeader>
-        <ModalBody>
-          Are you sure?
-          {error && (
-            <p role='alert' className='text-danger'>
-              {error}
-            </p>
-          )}
-        </ModalBody>
-        <ModalFooter>
-          <Button color='danger' variant='light' onPress={handleClose}>
-            Cancel
-          </Button>
-          <Button
-            color='primary'
-            isLoading={isLoading}
-            isDisabled={!user}
-            onPress={handleLogout}
-          >
-            Logout
-          </Button>
-        </ModalFooter>
-      </ModalContent>
-    </Modal>
+    <>
+      <h3>Logout</h3>
+
+      <Modal
+        placement='center'
+        backdrop='blur'
+        isOpen={isOpen}
+        onClose={handleClose}
+        motionProps={scaleModalMotionProps}
+      >
+        <ModalContent>
+          <ModalHeader>Logout</ModalHeader>
+
+          <ModalBody>
+            Are you sure?
+            {error && (
+              <p role='alert' className='text-danger'>
+                {error}
+              </p>
+            )}
+          </ModalBody>
+
+          <ModalFooter>
+            <Button color='danger' variant='light' onPress={handleClose}>
+              Cancel
+            </Button>
+
+            <Button
+              color='primary'
+              isLoading={isLoading}
+              isDisabled={!user}
+              onPress={handleLogout}
+            >
+              Logout
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+    </>
   );
 };

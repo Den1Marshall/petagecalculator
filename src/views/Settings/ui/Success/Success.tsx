@@ -3,10 +3,11 @@ import { motion } from 'motion/react';
 import { Button, ModalFooter, ModalHeader } from '@nextui-org/react';
 
 interface SuccessProps {
+  title: string;
   onClose: () => void;
 }
 
-export const Success: FC<SuccessProps> = ({ onClose }) => {
+export const Success: FC<SuccessProps> = ({ title, onClose }) => {
   return (
     <motion.div
       key={'success'}
@@ -14,7 +15,7 @@ export const Success: FC<SuccessProps> = ({ onClose }) => {
       animate={{ transform: 'translateX(0%)' }}
       exit={{ transform: 'translateX(0%)' }}
     >
-      <ModalHeader>Your account has been deleted</ModalHeader>
+      <ModalHeader>{title}</ModalHeader>
       <ModalFooter>
         <Button fullWidth color='primary' onPress={onClose}>
           Done

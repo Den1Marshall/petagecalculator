@@ -1,14 +1,15 @@
 'use client';
 import { SelectTheme } from '@/features/SelectTheme';
-import { Logout } from '@/features/Logout';
-import { DeleteAccount } from '@/features/DeleteAccount';
-import { Listbox, ListboxItem, ListboxSection } from '@nextui-org/react';
+import { Logout } from './Logout/Logout';
+import { DeleteAccount } from './DeleteAccount/DeleteAccount';
 import { useContext, useState } from 'react';
 import { UserContext } from '@/app/model';
-import { ChangeEmail } from '@/features/ChangeEmail';
-import { ChangePassword } from '@/features/ChangePassword';
+import { ChangeEmail } from './ChangeEmail/ChangeEmail';
+import { ChangePassword } from './ChangePassword/ChangePassword';
 import { Login } from '@/features/Login';
 import { LoadingSpinner } from '@/shared/ui';
+import { SettingsButton } from './SettingsButton/SettingsButton';
+import { Button, Card, CardBody, Divider } from '@nextui-org/react';
 
 export default function Settings() {
   const { isLoading, user } = useContext(UserContext);
@@ -24,104 +25,63 @@ export default function Settings() {
   if (isLoading) return <LoadingSpinner />;
 
   return (
-    <main className='relative h-[calc(100%_-_64px)] flex flex-col overflow-y-scroll'>
-      <h1 className='text-6xl text-center font-pacifico max-lg:mb-10'>
-        Settings
-      </h1>
-      <Listbox
-        disabledKeys={
-          isGoogleProvider
-            ? new Set(['changeEmail', 'changePassword'])
-            : undefined
-        }
-        label='Settings'
-        itemClasses={{ title: 'text-medium' }}
-        variant='light'
-        onAction={(key) => {
-          if (!user && key !== 'selectTheme') {
-            setIsLoginOpen(true);
-            return;
-          }
+    <main className='relative h-[calc(100%_-_64px)] flex flex-col gap-5 overflow-y-scroll'>
+      <h1 className='text-6xl text-center font-pacifico mb-5'>Settings</h1>
 
-          switch (key) {
-            case 'changeEmail':
-              setIsChangeEmailOpen(true);
-              break;
-
-            case 'changePassword':
-              setIsChangePasswordOpen(true);
-              break;
-
-            case 'logout':
-              setIsLogoutOpen(true);
-              break;
-
-            case 'deleteAccount':
-              setIsDeleteAccountOpen(true);
-              break;
-
-            default:
-              break;
-          }
-        }}
-      >
-        <ListboxSection title={'Preferences'} showDivider>
-          <ListboxItem
-            color='primary'
-            key={'selectTheme'}
-            textValue='Select theme'
-          >
-            <div className='flex items-center justify-between'>
-              <h2>Select theme</h2>
+      <Card shadow='sm' isBlurred as='article'>
+        <CardBody className='gap-2.5'>
+          <div className='flex items-center justify-between'>
+            <Button
+              fullWidth
+              disableAnimation
+              className='flex items-center justify-between bg-transparent'
+              as={'div'}
+            >
+              Select theme
               <SelectTheme />
-            </div>
-          </ListboxItem>
-        </ListboxSection>
-        <ListboxSection title={'Account'} showDivider>
-          <ListboxItem
-            color='primary'
-            key={'changeEmail'}
-            textValue='Email address'
+            </Button>
+            {/* TODO: refactor */}
+          </div>
+
+          <Divider />
+
+          <SettingsButton
+            isDisabled={isGoogleProvider}
+            onPress={() => setIsChangeEmailOpen(true)}
+            value={user?.email ?? ''}
           >
-            <div className='flex justify-between'>
-              <h2>Email address</h2>
-              <p>{user?.email}</p>
-            </div>
-          </ListboxItem>
-          <ListboxItem
-            color='primary'
-            key={'changePassword'}
-            textValue='Password'
+            <ChangeEmail
+              isOpen={isChangeEmailOpen}
+              setIsOpen={setIsChangeEmailOpen}
+            />
+          </SettingsButton>
+
+          <SettingsButton
+            isDisabled={isGoogleProvider}
+            onPress={() => setIsChangePasswordOpen(true)}
+            value='******'
           >
-            Password
-          </ListboxItem>
-        </ListboxSection>
-        <ListboxSection title={'Danger zone'} showDivider>
-          <ListboxItem key={'logout'} color='danger' textValue='Logout'>
-            Logout
-          </ListboxItem>
-          <ListboxItem
-            key={'deleteAccount'}
-            color='danger'
-            textValue='Delete account'
-          >
-            Delete account
-          </ListboxItem>
-        </ListboxSection>
-      </Listbox>
-      <ChangeEmail
-        isOpen={isChangeEmailOpen}
-        setIsOpen={setIsChangeEmailOpen}
-      />
-      <ChangePassword
-        isOpen={isChangePasswordOpen}
-        setIsOpen={setIsChangePasswordOpen}
-      />
-      <Logout isOpen={isLogoutOpen} setIsOpen={setIsLogoutOpen} />
-      <DeleteAccount
-        isOpen={isDeleteAccountOpen}
-        setIsOpen={setIsDeleteAccountOpen}
-      />
+            <ChangePassword
+              isOpen={isChangePasswordOpen}
+              setIsOpen={setIsChangePasswordOpen}
+            />
+          </SettingsButton>
+
+          <Divider />
+
+          <SettingsButton onPress={() => setIsLogoutOpen(true)}>
+            <Logout isOpen={isLogoutOpen} setIsOpen={setIsLogoutOpen} />
+          </SettingsButton>
+
+          <SettingsButton onPress={() => setIsDeleteAccountOpen(true)}>
+            <DeleteAccount
+              isOpen={isDeleteAccountOpen}
+              setIsOpen={setIsDeleteAccountOpen}
+            />
+          </SettingsButton>
+        </CardBody>
+      </Card>
+
       <Login
         isOpen={!user && isLoginOpen}
         onClose={() => setIsLoginOpen(false)}
