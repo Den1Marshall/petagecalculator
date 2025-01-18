@@ -10,7 +10,7 @@ import {
   DropdownTrigger,
   Spinner,
   useDisclosure,
-} from '@nextui-org/react';
+} from '@heroui/react';
 import Image from 'next/image';
 import { FC, useContext, useState } from 'react';
 import { IPet } from '../model/IPet';
@@ -81,7 +81,7 @@ export const Pet: FC<PetProps> = ({
       }
     } catch (error) {
       if (error instanceof FirebaseError) {
-        alert(error.code); // TODO: use nextui alert
+        alert(error.code); // TODO: use heroui alert
       } else {
         alert('Something went wrong');
       }

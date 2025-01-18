@@ -1,6 +1,6 @@
 'use client';
 import { FC, PropsWithChildren } from 'react';
-import { Button, ButtonProps, Input } from '@nextui-org/react';
+import { Button, ButtonProps, Input } from '@heroui/react';
 
 interface SettingsButtonProps
   extends PropsWithChildren,

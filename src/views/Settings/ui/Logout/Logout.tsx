@@ -8,7 +8,7 @@ import {
   ModalFooter,
   ModalHeader,
   Button,
-} from '@nextui-org/react';
+} from '@heroui/react';
 import { FirebaseError } from 'firebase/app';
 import { FC, useContext, useState } from 'react';
 import { signOut } from 'firebase/auth';

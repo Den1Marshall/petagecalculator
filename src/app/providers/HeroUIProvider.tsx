@@ -1,14 +1,14 @@
 'use client';
-import { NextUIProvider as Provider } from '@nextui-org/react';
+import { HeroUIProvider as Provider } from '@heroui/react';
 import { useRouter } from 'next/navigation';
 import { FC, ReactNode } from 'react';
 import { ThemeProvider as NextThemesProvider } from 'next-themes';
 
-interface NextUIProviderProps {
+interface HeroUIProviderProps {
   children: ReactNode;
 }
 
-export const NextUIProvider: FC<NextUIProviderProps> = ({ children }) => {
+export const HeroUIProvider: FC<HeroUIProviderProps> = ({ children }) => {
   const router = useRouter();
 
   return (

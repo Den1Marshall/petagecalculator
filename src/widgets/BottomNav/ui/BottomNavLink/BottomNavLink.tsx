@@ -1,4 +1,4 @@
-import { Link, LinkProps } from '@nextui-org/react';
+import { Link, LinkProps } from '@heroui/react';
 import { FC } from 'react';
 
 interface BottomNavLinkProps {

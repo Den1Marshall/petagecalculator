@@ -1,5 +1,5 @@
 'use client';
-import { useDisclosure } from '@nextui-org/react';
+import { useDisclosure } from '@heroui/react';
 import { IPet, Pet } from '@/entities/Pet';
 import { useContext, useState } from 'react';
 import { UserContext } from '@/app/model';

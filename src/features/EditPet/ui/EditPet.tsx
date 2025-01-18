@@ -9,7 +9,7 @@ import {
   DrawerContent,
   DrawerFooter,
   DrawerHeader,
-} from '@nextui-org/react';
+} from '@heroui/react';
 import { FC, useContext, useEffect, useRef } from 'react';
 import {
   CalendarDate,

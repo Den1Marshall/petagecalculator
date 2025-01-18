@@ -1,5 +1,5 @@
 import type { Config } from 'tailwindcss';
-import { nextui } from '@nextui-org/react';
+import { heroui } from '@heroui/react';
 import tailwindcssReactAriaComponents from 'tailwindcss-react-aria-components';
 import tailwindcssSafeArea from 'tailwindcss-safe-area';
 
@@ -10,8 +10,8 @@ export default {
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/**/*.{js,ts,jsx,tsx,mdx}',
 
-    // nextui
-    './node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}',
+    // heroui
+    './node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
     extend: {
@@ -21,5 +21,5 @@ export default {
     },
   },
   darkMode: 'class',
-  plugins: [tailwindcssReactAriaComponents, tailwindcssSafeArea, nextui()],
+  plugins: [tailwindcssReactAriaComponents, tailwindcssSafeArea, heroui()],
 } satisfies Config;

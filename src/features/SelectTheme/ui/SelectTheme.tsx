@@ -7,7 +7,7 @@ import {
   DropdownMenu,
   DropdownTrigger,
   Selection,
-} from '@nextui-org/react';
+} from '@heroui/react';
 import { useTheme } from 'next-themes';
 import { FC, useEffect, useState } from 'react';
 

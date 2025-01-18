@@ -10,7 +10,7 @@ import {
   ModalFooter,
   ModalHeader,
   useDisclosure,
-} from '@nextui-org/react';
+} from '@heroui/react';
 import { Variants } from 'motion/react';
 import { FC } from 'react';
 
@@ -28,6 +28,10 @@ export const Credits: FC = () => {
   };
 
   return (
+    //         <Dialog className='size-full flex flex-col items-center gap-10 outline-none'>
+    //           <footer className='mt-auto w-full flex flex-col justify-center items-center gap-5'>
+    //           </footer>
+    //         </Dialog>
     <>
       <Button
         variant='light'
@@ -38,7 +42,6 @@ export const Credits: FC = () => {
       >
         <Icon isOpen={isOpen} />
       </Button>
-
       <Modal
         hideCloseButton
         size='full'
@@ -106,9 +109,5 @@ export const Credits: FC = () => {
         </ModalContent>
       </Modal>
     </>
-    //         <Dialog className='size-full flex flex-col items-center gap-10 outline-none'>
-    //           <footer className='mt-auto w-full flex flex-col justify-center items-center gap-5'>
-    //           </footer>
-    //         </Dialog>
   );
 };

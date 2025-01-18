@@ -1,6 +1,6 @@
 'use client';
 import { FC } from 'react';
-import { Slider } from '@nextui-org/react';
+import { Slider } from '@heroui/react';
 
 interface SelectAnimalAgeProps {
   age: number;

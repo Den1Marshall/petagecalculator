@@ -3,7 +3,7 @@ import { startupImage } from './startupImage';
 import { Pacifico } from 'next/font/google';
 import { description } from './description';
 import { Analytics } from '@vercel/analytics/react';
-import { MotionProvider, UserProvider, NextUIProvider } from '@/app/providers';
+import { MotionProvider, UserProvider, HeroUIProvider } from '@/app/providers';
 import { BottomNav } from '@/widgets/BottomNav';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { GoogleAnalytics } from '@next/third-parties/google';
@@ -74,13 +74,13 @@ export default function RootLayout({
     >
       <body className='h-full py-safe px-safe-or-5 overscroll-none antialiased'>
         <UserProvider>
-          <NextUIProvider>
+          <HeroUIProvider>
             <MotionProvider>
               {children}
               <BottomNav />
               <Analytics />
             </MotionProvider>
-          </NextUIProvider>
+          </HeroUIProvider>
         </UserProvider>
         <SpeedInsights />
       </body>

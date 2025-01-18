@@ -5,7 +5,7 @@ import {
   ModalBody,
   ModalFooter,
   ModalHeader,
-} from '@nextui-org/react';
+} from '@heroui/react';
 import { FC } from 'react';
 import { Variants, motion } from 'motion/react';
 import { sendPasswordResetEmail } from 'firebase/auth';

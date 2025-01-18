@@ -9,7 +9,7 @@ import { ChangePassword } from './ChangePassword/ChangePassword';
 import { Login } from '@/features/Login';
 import { LoadingSpinner } from '@/shared/ui';
 import { SettingsButton } from './SettingsButton/SettingsButton';
-import { Button, Card, CardBody, Divider } from '@nextui-org/react';
+import { Button, Card, CardBody, Divider } from '@heroui/react';
 
 export default function Settings() {
   const { isLoading, user } = useContext(UserContext);

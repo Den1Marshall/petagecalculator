@@ -10,7 +10,7 @@ import {
   DrawerHeader,
   DrawerBody,
   DrawerFooter,
-} from '@nextui-org/react';
+} from '@heroui/react';
 import { FC, useContext, useRef } from 'react';
 import { getLocalTimeZone, today as dateToday } from '@internationalized/date';
 import { UserContext } from '@/app/model';

@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { motion } from 'motion/react';
-import { Button, ModalFooter, ModalHeader } from '@nextui-org/react';
+import { Button, ModalFooter, ModalHeader } from '@heroui/react';
 
 interface SuccessProps {
   title: string;

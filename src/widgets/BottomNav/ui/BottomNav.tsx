@@ -2,7 +2,7 @@
 import { FC } from 'react';
 import { BottomNavLink } from './BottomNavLink/BottomNavLink';
 import { usePathname } from 'next/navigation';
-import { Navbar, NavbarContent, NavbarItem } from '@nextui-org/react';
+import { Navbar, NavbarContent, NavbarItem } from '@heroui/react';
 import { HomeIcon } from './icons/HomeIcon';
 import { SettingsIcon } from './icons/SettingsIcon';
 import { UserIcon } from './icons/UserIcon';

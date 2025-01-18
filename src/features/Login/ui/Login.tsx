@@ -8,7 +8,7 @@ import {
   ModalContent,
   ModalFooter,
   ModalHeader,
-} from '@nextui-org/react';
+} from '@heroui/react';
 import { FC, useState } from 'react';
 import {
   createUserWithEmailAndPassword,

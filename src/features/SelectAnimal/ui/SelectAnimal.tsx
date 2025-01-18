@@ -5,7 +5,7 @@ import { useMediaQuery } from 'usehooks-ts';
 import { animals } from '../model/animals';
 import { Animal } from '../model/types';
 import Image from 'next/image';
-import { Modal, ModalBody, ModalContent, ModalHeader } from '@nextui-org/react';
+import { Modal, ModalBody, ModalContent, ModalHeader } from '@heroui/react';
 import { defaultTransition, PressableButton } from '@/shared/ui';
 
 interface SelectAnimalProps {
