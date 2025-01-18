@@ -117,7 +117,7 @@ export const AddNewPet: FC<AddNewPetProps> = ({
         layout
         className={`${
           userPets.length === 0 ? 'mx-auto' : ''
-        } w-full max-w-96 aspect-square flex items-center justify-center`}
+        } w-full max-w-80 aspect-square flex items-center justify-center`}
       >
         <Button
           isIconOnly
