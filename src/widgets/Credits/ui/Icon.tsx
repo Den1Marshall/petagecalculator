@@ -9,13 +9,14 @@ interface IconProps {
 export const Icon: FC<IconProps> = ({ isOpen }) => {
   const variants: Variants = {
     enter: {
-      transform: 'scale(1)',
+      scale: 1,
     },
 
     exit: {
-      transform: 'scale(0)',
+      scale: 0,
     },
   };
+
   return (
     <motion.svg
       xmlns='http://www.w3.org/2000/svg'
@@ -24,7 +25,7 @@ export const Icon: FC<IconProps> = ({ isOpen }) => {
       className='size-6'
       whileTap={{ scale: 0.95 }}
     >
-      <AnimatePresence initial={false}>
+      <AnimatePresence initial={false} mode='popLayout'>
         {isOpen ? (
           <motion.path
             key={0}
