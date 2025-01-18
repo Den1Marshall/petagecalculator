@@ -47,13 +47,9 @@ export default function MyPets() {
     }
   };
 
-  const [overflow, setOverflow] = useState<
-    'overflow-scroll' | 'overflow-hidden'
-  >('overflow-scroll');
-
   const lg = useMediaQuery('(min-width: 1024px)');
 
-  const drag = userPets.length > 1 ? (lg ? 'x' : 'y') : false;
+  const drag = lg && userPets.length > 1;
 
   return (
     <main className='relative h-[calc(100%_-_64px)] flex flex-col'>
@@ -65,11 +61,11 @@ export default function MyPets() {
             My Pets
           </h1>
           <Reorder.Group
-            axis={drag || undefined}
+            axis='x'
             values={userPets}
             onReorder={handleReorder}
             layoutScroll
-            className={`max-lg:pb-10 h-full flex flex-col items-center gap-10 ${overflow} no-scrollbar lg:my-auto lg:flex-row`}
+            className='max-lg:pb-10 h-full flex flex-col items-center gap-10 no-scrollbar overflow-auto lg:my-auto lg:flex-row'
           >
             <AnimatePresence initial={false} mode='popLayout'>
               {userPets.map((pet) => (
@@ -81,15 +77,6 @@ export default function MyPets() {
                   initial={{ scale: 0 }}
                   animate={{ scale: 1 }}
                   exit={{ scale: 0 }}
-                  onDragStart={(e) => {
-                    if (overflow === 'overflow-scroll') {
-                      e.preventDefault();
-                      setOverflow('overflow-hidden');
-                    }
-                  }}
-                  onDragEnd={() => {
-                    setOverflow('overflow-scroll');
-                  }}
                   className={`w-full max-w-80 aspect-square ${
                     drag && 'cursor-grab'
                   }`}
