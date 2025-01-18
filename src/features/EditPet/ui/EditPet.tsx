@@ -5,11 +5,10 @@ import {
   Input,
   Select,
   SelectItem,
-  Modal,
-  ModalBody,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
+  DrawerBody,
+  DrawerContent,
+  DrawerFooter,
+  DrawerHeader,
 } from '@nextui-org/react';
 import { FC, useContext, useEffect, useRef } from 'react';
 import {
@@ -22,8 +21,6 @@ import { IPet } from '@/entities/Pet';
 import { doc, setDoc } from 'firebase/firestore';
 import { db } from '@/shared/config';
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
-import { Variants } from 'motion/react';
-import { useMediaQuery } from 'usehooks-ts';
 import cat from '@/../public/images/animals/cat.png';
 import dog from '@/../public/images/animals/dog.png';
 import hamster from '@/../public/images/animals/hamster.png';
@@ -39,7 +36,7 @@ import Image from 'next/image';
 import { deleteUserPetImage, uploadUserPetImage } from '@/shared/api';
 import { FirebaseError } from 'firebase/app';
 import { isImageLocal } from '@/shared/lib';
-import { defaultTransition } from '@/shared/ui';
+import { defaultTransition, Sheet } from '@/shared/ui';
 
 interface EditPetProps {
   isOpen: boolean;
@@ -155,59 +152,20 @@ export const EditPet: FC<EditPetProps> = ({ isOpen, onClose, pet }) => {
 
   const today = dateToday(getLocalTimeZone());
 
-  const lg = useMediaQuery('(min-width: 1024px)');
-
-  const variants: Variants = {
-    enter: {
-      y: lg ? undefined : '0%',
-      x: lg ? '0%' : undefined,
-    },
-    exit: {
-      y: lg ? undefined : '50%',
-      x: lg ? '-100%' : undefined,
-    },
-  };
-
   const inputRef = useRef<HTMLInputElement>(null);
 
   return (
-    <Modal
-      hideCloseButton
-      backdrop='transparent'
-      isDismissable
-      size='full'
+    <Sheet
       isOpen={isOpen}
       onClose={() => {
         reset();
         onClose();
       }}
-      motionProps={{
-        transition: defaultTransition,
-        variants,
-        drag: !lg && 'y',
-        dragConstraints: { top: -0 },
-        dragElastic: 0.05,
-        dragSnapToOrigin: true,
-        dragTransition: { bounceStiffness: 500, bounceDamping: 50 },
-        onDragEnd: (_e, info) => {
-          if (
-            info.offset.y >= window.innerHeight / 4 ||
-            info.velocity.y >= 250
-          ) {
-            onClose();
-          }
-        },
-      }}
-      className='max-lg:max-h-[50%] backdrop-blur-2xl saturate-150 bg-overlay/30 overflow-y-scroll'
-      classNames={{ wrapper: 'lg:max-w-[25%]' }}
     >
-      <ModalContent>
-        <form
-          onSubmit={handleSubmit(onSubmit)}
-          className='h-full flex flex-col'
-        >
-          <ModalHeader>Edit your pet</ModalHeader>
-          <ModalBody>
+      <DrawerContent>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <DrawerHeader>Edit your pet</DrawerHeader>
+          <DrawerBody>
             <Controller
               name='name'
               rules={{
@@ -229,6 +187,7 @@ export const EditPet: FC<EditPetProps> = ({ isOpen, onClose, pet }) => {
                 />
               )}
             />
+
             <Controller
               name='birthDate'
               rules={{ required: 'This field is required' }}
@@ -245,6 +204,7 @@ export const EditPet: FC<EditPetProps> = ({ isOpen, onClose, pet }) => {
                 />
               )}
             />
+
             <Controller
               name='image'
               control={control}
@@ -360,14 +320,17 @@ export const EditPet: FC<EditPetProps> = ({ isOpen, onClose, pet }) => {
                 </Select>
               )}
             />
+
             <input ref={inputRef} type='file' accept='image/*' />
+
             {errors.root && (
               <p role='alert' className='text-danger'>
                 {errors.root?.message}
               </p>
             )}
-          </ModalBody>
-          <ModalFooter className='mb-safe'>
+          </DrawerBody>
+
+          <DrawerFooter>
             <Button
               type='submit'
               isLoading={isSubmitting}
@@ -376,9 +339,9 @@ export const EditPet: FC<EditPetProps> = ({ isOpen, onClose, pet }) => {
             >
               Edit
             </Button>
-          </ModalFooter>
+          </DrawerFooter>
         </form>
-      </ModalContent>
-    </Modal>
+      </DrawerContent>
+    </Sheet>
   );
 };

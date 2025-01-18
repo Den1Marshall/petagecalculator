@@ -6,11 +6,10 @@ import {
   Input,
   Select,
   SelectItem,
-  Modal,
-  ModalBody,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
+  DrawerContent,
+  DrawerHeader,
+  DrawerBody,
+  DrawerFooter,
 } from '@nextui-org/react';
 import { FC, useContext, useRef } from 'react';
 import { getLocalTimeZone, today as dateToday } from '@internationalized/date';
@@ -19,8 +18,7 @@ import { IPet } from '@/entities/Pet';
 import { doc, setDoc } from 'firebase/firestore';
 import { db } from '@/shared/config';
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
-import { Variants, motion } from 'motion/react';
-import { useMediaQuery } from 'usehooks-ts';
+import { motion } from 'motion/react';
 import cat from '@/../public/images/animals/cat.png';
 import dog from '@/../public/images/animals/dog.png';
 import hamster from '@/../public/images/animals/hamster.png';
@@ -36,7 +34,7 @@ import Image from 'next/image';
 import { uploadUserPetImage } from '@/shared/api';
 import { v4 as uuidv4 } from 'uuid';
 import { FirebaseError } from 'firebase/app';
-import { defaultTransition } from '@/shared/ui';
+import { defaultTransition, Sheet } from '@/shared/ui';
 
 interface AddNewPetProps {
   isOpen: boolean;
@@ -111,17 +109,6 @@ export const AddNewPet: FC<AddNewPetProps> = ({
 
   const today = dateToday(getLocalTimeZone());
 
-  const lg = useMediaQuery('(min-width: 1024px)');
-
-  const variants: Variants = {
-    enter: {
-      transform: lg ? 'translateX(0%)' : 'translateY(100%)',
-    },
-    exit: {
-      transform: lg ? 'translateX(-100%)' : 'translateY(100%)',
-    },
-  };
-
   const inputRef = useRef<HTMLInputElement>(null);
 
   return (
@@ -144,45 +131,12 @@ export const AddNewPet: FC<AddNewPetProps> = ({
         </Button>
       </motion.span>
 
-      <Modal
-        hideCloseButton
-        backdrop='transparent'
-        isDismissable
-        size='full'
-        isOpen={isOpen}
-        onOpenChange={onOpenChange}
-        onClose={reset}
-        motionProps={{
-          transition: defaultTransition,
-          variants,
-          drag: !lg && 'y',
-          dragConstraints: { top: -0 },
-          dragElastic: 0.05,
-          dragSnapToOrigin: true,
-          dragTransition: { bounceStiffness: 500, bounceDamping: 50 },
-          onDragEnd: (_e, info) => {
-            if (
-              info.offset.y >= window.innerHeight / 4 ||
-              info.velocity.y >= 250
-            ) {
-              onClose();
-            }
-          },
-        }}
-        className='backdrop-blur-2xl saturate-150 bg-overlay/30 overflow-y-scroll'
-        classNames={{
-          wrapper: 'lg:max-w-[25%]',
-          base: 'max-sm:min-w-full max-sm:pb-safe max-sm:bottom-safe max-sm:mb-0 max-sm:mx-0',
-          body: 'max-sm:max-h-[50%] max-sm:bottom-safe',
-        }}
-      >
-        <ModalContent>
-          <form
-            onSubmit={handleSubmit(onSubmit)}
-            className='h-full flex flex-col'
-          >
-            <ModalHeader>Tell us more about your pet</ModalHeader>
-            <ModalBody>
+      <Sheet isOpen={isOpen} onOpenChange={onOpenChange} onClose={reset}>
+        <DrawerContent>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <DrawerHeader>Tell us more about your pet</DrawerHeader>
+
+            <DrawerBody>
               <Controller
                 name='name'
                 rules={{
@@ -204,6 +158,7 @@ export const AddNewPet: FC<AddNewPetProps> = ({
                   />
                 )}
               />
+
               <Controller
                 name='birthDate'
                 rules={{ required: 'This field is required' }}
@@ -220,6 +175,7 @@ export const AddNewPet: FC<AddNewPetProps> = ({
                   />
                 )}
               />
+
               <Controller
                 name='image'
                 control={control}
@@ -335,14 +291,17 @@ export const AddNewPet: FC<AddNewPetProps> = ({
                   </Select>
                 )}
               />
+
               <input ref={inputRef} type='file' accept='image/*' />
+
               {errors.root && (
                 <p role='alert' className='text-danger'>
                   {errors.root?.message}
                 </p>
               )}
-            </ModalBody>
-            <ModalFooter className='mb-safe'>
+            </DrawerBody>
+
+            <DrawerFooter>
               <Button
                 type='submit'
                 isLoading={isSubmitting}
@@ -351,10 +310,10 @@ export const AddNewPet: FC<AddNewPetProps> = ({
               >
                 Add
               </Button>
-            </ModalFooter>
+            </DrawerFooter>
           </form>
-        </ModalContent>
-      </Modal>
+        </DrawerContent>
+      </Sheet>
     </>
   );
 };
