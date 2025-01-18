@@ -43,7 +43,7 @@ export default function MyPets() {
         setUserPets(newOrder);
       }
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
