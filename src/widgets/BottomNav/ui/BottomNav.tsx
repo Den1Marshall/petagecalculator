@@ -1,11 +1,11 @@
 'use client';
 import { FC } from 'react';
-import { BottomNavLink } from './BottomNavLink';
+import { BottomNavLink } from './BottomNavLink/BottomNavLink';
 import { usePathname } from 'next/navigation';
 import { Navbar, NavbarContent, NavbarItem } from '@nextui-org/react';
-import { HomeIcon } from './HomeIcon';
-import { SettingsIcon } from './SettingsIcon';
-import { UserIcon } from './UserIcon';
+import { HomeIcon } from './icons/HomeIcon';
+import { SettingsIcon } from './icons/SettingsIcon';
+import { UserIcon } from './icons/UserIcon';
 
 export const BottomNav: FC = () => {
   const pathname = usePathname();
@@ -19,12 +19,14 @@ export const BottomNav: FC = () => {
             Home
           </BottomNavLink>
         </NavbarItem>
+
         <NavbarItem className='w-full'>
           <BottomNavLink href='/my-pets' pathname={pathname}>
             <UserIcon />
             My Pets
           </BottomNavLink>
         </NavbarItem>
+
         <NavbarItem className='w-full'>
           <BottomNavLink href='/settings' pathname={pathname}>
             <SettingsIcon />
