@@ -47,7 +47,13 @@ export default function Settings() {
 
           <SettingsButton
             isDisabled={isGoogleProvider}
-            onPress={() => setIsChangeEmailOpen(true)}
+            onPress={() => {
+              if (user) {
+                setIsChangeEmailOpen(true);
+              } else {
+                setIsLoginOpen(true);
+              }
+            }}
             value={user?.email ?? ''}
           >
             <ChangeEmail
@@ -58,7 +64,13 @@ export default function Settings() {
 
           <SettingsButton
             isDisabled={isGoogleProvider}
-            onPress={() => setIsChangePasswordOpen(true)}
+            onPress={() => {
+              if (user) {
+                setIsChangePasswordOpen(true);
+              } else {
+                setIsLoginOpen(true);
+              }
+            }}
             value='******'
           >
             <ChangePassword
@@ -69,11 +81,27 @@ export default function Settings() {
 
           <Divider />
 
-          <SettingsButton onPress={() => setIsLogoutOpen(true)}>
+          <SettingsButton
+            onPress={() => {
+              if (user) {
+                setIsLogoutOpen(true);
+              } else {
+                setIsLoginOpen(true);
+              }
+            }}
+          >
             <Logout isOpen={isLogoutOpen} setIsOpen={setIsLogoutOpen} />
           </SettingsButton>
 
-          <SettingsButton onPress={() => setIsDeleteAccountOpen(true)}>
+          <SettingsButton
+            onPress={() => {
+              if (user) {
+                setIsDeleteAccountOpen(true);
+              } else {
+                setIsLoginOpen(true);
+              }
+            }}
+          >
             <DeleteAccount
               isOpen={isDeleteAccountOpen}
               setIsOpen={setIsDeleteAccountOpen}
