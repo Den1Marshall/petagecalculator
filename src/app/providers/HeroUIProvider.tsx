@@ -2,7 +2,7 @@
 import { HeroUIProvider as Provider } from '@heroui/react';
 import { useRouter } from 'next/navigation';
 import { FC, ReactNode } from 'react';
-import { ThemeProvider as NextThemesProvider } from 'next-themes';
+import { ThemeProvider } from 'next-themes';
 
 interface HeroUIProviderProps {
   children: ReactNode;
@@ -12,14 +12,8 @@ export const HeroUIProvider: FC<HeroUIProviderProps> = ({ children }) => {
   const router = useRouter();
 
   return (
-    <NextThemesProvider attribute='class'>
-      <Provider
-        disableRipple
-        navigate={router.push}
-        className={'w-full h-full'}
-      >
-        {children}
-      </Provider>
-    </NextThemesProvider>
+    <Provider disableRipple navigate={router.push} className='w-full h-full'>
+      <ThemeProvider attribute='class'>{children}</ThemeProvider>
+    </Provider>
   );
 };
