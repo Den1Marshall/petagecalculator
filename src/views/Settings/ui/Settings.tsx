@@ -1,4 +1,5 @@
 'use client';
+
 import { SelectTheme } from '@/features/SelectTheme';
 import { Logout } from './Logout/Logout';
 import { DeleteAccount } from './DeleteAccount/DeleteAccount';

@@ -1,4 +1,5 @@
 'use client';
+
 import { useDisclosure } from '@heroui/react';
 import { IPet, Pet } from '@/entities/Pet';
 import { useContext, useState } from 'react';

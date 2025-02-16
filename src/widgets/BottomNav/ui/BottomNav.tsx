@@ -1,4 +1,5 @@
 'use client';
+
 import { FC } from 'react';
 import { BottomNavLink } from './BottomNavLink/BottomNavLink';
 import { usePathname } from 'next/navigation';

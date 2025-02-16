@@ -1,4 +1,5 @@
 'use client';
+
 import { HeroUIProvider as Provider } from '@heroui/react';
 import { useRouter } from 'next/navigation';
 import { FC, ReactNode } from 'react';

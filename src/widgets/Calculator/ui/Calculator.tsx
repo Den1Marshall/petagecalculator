@@ -1,4 +1,5 @@
 'use client';
+
 import { AnimalButton } from '@/entities/AnimalButton';
 import { FC, useState } from 'react';
 import humanImage from '@/../public/images/animals/human.png';

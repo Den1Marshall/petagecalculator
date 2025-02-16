@@ -1,4 +1,5 @@
 'use client';
+
 import { Button } from '@heroui/react';
 import { AnimatePresence, useAnimationControls } from 'motion/react';
 import { StaticImport } from 'next/dist/shared/lib/get-img-props';

@@ -1,4 +1,5 @@
 'use client';
+
 import { defaultTransition } from '@/shared/ui';
 import { Icon } from './Icon';
 import {

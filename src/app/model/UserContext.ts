@@ -1,4 +1,5 @@
 'use client';
+
 import { IPet } from '@/entities/Pet';
 import { User } from 'firebase/auth';
 import { createContext } from 'react';

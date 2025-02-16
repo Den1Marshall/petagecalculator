@@ -1,4 +1,5 @@
 'use client';
+
 import { FC, ReactNode, useEffect, useState } from 'react';
 import { auth, db } from '@/shared/config';
 import { IPet } from '@/entities/Pet';

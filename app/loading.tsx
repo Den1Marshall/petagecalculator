@@ -1,4 +1,5 @@
 'use client';
+
 import { LoadingSpinner } from '@/shared/ui';
 
 export default function Loading() {
