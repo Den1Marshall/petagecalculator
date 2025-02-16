@@ -2,10 +2,8 @@ import type { Metadata, Viewport } from 'next';
 import { startupImage } from './startupImage';
 import { Pacifico } from 'next/font/google';
 import { description } from './description';
-import { Analytics } from '@vercel/analytics/react';
 import { MotionProvider, UserProvider, HeroUIProvider } from '@/app/providers';
 import { BottomNav } from '@/widgets/BottomNav';
-import { SpeedInsights } from '@vercel/speed-insights/next';
 import { GoogleAnalytics } from '@next/third-parties/google';
 
 import '@/app/index.css';
@@ -77,13 +75,13 @@ export default function RootLayout({
           <HeroUIProvider>
             <MotionProvider>
               {children}
+
               <BottomNav />
-              <Analytics />
             </MotionProvider>
           </HeroUIProvider>
         </UserProvider>
-        <SpeedInsights />
       </body>
+
       <GoogleAnalytics gaId='G-RSXE80Q5J8' />
     </html>
   );
